@@ -2,12 +2,14 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import cloudinary from "@/lib/cloudinary";
 
-// ✅ DELETE handler
-export async function DELETE(
-  req: Request,
-  { params }: { params: Record<string, string> }
-) {
-  const id = Number(params.id);
+interface Context {
+  params: {
+    id: string;
+  };
+}
+
+export async function DELETE(req: NextRequest, context: Context) {
+  const id = Number(context.params.id);
 
   if (isNaN(id)) {
     return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
@@ -38,12 +40,8 @@ export async function DELETE(
   }
 }
 
-// ✅ PATCH handler
-export async function PATCH(
-  req: NextRequest,
-  { params }: { params: Record<string, string> }
-) {
-  const id = Number(params.id);
+export async function PATCH(req: NextRequest, context: Context) {
+  const id = Number(context.params.id);
 
   if (isNaN(id)) {
     return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
@@ -58,8 +56,8 @@ export async function PATCH(
     });
 
     return NextResponse.json(updatedVideo);
-  } catch (err) {
-    console.error("Update error:", err);
+  } catch (error) {
+    console.error("Update error:", error);
     return NextResponse.json(
       { error: "Failed to update video" },
       { status: 500 }
