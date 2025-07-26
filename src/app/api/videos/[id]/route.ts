@@ -2,10 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import cloudinary from "@/lib/cloudinary";
 
-// DELETE handler
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Record<string, string> }
 ) {
   const id = Number(params.id);
   if (isNaN(id)) {
@@ -18,7 +17,6 @@ export async function DELETE(
       return NextResponse.json({ error: "Video not found" }, { status: 404 });
     }
 
-    // Delete from Cloudinary if publicId exists
     if (video.publicId) {
       await cloudinary.uploader.destroy(video.publicId, {
         resource_type: "video",
@@ -29,7 +27,7 @@ export async function DELETE(
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("Delete error:", error);
+    console.error("DELETE error:", error);
     return NextResponse.json(
       { error: "Failed to delete video" },
       { status: 500 }
@@ -37,10 +35,9 @@ export async function DELETE(
   }
 }
 
-// PATCH handler
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Record<string, string> }
 ) {
   const id = Number(params.id);
   if (isNaN(id)) {
@@ -57,7 +54,7 @@ export async function PATCH(
 
     return NextResponse.json(updatedVideo);
   } catch (error) {
-    console.error("Update error:", error);
+    console.error("PATCH error:", error);
     return NextResponse.json(
       { error: "Failed to update video" },
       { status: 500 }
