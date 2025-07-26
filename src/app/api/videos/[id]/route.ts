@@ -2,9 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import cloudinary from "@/lib/cloudinary";
 
+// ✅ DELETE handler
 export async function DELETE(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Record<string, string> }
 ) {
   const id = Number(params.id);
 
@@ -37,9 +38,10 @@ export async function DELETE(
   }
 }
 
+// ✅ PATCH handler
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Record<string, string> }
 ) {
   const id = Number(params.id);
 
