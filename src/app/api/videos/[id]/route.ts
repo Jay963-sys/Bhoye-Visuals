@@ -8,6 +8,10 @@ export async function DELETE(
 ) {
   const id = Number(context.params.id);
 
+  if (isNaN(id)) {
+    return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
+  }
+
   try {
     const video = await prisma.video.findUnique({
       where: { id },
@@ -17,9 +21,11 @@ export async function DELETE(
       return NextResponse.json({ error: "Video not found" }, { status: 404 });
     }
 
-    await cloudinary.uploader.destroy(video.publicId, {
-      resource_type: "video",
-    });
+    if (video.publicId) {
+      await cloudinary.uploader.destroy(video.publicId, {
+        resource_type: "video",
+      });
+    }
 
     await prisma.video.delete({
       where: { id },
@@ -40,9 +46,14 @@ export async function PATCH(
   context: { params: { id: string } }
 ) {
   const id = Number(context.params.id);
-  const { title, orientation } = await req.json();
+
+  if (isNaN(id)) {
+    return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
+  }
 
   try {
+    const { title, orientation } = await req.json();
+
     const updatedVideo = await prisma.video.update({
       where: { id },
       data: {
