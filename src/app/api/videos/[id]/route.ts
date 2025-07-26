@@ -3,10 +3,9 @@ import { prisma } from "@/lib/prisma";
 import cloudinary from "@/lib/cloudinary";
 
 export async function DELETE(
-  req: NextRequest, // Changed from Request to NextRequest
+  req: NextRequest,
   { params }: { params: { id: string } }
 ): Promise<NextResponse> {
-  // Changed return type to NextResponse for consistency
   const id = Number(params.id);
 
   if (isNaN(id)) {
@@ -37,10 +36,9 @@ export async function DELETE(
 }
 
 export async function PATCH(
-  req: NextRequest, // Changed from Request to NextRequest
+  req: NextRequest,
   { params }: { params: { id: string } }
 ): Promise<NextResponse> {
-  // Changed return type to NextResponse for consistency
   const id = Number(params.id);
   const { title, orientation } = await req.json();
 
