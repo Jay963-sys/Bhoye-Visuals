@@ -54,6 +54,7 @@ export default function UploadForm() {
       toast.dismiss();
       toast.success("Upload successful!");
     } catch (err) {
+      console.error("Upload error:", err);
       toast.dismiss();
       toast.error("Something went wrong.");
     } finally {

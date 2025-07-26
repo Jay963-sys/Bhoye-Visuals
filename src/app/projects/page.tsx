@@ -1,7 +1,13 @@
 import ProjectCard from "@/components/ProjectCard";
-import Link from "next/link";
 
-async function getVideos() {
+interface Video {
+  id: number;
+  title: string;
+  url: string;
+  orientation: string;
+}
+
+async function getVideos(): Promise<Video[]> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/videos`, {
     cache: "no-store",
   });
@@ -13,9 +19,7 @@ async function getVideos() {
 
 export default async function ProjectsPage() {
   const videos = await getVideos();
-  const landscapeVideos = videos.filter(
-    (v: any) => v.orientation === "landscape"
-  );
+  const landscapeVideos = videos.filter((v) => v.orientation === "landscape");
 
   return (
     <main className="min-h-screen bg-background text-foreground px-4 pt-20 pb-16">
@@ -30,7 +34,7 @@ export default async function ProjectsPage() {
           </p>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {landscapeVideos.map((video: any) => (
+            {landscapeVideos.map((video) => (
               <ProjectCard
                 key={video.id}
                 title={video.title}

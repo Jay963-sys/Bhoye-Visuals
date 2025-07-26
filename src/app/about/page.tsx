@@ -37,8 +37,9 @@ export default function AboutPage() {
               <strong className="text-white font-semibold">Boye</strong> is a
               Chicago-based videographer and creative storyteller capturing raw
               emotion, bold movement, and striking visuals across every frame.
-              Whether it's cinematic music videos, brand content, or events —
-              Bhoye blends instinct, artistry, and edge into unforgettable film.
+              Whether It&apos;s cinematic music videos, brand content, or events
+              — Bhoye blends instinct, artistry, and edge into unforgettable
+              film.
             </p>
 
             <p className="mt-4">

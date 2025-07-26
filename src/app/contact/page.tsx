@@ -13,7 +13,7 @@ export default function ContactPage() {
           transition={{ duration: 0.8 }}
           className="text-4xl md:text-5xl font-extrabold text-accent"
         >
-          Let's Create Magic
+          Let&apos;s Create Magic
         </motion.h1>
 
         <motion.p
@@ -22,8 +22,8 @@ export default function ContactPage() {
           transition={{ delay: 0.3, duration: 0.8 }}
           className="text-lg text-gray-400 max-w-xl mx-auto"
         >
-          Whether you're ready to book a shoot, collaborate, or just say hello —
-          I’d love to hear from you.
+          Whether you&apos;re ready to book a shoot, collaborate, or just say
+          hello — I&apos;d love to hear from you.
         </motion.p>
 
         <motion.div

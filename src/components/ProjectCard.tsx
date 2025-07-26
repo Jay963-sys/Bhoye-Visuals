@@ -17,23 +17,26 @@ export default function ProjectCard({
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.play().catch(() => {
-        // Silent catch to avoid autoplay errors on mobile
-      });
-    }
+    videoRef.current?.play().catch(() => {
+      // Silent fail for autoplay errors on mobile
+    });
   }, []);
 
   const handleFullscreen = () => {
     const video = videoRef.current;
     if (!video) return;
 
+    const v = video as HTMLVideoElement & {
+      webkitEnterFullscreen?: () => void;
+      msRequestFullscreen?: () => void;
+    };
+
     if (video.requestFullscreen) {
       video.requestFullscreen();
-    } else if ((video as any).webkitEnterFullscreen) {
-      (video as any).webkitEnterFullscreen(); // iOS Safari
-    } else if ((video as any).msRequestFullscreen) {
-      (video as any).msRequestFullscreen(); // IE11
+    } else if (v.webkitEnterFullscreen) {
+      v.webkitEnterFullscreen();
+    } else if (v.msRequestFullscreen) {
+      v.msRequestFullscreen();
     }
   };
 
@@ -60,7 +63,9 @@ export default function ProjectCard({
       </div>
 
       <div className="p-4 text-white">
-        <h3 className="text-lg font-semibold truncate">{title}</h3>
+        <h3 className="text-lg font-semibold truncate">
+          {title.replace(/\.[^/.]+$/, "")} {/* Remove file extension */}
+        </h3>
         {orientation && (
           <p className="text-sm text-gray-400 mt-1 capitalize">
             Orientation: {orientation}
