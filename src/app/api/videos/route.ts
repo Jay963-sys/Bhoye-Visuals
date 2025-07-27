@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import cloudinary from "@/lib/cloudinary";
 
 // Enable body parsing for large video data
 export const config = {

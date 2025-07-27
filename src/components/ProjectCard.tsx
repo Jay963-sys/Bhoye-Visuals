@@ -24,12 +24,18 @@ export default function ProjectCard({
     const video = videoRef.current;
     if (!video) return;
 
-    if (video.requestFullscreen) video.requestFullscreen();
-    // Handle mobile fullscreen quirks
-    else if ((video as any).webkitEnterFullscreen)
-      (video as any).webkitEnterFullscreen();
-    else if ((video as any).msRequestFullscreen)
-      (video as any).msRequestFullscreen();
+    const v = video as HTMLVideoElement & {
+      webkitEnterFullscreen?: () => void;
+      msRequestFullscreen?: () => void;
+    };
+
+    if (v.requestFullscreen) {
+      v.requestFullscreen();
+    } else if (v.webkitEnterFullscreen) {
+      v.webkitEnterFullscreen();
+    } else if (v.msRequestFullscreen) {
+      v.msRequestFullscreen();
+    }
   };
 
   const aspectClass =

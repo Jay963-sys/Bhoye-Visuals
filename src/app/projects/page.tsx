@@ -38,7 +38,9 @@ export default function ProjectsPage() {
           {["all", "landscape", "portrait"].map((type) => (
             <button
               key={type}
-              onClick={() => setFilter(type as any)}
+              onClick={() =>
+                setFilter(type as "all" | "landscape" | "portrait")
+              }
               className={`whitespace-nowrap px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 ease-in-out border ${
                 filter === type
                   ? "bg-accent text-black border-accent shadow-md"
