@@ -34,22 +34,24 @@ export default function ProjectsPage() {
         </h1>
 
         {/* Filter Bar */}
-        <div className="flex justify-center overflow-x-auto gap-3 mb-10 px-2 scrollbar-hide">
-          {["all", "landscape", "portrait"].map((type) => (
-            <button
-              key={type}
-              onClick={() =>
-                setFilter(type as "all" | "landscape" | "portrait")
-              }
-              className={`whitespace-nowrap px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 ease-in-out border ${
-                filter === type
-                  ? "bg-accent text-black border-accent shadow-md"
-                  : "bg-gray-900 border-gray-700 text-white hover:bg-gray-800 hover:border-gray-500"
-              }`}
-            >
-              {type.charAt(0).toUpperCase() + type.slice(1)}
-            </button>
-          ))}
+        <div className="flex justify-center flex-wrap gap-3 mb-10">
+          {["all", "landscape", "portrait"].map((type) => {
+            const isActive = filter === type;
+            return (
+              <button
+                key={type}
+                onClick={() => setFilter(type as any)}
+                className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 border 
+          ${
+            isActive
+              ? "bg-accent text-black border-accent shadow-lg"
+              : "bg-transparent text-gray-300 border-gray-600 hover:bg-gray-800"
+          }`}
+              >
+                {type.charAt(0).toUpperCase() + type.slice(1)}
+              </button>
+            );
+          })}
         </div>
 
         {filteredVideos.length === 0 ? (
