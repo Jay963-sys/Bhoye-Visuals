@@ -3,6 +3,10 @@
 import { useEffect, useState } from "react";
 import ProjectCard from "@/components/ProjectCard";
 
+// ✅ Define strict filter options and type
+const filterOptions = ["all", "landscape", "portrait"] as const;
+type FilterOption = (typeof filterOptions)[number];
+
 interface Video {
   id: number;
   title: string;
@@ -12,7 +16,7 @@ interface Video {
 
 export default function ProjectsPage() {
   const [videos, setVideos] = useState<Video[]>([]);
-  const [filter, setFilter] = useState<"all" | "landscape" | "portrait">("all");
+  const [filter, setFilter] = useState<FilterOption>("all");
 
   useEffect(() => {
     async function fetchVideos() {
@@ -33,20 +37,20 @@ export default function ProjectsPage() {
           My Work
         </h1>
 
-        {/* Filter Bar */}
+        {/* ✅ Filter Bar */}
         <div className="flex justify-center flex-wrap gap-3 mb-10">
-          {["all", "landscape", "portrait"].map((type) => {
+          {filterOptions.map((type) => {
             const isActive = filter === type;
             return (
               <button
                 key={type}
-                onClick={() => setFilter(type as any)}
+                onClick={() => setFilter(type)}
                 className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 border 
-          ${
-            isActive
-              ? "bg-accent text-black border-accent shadow-lg"
-              : "bg-transparent text-gray-300 border-gray-600 hover:bg-gray-800"
-          }`}
+                ${
+                  isActive
+                    ? "bg-accent text-black border-accent shadow-lg brightness-110"
+                    : "bg-transparent text-gray-300 border-gray-600 hover:bg-gray-800"
+                }`}
               >
                 {type.charAt(0).toUpperCase() + type.slice(1)}
               </button>
