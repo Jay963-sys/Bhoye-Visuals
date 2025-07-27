@@ -12,33 +12,28 @@ interface ProjectCardProps {
 export default function ProjectCard({
   title,
   url,
-  orientation,
+  orientation = "landscape",
 }: ProjectCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    videoRef.current?.play().catch(() => {
-      // Silent fail for autoplay errors on mobile
-    });
+    videoRef.current?.play().catch(() => {});
   }, []);
 
   const handleFullscreen = () => {
     const video = videoRef.current;
     if (!video) return;
 
-    const v = video as HTMLVideoElement & {
-      webkitEnterFullscreen?: () => void;
-      msRequestFullscreen?: () => void;
-    };
-
-    if (video.requestFullscreen) {
-      video.requestFullscreen();
-    } else if (v.webkitEnterFullscreen) {
-      v.webkitEnterFullscreen();
-    } else if (v.msRequestFullscreen) {
-      v.msRequestFullscreen();
-    }
+    if (video.requestFullscreen) video.requestFullscreen();
+    // Handle mobile fullscreen quirks
+    else if ((video as any).webkitEnterFullscreen)
+      (video as any).webkitEnterFullscreen();
+    else if ((video as any).msRequestFullscreen)
+      (video as any).msRequestFullscreen();
   };
+
+  const aspectClass =
+    orientation === "portrait" ? "aspect-[9/16]" : "aspect-video";
 
   return (
     <motion.div
@@ -48,7 +43,7 @@ export default function ProjectCard({
       viewport={{ once: true }}
       className="relative rounded-xl overflow-hidden border border-neutral-800 bg-black shadow-lg group"
     >
-      <div className="relative w-full aspect-video">
+      <div className={`relative w-full ${aspectClass}`}>
         <video
           ref={videoRef}
           src={url}
@@ -64,7 +59,7 @@ export default function ProjectCard({
 
       <div className="p-4 text-white">
         <h3 className="text-lg font-semibold truncate">
-          {title.replace(/\.[^/.]+$/, "")} {/* Remove file extension */}
+          {title.replace(/\.[^/.]+$/, "")}
         </h3>
         {orientation && (
           <p className="text-sm text-gray-400 mt-1 capitalize">

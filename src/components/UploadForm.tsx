@@ -1,12 +1,26 @@
 "use client";
 
 import { useState } from "react";
-import { uploadVideoToCloudinary } from "@/utils/cloudinary";
 import toast from "react-hot-toast";
 
 export default function UploadForm() {
   const [videoUrl, setVideoUrl] = useState("");
   const [uploading, setUploading] = useState(false);
+
+  const getVideoOrientation = (
+    file: File
+  ): Promise<"landscape" | "portrait"> => {
+    return new Promise((resolve) => {
+      const video = document.createElement("video");
+      video.preload = "metadata";
+      video.onloadedmetadata = () => {
+        const orientation =
+          video.videoWidth < video.videoHeight ? "portrait" : "landscape";
+        resolve(orientation);
+      };
+      video.src = URL.createObjectURL(file);
+    });
+  };
 
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -21,30 +35,21 @@ export default function UploadForm() {
     toast.loading("Uploading video...");
 
     try {
-      const result = await uploadVideoToCloudinary(file);
+      const orientation = await getVideoOrientation(file);
 
-      if (!result) {
-        toast.dismiss();
-        toast.error("Upload to Cloudinary failed.");
-        setUploading(false);
-        return;
-      }
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("title", file.name.replace(/\.[^/.]+$/, ""));
+      formData.append("orientation", orientation); // ✅ Include orientation
 
       const res = await fetch("/api/videos", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          url: result.secure_url,
-          title: file.name.replace(/\.[^/.]+$/, ""),
-
-          orientation: "landscape",
-          publicId: result.public_id,
-        }),
+        body: formData,
       });
 
       if (!res.ok) {
         toast.dismiss();
-        toast.error("Failed to save to database.");
+        toast.error("Failed to upload video.");
         setUploading(false);
         return;
       }
@@ -53,6 +58,8 @@ export default function UploadForm() {
       setVideoUrl(video.url);
       toast.dismiss();
       toast.success("Upload successful!");
+
+      e.target.value = ""; // ✅ Reset file input
     } catch (err) {
       console.error("Upload error:", err);
       toast.dismiss();
