@@ -16,14 +16,12 @@ export default function Navbar() {
   const { signOut } = useClerk();
   const role = user?.publicMetadata?.role;
 
-  // Scroll effect for background blur
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close on outside click
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
@@ -49,21 +47,21 @@ export default function Navbar() {
       <Link
         href="/about"
         onClick={handleLinkClick}
-        className="hover:text-accent transition"
+        className="hover:text-burnt transition"
       >
         About
       </Link>
       <Link
         href="/projects"
         onClick={handleLinkClick}
-        className="hover:text-accent transition"
+        className="hover:text-burnt transition"
       >
         Projects
       </Link>
       <Link
         href="/contact"
         onClick={handleLinkClick}
-        className="hover:text-accent transition"
+        className="hover:text-burnt transition"
       >
         Contact
       </Link>
@@ -81,7 +79,7 @@ export default function Navbar() {
           <Link
             href="/admin"
             onClick={handleLinkClick}
-            className="hover:text-accent text-sm"
+            className="hover:text-burnt text-sm"
           >
             Admin Panel
           </Link>
@@ -91,7 +89,7 @@ export default function Navbar() {
                 window.location.href = "/";
               });
             }}
-            className="text-sm hover:text-red-400"
+            className="text-sm hover:text-burnt"
           >
             Sign Out
           </button>
@@ -106,20 +104,27 @@ export default function Navbar() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? "bg-black/80 backdrop-blur-md shadow-lg" : "bg-black/50"
+        scrolled
+          ? "bg-darkPrimary/90 backdrop-blur-md shadow-lg"
+          : "bg-darkPrimary/70"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-        <Link href="/" className="text-white text-xl font-bold tracking-wide">
-          Bhoye.mov
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+        {/* Logo link to homepage */}
+        <Link href="/" className="block" aria-label="Homepage">
+          <img
+            src="/Logo Dark.svg"
+            alt="Bhoye Visuals Logo"
+            className="h-14 w-auto sm:h-16 transition-all duration-300"
+          />
         </Link>
 
-        <div className="hidden md:flex gap-6 text-white">{navLinks}</div>
+        <div className="hidden md:flex gap-6 text-newWhite">{navLinks}</div>
 
         {/* Mobile menu toggle */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden text-white"
+          className="md:hidden text-newWhite"
           aria-label="Toggle Menu"
         >
           {menuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -135,7 +140,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden px-6 pb-6 pt-2 bg-black text-white flex flex-col gap-4"
+            className="md:hidden px-6 pb-6 pt-2 bg-darkPrimary text-newWhite flex flex-col gap-4"
           >
             {navLinks}
           </motion.div>

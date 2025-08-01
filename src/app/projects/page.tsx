@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import ProjectCard from "@/components/ProjectCard";
 
-// ✅ Define strict filter options and type
 const filterOptions = ["all", "landscape", "portrait"] as const;
 type FilterOption = (typeof filterOptions)[number];
 
@@ -31,33 +30,37 @@ export default function ProjectsPage() {
     filter === "all" ? videos : videos.filter((v) => v.orientation === filter);
 
   return (
-    <main className="min-h-screen bg-background text-foreground px-4 pt-20 pb-16">
+    <main className="min-h-screen bg-[#202020] text-white px-4 py-20 relative overflow-hidden">
+      <div className="absolute inset-0 z-0 bg-[url('/noise.svg')] opacity-20 pointer-events-none" />
+
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-center text-accent mb-6">
-          My Work
+        {/* ✅ Header */}
+        <h1 className="text-4xl md:text-5xl font-extrabold text-center text-[#FF3100] mb-10 tracking-tight">
+          Featured Projects
         </h1>
 
-        {/* ✅ Filter Bar */}
-        <div className="flex justify-center flex-wrap gap-3 mb-10">
+        {/* ✅ Filter Buttons */}
+        <div className="flex justify-center flex-wrap gap-4 mb-12">
           {filterOptions.map((type) => {
             const isActive = filter === type;
             return (
               <button
                 key={type}
                 onClick={() => setFilter(type)}
-                className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 border 
-                ${
-                  isActive
-                    ? "bg-accent text-black border-accent shadow-lg brightness-110"
-                    : "bg-transparent text-gray-300 border-gray-600 hover:bg-gray-800"
-                }`}
+                className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 border uppercase tracking-wider
+                  ${
+                    isActive
+                      ? "bg-[#FF3100] text-black border-[#FF3100] shadow-lg shadow-[#FF3100]/40"
+                      : "bg-[#2a2a2a] text-gray-300 border-gray-600 hover:bg-[#C10801]/10 hover:text-white"
+                  }`}
               >
-                {type.charAt(0).toUpperCase() + type.slice(1)}
+                {type}
               </button>
             );
           })}
         </div>
 
+        {/* ✅ Video Grid */}
         {filteredVideos.length === 0 ? (
           <p className="text-gray-500 text-center">No videos available.</p>
         ) : (

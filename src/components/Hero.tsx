@@ -1,127 +1,182 @@
 "use client";
 
-import { useRef, useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { FaInstagram, FaYoutube, FaTwitter } from "react-icons/fa";
+import { useEffect, useRef } from "react";
+import { FaInstagram, FaYoutube, FaTwitter, FaEnvelope } from "react-icons/fa";
 
 export default function Hero() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const audioRef = useRef<HTMLAudioElement>(null);
-  const [audioOn, setAudioOn] = useState(false);
+  const bgRef = useRef<HTMLDivElement>(null);
 
-  const toggleAudio = () => {
-    const audio = audioRef.current;
-    if (audio) {
-      if (audio.paused) {
-        audio.play();
-        setAudioOn(true);
-      } else {
-        audio.pause();
-        setAudioOn(false);
-      }
+  useEffect(() => {
+    const node = bgRef.current;
+    if (node) {
+      node.animate(
+        [
+          { transform: "scale(1) translate(0, 0)" },
+          { transform: "scale(1.1) translate(-5%, -5%)" },
+        ],
+        { duration: 20000, iterations: Infinity, easing: "ease-in-out" }
+      );
     }
-  };
+  }, []);
 
   return (
-    <section className="relative w-screen h-screen overflow-hidden bg-black text-white pt-16">
-      {/* Background video */}
-      <video
-        ref={videoRef}
-        className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="auto"
+    <section className="relative h-screen bg-black text-white overflow-hidden flex items-center justify-center py-24 md:py-32">
+      {/* BACKGROUND */}
+      <div ref={bgRef} className="absolute inset-0">
+        <Image
+          src="/hero-bg.jpg"
+          alt="Cinematic background"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-black/60" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+        <div className="absolute inset-0 pointer-events-none bg-[url('/grain.png')] animate-grain mix-blend-overlay opacity-20" />
+      </div>
+
+      {/* MAIN CONTENT */}
+      <motion.div
+        className="relative z-10 max-w-5xl text-center px-6 sm:px-10 space-y-6"
+        initial="hidden"
+        animate="visible"
+        variants={{
+          hidden: {},
+          visible: {
+            transition: { staggerChildren: 0.15 },
+          },
+        }}
       >
-        <source src="/videos/hero-bg.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-
-      {/* Optional background audio */}
-      <audio ref={audioRef} loop preload="auto">
-        <source src="/audio/intro-bg.mp3" type="audio/mp3" />
-      </audio>
-
-      {/* Gradient overlay for readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/30 to-black/80 z-0" />
-
-      {/* Content */}
-      <div className="relative z-10 flex flex-col justify-center items-center h-full px-4 text-center">
-        <motion.h1
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-4xl md:text-6xl font-extrabold tracking-wide"
+        {/* Subtitle */}
+        <motion.p
+          className="text-xs sm:text-sm md:text-base uppercase tracking-widest text-[#FF3100] font-medium"
+          variants={{
+            hidden: { opacity: 0, y: 20 },
+            visible: {
+              opacity: 1,
+              y: 0,
+              transition: { duration: 0.3, ease: "easeOut" },
+            },
+          }}
         >
-          Bhoye Visuals
+          Bhoye Visuals — Videographer | Editor | Director
+        </motion.p>
+
+        {/* Headline */}
+        <motion.h1
+          className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight drop-shadow-lg"
+          variants={{
+            hidden: { opacity: 0, y: 30 },
+            visible: {
+              opacity: 1,
+              y: 0,
+              transition: { duration: 1.4, ease: "easeOut" },
+            },
+          }}
+        >
+          Cinematic Visuals, Bold Stories.
         </motion.h1>
 
+        {/* Paragraph */}
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
-          className="mt-4 text-lg md:text-2xl max-w-xl text-gray-300"
+          className="text-base sm:text-lg md:text-xl text-gray-300 max-w-2xl mx-auto drop-shadow"
+          variants={{
+            hidden: { opacity: 0, y: 30 },
+            visible: {
+              opacity: 1,
+              y: 0,
+              transition: { duration: 1.4, ease: "easeOut" },
+            },
+          }}
         >
-          Capturing stories through cinematic film & creative direction.
+          I craft immersive videos that captivate, communicate, and connect.
+          Let’s bring your vision to life.
         </motion.p>
 
         {/* CTA Buttons */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.8, duration: 0.5 }}
-          className="flex flex-col sm:flex-row gap-4 mt-8"
+          className="flex justify-center flex-wrap gap-4 mt-6"
+          variants={{
+            hidden: { opacity: 0, y: 20 },
+            visible: {
+              opacity: 1,
+              y: 0,
+              transition: { duration: 1.4, ease: "easeOut" },
+            },
+          }}
         >
-          <Link
-            href="/projects"
-            className="px-6 py-3 bg-white text-black font-medium rounded-full shadow hover:bg-gray-200 transition"
-          >
-            View Projects
+          <Link href="#works">
+            <button className="px-6 py-3 bg-[#FF3100] hover:bg-[#C10801] text-white rounded-2xl transition shadow-md hover:scale-105">
+              View Work
+            </button>
+          </Link>
+          <Link href="#contact">
+            <button className="px-6 py-3 border border-white hover:bg-white hover:text-black rounded-2xl transition shadow-md hover:scale-105">
+              Contact
+            </button>
           </Link>
         </motion.div>
 
-        {/* Audio Toggle */}
-        <motion.button
-          onClick={toggleAudio}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2 }}
-          className="absolute bottom-6 right-6 text-white bg-black/50 hover:bg-black/70 rounded-full px-4 py-2 text-sm transition backdrop-blur"
-        >
-          {audioOn ? "Mute Audio" : "Play Audio"}
-        </motion.button>
-
         {/* Social Icons */}
-        <div className="absolute bottom-6 left-6 flex gap-4 text-white text-xl">
-          <a
-            href="https://www.instagram.com/bhoyevisuals?igsh=MWRjcmZ4YzR2MmY4eA=="
+        <motion.div
+          className="mt-6 flex justify-center gap-6 text-white text-xl sm:text-2xl"
+          variants={{
+            hidden: { opacity: 0, y: 20 },
+            visible: {
+              opacity: 1,
+              y: 0,
+              transition: { duration: 1.4, ease: "easeOut" },
+            },
+          }}
+        >
+          <Link
+            href="https://www.instagram.com/bhoyevisuals"
             target="_blank"
-            rel="noreferrer"
+            className="hover:text-[#FF3100] transition"
           >
-            <FaInstagram className="hover:text-pink-400 transition" />
-          </a>
-          <a
-            href="https://youtube.com/@bhoyevisual?si=UOC1QZJwPHd-pEz_"
+            <FaInstagram />
+          </Link>
+          <Link
+            href="https://youtube.com/@bhoyevisual"
             target="_blank"
-            rel="noreferrer"
+            className="hover:text-[#FF3100] transition"
           >
-            <FaYoutube className="hover:text-red-500 transition" />
-          </a>
-          <a
-            href="https://x.com/bhoyevisuals?s=11&t=vSVbjHCHW_QG5tU6-96n8g"
+            <FaYoutube />
+          </Link>
+          <Link
+            href="https://x.com/bhoyevisuals"
             target="_blank"
-            rel="noreferrer"
+            className="hover:text-[#FF3100] transition"
           >
-            <FaTwitter className="hover:text-blue-400 transition" />
-          </a>
-        </div>
+            <FaTwitter />
+          </Link>
+          <Link
+            href="mailto:Bhoyevisuals@gmail.com"
+            className="hover:text-[#FF3100] transition"
+          >
+            <FaEnvelope />
+          </Link>
+        </motion.div>
+      </motion.div>
 
-        {/* Watermark */}
-        <div className="absolute top-4 right-6 opacity-30 text-xs tracking-wider">
-          © Bhoye.mov
-        </div>
+      {/* Bottom Fade */}
+      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent z-10 pointer-events-none" />
+
+      {/* SVG Divider */}
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-10">
+        <svg
+          className="w-full h-16 md:h-20 text-[#111111]"
+          viewBox="0 0 1440 320"
+          preserveAspectRatio="none"
+        >
+          <path
+            fill="currentColor"
+            d="M0,64L60,69.3C120,75,240,85,360,106.7C480,128,600,160,720,154.7C840,149,960,107,1080,117.3C1200,128,1320,192,1380,224L1440,256L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"
+          />
+        </svg>
       </div>
     </section>
   );

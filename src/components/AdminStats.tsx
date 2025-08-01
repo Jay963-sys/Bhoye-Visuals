@@ -28,7 +28,7 @@ export default function AdminStats() {
 
   if (loading) {
     return (
-      <div className="bg-white/5 p-6 rounded-xl border border-neutral-700 text-white shadow animate-pulse">
+      <div className="bg-[#ffffff0a] backdrop-blur-sm border border-[#333] text-white shadow-md shadow-[#ffffff0a] p-6 rounded-2xl animate-pulse">
         <div className="h-6 w-40 bg-gray-700 rounded mb-4" />
         <div className="space-y-2">
           <div className="h-4 w-60 bg-gray-800 rounded" />
@@ -41,18 +41,20 @@ export default function AdminStats() {
   if (!stats) return null;
 
   return (
-    <div className="bg-white/5 p-6 rounded-xl border border-neutral-700 text-white shadow">
-      <h2 className="text-xl font-semibold text-accent mb-3">Stats Overview</h2>
-      <div className="space-y-2 text-gray-300">
+    <div className="bg-[#ffffff0a] backdrop-blur-sm border border-[#333] text-white shadow-md shadow-[#FF310020] p-6 rounded-2xl">
+      <h2 className="text-2xl font-bold text-[#FF3100] mb-3 tracking-wide">
+        Stats Overview
+      </h2>
+      <div className="space-y-2 text-[#CCCCCC] text-base leading-relaxed">
         <p>
           Total Videos:{" "}
-          <span className="text-white font-medium">
+          <span className="text-white font-semibold">
             {stats.totalCount ?? 0}
           </span>
         </p>
         <p>
           Estimated Storage:{" "}
-          <span className="text-white font-medium">
+          <span className="text-white font-semibold">
             {stats.estimatedStorageMB ?? 0} MB
           </span>
         </p>

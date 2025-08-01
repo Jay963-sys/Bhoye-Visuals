@@ -5,13 +5,15 @@ import { Mail, Instagram, Phone, MapPin } from "lucide-react";
 
 export default function ContactPage() {
   return (
-    <main className="min-h-screen bg-background text-foreground px-4 py-16">
-      <div className="max-w-4xl mx-auto space-y-12 text-center">
+    <main className="min-h-screen bg-[#202020] text-white px-4 py-20 relative overflow-hidden">
+      <div className="absolute inset-0 z-0 bg-[url('/noise.svg')] opacity-20 pointer-events-none" />
+
+      <div className="max-w-4xl mx-auto z-10 relative space-y-12 text-center">
         <motion.h1
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-4xl md:text-5xl font-extrabold text-accent"
+          className="text-4xl md:text-5xl font-extrabold text-[#FF3100]"
         >
           Let&apos;s Create Magic
         </motion.h1>
@@ -65,7 +67,7 @@ export default function ContactPage() {
         >
           <a
             href="mailto:bhoyevisuals@gmail.com"
-            className="inline-block px-6 py-3 bg-accent text-black rounded-full font-semibold shadow-lg hover:scale-105 hover:bg-white transition duration-300"
+            className="inline-block px-8 py-3 bg-[#FF3100] text-black rounded-full font-bold shadow-xl hover:scale-105 hover:bg-white transition duration-300 uppercase tracking-wide"
           >
             Send a Message
           </a>
@@ -91,9 +93,9 @@ function ContactCard({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex items-center gap-4 bg-white/5 hover:bg-white/10 hover:border-accent border border-white/10 p-4 rounded-lg transition duration-300 group"
+      className="flex items-center gap-4 bg-[#ffffff0a] hover:bg-[#ffffff15] border border-white/10 p-5 rounded-2xl transition duration-300 group backdrop-blur-sm shadow-md"
     >
-      <div className="text-accent group-hover:scale-110 group-hover:text-white transition duration-300">
+      <div className="text-[#FF3100] group-hover:scale-110 group-hover:text-white transition duration-300">
         {icon}
       </div>
       <div className="text-left">

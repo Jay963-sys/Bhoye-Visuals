@@ -16,21 +16,20 @@ export const metadata: Metadata = {
     "videography",
     "film maker",
     "creative visuals",
-    "Nigeria",
     "Chicago",
     "wedding video",
     "event shoot",
   ],
-  authors: [{ name: "Bhoye.mov", url: "https://bhoye.vercel.app" }],
-  metadataBase: new URL("https://bhoye.vercel.app"),
+  authors: [{ name: "Bhoye.mov", url: "https://bhoyevisuals.vercel.app" }],
+  metadataBase: new URL("https://bhoyevisuals.vercel.app"),
   openGraph: {
     title: "Bhoye Visuals",
     description: "Cinematic storytelling through visual direction and film.",
-    url: "https://bhoye.vercel.app",
+    url: "https://bhoyevisuals.vercel.app",
     siteName: "Bhoye Visuals",
     images: [
       {
-        url: "/og-image.png", // optional: create an Open Graph banner
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "Bhoye Visuals Open Graph Image",

@@ -36,25 +36,71 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
 ```
-tailwind-test
+videographer-portfolio-p
 ├─ eslint.config.mjs
 ├─ next.config.ts
 ├─ package-lock.json
 ├─ package.json
 ├─ postcss.config.mjs
+├─ prisma
+│  ├─ migrations
+│  │  ├─ 20250726003636_init
+│  │  │  └─ migration.sql
+│  │  ├─ 20250726015742_add_orientation
+│  │  │  └─ migration.sql
+│  │  ├─ 20250726163955_add_public_id
+│  │  │  └─ migration.sql
+│  │  └─ migration_lock.toml
+│  └─ schema.prisma
 ├─ public
-│  ├─ file.svg
-│  ├─ globe.svg
-│  ├─ next.svg
-│  ├─ vercel.svg
-│  └─ window.svg
+│  ├─ audio
+│  │  └─ intro-bg.mp3
+│  ├─ favico.ico
+│  ├─ favicon.ico
+│  ├─ me.jpg
+│  ├─ og-image.png
+│  └─ videos
+│     └─ hero-bg.mp4
 ├─ README.md
 ├─ src
-│  └─ app
-│     ├─ favicon.ico
-│     ├─ globals.css
-│     ├─ layout.tsx
-│     └─ page.tsx
+│  ├─ app
+│  │  ├─ about
+│  │  │  └─ page.tsx
+│  │  ├─ admin
+│  │  │  └─ page.tsx
+│  │  ├─ api
+│  │  │  └─ videos
+│  │  │     ├─ route.ts
+│  │  │     ├─ stats
+│  │  │     │  └─ route.ts
+│  │  │     └─ [id]
+│  │  │        └─ route.ts
+│  │  ├─ contact
+│  │  │  └─ page.tsx
+│  │  ├─ globals.css
+│  │  ├─ layout.tsx
+│  │  ├─ page.tsx
+│  │  ├─ projects
+│  │  │  └─ page.tsx
+│  │  └─ sign-in
+│  │     └─ [[...sign-in]]
+│  │        └─ page.tsx
+│  ├─ components
+│  │  ├─ AdminStats.tsx
+│  │  ├─ Hero.tsx
+│  │  ├─ Navbar.tsx
+│  │  ├─ ProjectCard.tsx
+│  │  ├─ UploadForm.tsx
+│  │  └─ VideoListAdmin.tsx
+│  ├─ data
+│  │  └─ mockVideos.ts
+│  ├─ db
+│  ├─ lib
+│  │  ├─ cloudinary.ts
+│  │  └─ prisma.ts
+│  ├─ middleware.ts
+│  └─ utils
+│     └─ cloudinary.ts
 └─ tsconfig.json
 
 ```

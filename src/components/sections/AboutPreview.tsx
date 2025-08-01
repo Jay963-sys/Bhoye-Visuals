@@ -1,0 +1,72 @@
+"use client";
+
+import { motion } from "framer-motion";
+import Image from "next/image";
+
+export default function AboutPreview() {
+  return (
+    <section
+      id="about"
+      className="relative min-h-screen snap-start flex flex-col md:flex-row items-center justify-center gap-12 px-6 py-32 bg-[#202020] text-white overflow-hidden"
+    >
+      {/* 🎨 Animated blobs background */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <div className="absolute w-[60vw] h-[60vw] bg-[#C10801] opacity-30 rounded-full filter blur-3xl animate-pulse-slow top-[-20%] left-[-20%]" />
+        <div className="absolute w-[50vw] h-[50vw] bg-[#FF3100] opacity-20 rounded-full filter blur-2xl animate-pulse-slower top-[40%] right-[-15%]" />
+        <div className="absolute w-[40vw] h-[40vw] bg-[#ffffff0a] opacity-10 rounded-full filter blur-2xl animate-pulse-slow bottom-[-10%] left-[30%]" />
+      </div>
+
+      {/* 🟫 Optional grain overlay */}
+      <div className="absolute inset-0 bg-[url('/grain.png')] opacity-10 mix-blend-overlay z-0 pointer-events-none" />
+
+      {/* 🔲 Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-transparent z-0" />
+
+      {/* 🧑 Profile image */}
+      <motion.div
+        className="w-40 h-40 md:w-60 md:h-60 relative z-10 group"
+        initial={{ opacity: 0, scale: 0.8, y: 50 }}
+        whileInView={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
+        viewport={{ once: true }}
+      >
+        <Image
+          src="/profile.jpg"
+          alt="Boye's profile"
+          fill
+          className="rounded-full object-cover border-4 border-[#FF3100] shadow-[0_4px_40px_rgba(255,49,0,0.4)] group-hover:scale-105 transition-transform duration-300"
+        />
+      </motion.div>
+
+      {/* 📄 Text content */}
+      <motion.div
+        className="max-w-2xl text-center md:text-left space-y-6 z-10 px-2 md:px-0"
+        initial={{ opacity: 0, x: 100 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 1.2, delay: 0.3, ease: "easeOut" }}
+        viewport={{ once: true }}
+      >
+        <h2 className="text-4xl sm:text-5xl font-bold text-[#FF3100] drop-shadow-md tracking-wide">
+          Who is Boye?
+        </h2>
+
+        <p className="text-gray-200 text-base sm:text-lg leading-relaxed">
+          I'm <span className="font-semibold text-white">Boye</span> — a
+          creative videographer obsessed with capturing emotion, rhythm, and
+          atmosphere. Every frame is intentional. Every cut tells a story.
+        </p>
+
+        <p className="text-gray-400 text-sm sm:text-base leading-loose">
+          🎬 I specialize in cinematic storytelling for brands, music videos,
+          events, and personal passion projects. Whether on the streets of
+          Chicago or international sets, I bring bold vision and smooth
+          execution.
+        </p>
+
+        <p className="text-gray-400 text-sm sm:text-base leading-loose">
+          📍 Based in Chicago — available worldwide.
+        </p>
+      </motion.div>
+    </section>
+  );
+}
