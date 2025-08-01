@@ -106,8 +106,8 @@ export default function Navbar() {
       transition={{ duration: 0.6 }}
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-darkPrimary/90 backdrop-blur-md shadow-lg"
-          : "bg-darkPrimary/70"
+          ? "bg-white/10 dark:bg-darkPrimary/60 backdrop-blur-md shadow-md"
+          : "bg-white/5 dark:bg-darkPrimary/50 backdrop-blur-md"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
@@ -116,18 +116,18 @@ export default function Navbar() {
           <Image
             src="/Logo Dark.svg"
             alt="Bhoye Visuals Logo"
-            width={100}
-            height={50}
+            width={60}
+            height={30}
             className="h-14 w-auto sm:h-16 transition-all duration-300"
           />
         </Link>
 
-        <div className="hidden md:flex gap-6 text-newWhite">{navLinks}</div>
+        <div className="hidden md:flex gap-6 text-white">{navLinks}</div>
 
         {/* Mobile menu toggle */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden text-newWhite"
+          className="md:hidden text-white"
           aria-label="Toggle Menu"
         >
           {menuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -143,7 +143,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden px-6 pb-6 pt-2 bg-darkPrimary text-newWhite flex flex-col gap-4"
+            className="md:hidden px-6 pb-6 pt-2 bg-white/10 dark:bg-darkPrimary/60 backdrop-blur-md text-white flex flex-col gap-4"
           >
             {navLinks}
           </motion.div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Camera, VideoIcon, Film, Megaphone } from "lucide-react"; // Icon set
+import { Camera, VideoIcon, Film, Megaphone } from "lucide-react";
 
 const services = [
   {
@@ -31,7 +31,7 @@ const containerVariants = {
   show: {
     transition: {
       staggerChildren: 0.25,
-      delayChildren: 0.6,
+      delayChildren: 0.4,
     },
   },
 };
@@ -45,7 +45,7 @@ export default function Services() {
   return (
     <section
       id="services"
-      className="relative overflow-hidden min-h-screen snap-start bg-[#1a1a1a] text-[#F4F4F4] px-4 sm:px-6 md:px-10 py-24 flex flex-col items-center justify-center"
+      className="relative overflow-hidden min-h-screen snap-start bg-[#1a1a1a] text-[#F4F4F4] px-4 sm:px-6 md:px-10 py-20 md:py-28 flex flex-col items-center justify-center"
     >
       {/* 🔴 Animated Blobs */}
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -57,10 +57,10 @@ export default function Services() {
       {/* 🟫 Film grain overlay */}
       <div className="absolute inset-0 bg-[url('/grain.png')] opacity-10 mix-blend-overlay z-0 pointer-events-none" />
 
-      {/* 🔲 Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-transparent z-0" />
+      {/* 🔲 Gradient fade overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-transparent z-0" />
 
-      {/* 🔠 Section Title */}
+      {/* 🧠 Section Title */}
       <motion.h2
         className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-center text-[#FF3100] z-10"
         initial={{ opacity: 0, y: -30 }}
@@ -71,7 +71,7 @@ export default function Services() {
         What We Offer
       </motion.h2>
 
-      {/* 📝 Subtitle */}
+      {/* 🔡 Subtitle */}
       <motion.p
         className="text-center text-base sm:text-lg text-[#F4F4F4]/80 mb-12 max-w-xl z-10 px-2"
         initial={{ opacity: 0, y: 20 }}
@@ -83,7 +83,7 @@ export default function Services() {
         cinematic precision.
       </motion.p>
 
-      {/* 📦 Service Cards */}
+      {/* 🎬 Service Cards */}
       <motion.div
         className="grid md:grid-cols-2 gap-8 max-w-5xl w-full z-10"
         variants={containerVariants}
@@ -95,7 +95,7 @@ export default function Services() {
           <motion.div
             key={index}
             variants={cardVariants}
-            className="bg-[#2a2a2a] border border-[#FF3100]/40 p-6 rounded-2xl shadow-md transition-all duration-300 hover:border-[#FF3100] hover:shadow-[0_0_20px_#FF3100] hover:-translate-y-1"
+            className="bg-[#2a2a2a] border border-[#FF3100]/40 p-6 rounded-2xl shadow-md transition-all duration-300 hover:border-[#FF3100] hover:shadow-[0_0_24px_#FF3100aa] hover:-translate-y-1.5"
           >
             <div className="flex items-center gap-3 mb-4">
               {service.icon}

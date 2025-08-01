@@ -47,55 +47,58 @@ export default function WorksPreview() {
   return (
     <section
       id="projects"
-      className="relative min-h-screen snap-start bg-gradient-to-b from-[#1a1a1a] to-[#0d0d0d] text-white px-4 sm:px-6 md:px-10 py-24 flex flex-col items-center justify-center overflow-hidden"
+      className="relative overflow-hidden min-h-screen snap-start bg-[#1a1a1a] text-[#F4F4F4] px-4 sm:px-6 md:px-10 py-20 md:py-28 flex flex-col items-center justify-center"
     >
-      {/* 🌀 Background Effects */}
-      <motion.div
-        className="absolute inset-0 z-0 pointer-events-none"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.2 }}
-        transition={{ duration: 2 }}
-      >
-        <div className="absolute w-[500px] h-[500px] bg-[#FF3100]/40 rounded-full blur-3xl animate-pulse-slow left-[-100px] top-[-100px]" />
-        <div className="absolute w-[400px] h-[400px] bg-[#FF3100]/30 rounded-full blur-2xl animate-pulse-slower right-[-80px] bottom-[-80px]" />
-      </motion.div>
+      {/* 🔴 Animated Blobs */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <div className="absolute w-[60vw] h-[60vw] bg-[#C10801] opacity-30 rounded-full filter blur-3xl animate-pulse-slow top-[-20%] left-[-20%]" />
+        <div className="absolute w-[50vw] h-[50vw] bg-[#FF3100] opacity-20 rounded-full filter blur-2xl animate-pulse-slower top-[40%] right-[-15%]" />
+        <div className="absolute w-[40vw] h-[40vw] bg-[#ffffff0a] opacity-10 rounded-full filter blur-2xl animate-pulse-slow bottom-[-10%] left-[30%]" />
+      </div>
 
+      {/* 🟫 Film grain overlay */}
       <div className="absolute inset-0 bg-[url('/grain.png')] opacity-10 mix-blend-overlay z-0 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-transparent z-0" />
 
-      {/* 🔠 Heading */}
+      {/* 🔲 Gradient fade overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-transparent z-0" />
+
+      {/* 🧠 Section Title */}
       <motion.h2
-        className="relative z-10 text-3xl md:text-4xl font-extrabold text-[#FF3100] mb-4 tracking-tight text-center"
+        className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-center text-[#FF3100] z-10"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: 0.7 }}
         viewport={{ once: true }}
       >
         Featured Works
       </motion.h2>
 
-      {/* 📝 Subtitle */}
+      {/* 🔡 Subtitle */}
       <motion.p
-        className="relative z-10 text-center max-w-2xl text-gray-400 mb-12 text-sm sm:text-base md:text-lg"
+        className="text-center text-base sm:text-lg text-[#F4F4F4]/80 mb-12 max-w-xl z-10 px-2"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        transition={{ delay: 0.3, duration: 1 }}
+        transition={{ delay: 0.3, duration: 0.9 }}
         viewport={{ once: true }}
       >
         A curated glimpse into recent videography projects — cinematic edits,
         powerful visuals, and bold storytelling.
       </motion.p>
 
-      {/* 🎞️ Video Grid */}
-      <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 w-full max-w-6xl px-2">
+      {/* 🎬 Video Grid */}
+      <motion.div
+        className="grid md:grid-cols-2 gap-8 max-w-5xl w-full z-10"
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+      >
         {videos.map((video, i) => (
           <motion.div
             key={video.id}
-            className="group relative aspect-video bg-[#222222] rounded-2xl overflow-hidden shadow-lg hover:shadow-[0_0_30px_#FF3100aa] transition-shadow duration-300 cursor-pointer"
+            className="group relative aspect-video bg-[#222222] rounded-2xl overflow-hidden border border-[#FF3100]/40 hover:border-[#FF3100] hover:shadow-[0_0_24px_#FF3100aa] transition duration-300 cursor-pointer"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: i * 0.2 }}
-            viewport={{ once: true }}
             onClick={() => setSelectedVideo(video)}
           >
             <video
@@ -110,18 +113,16 @@ export default function WorksPreview() {
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
 
-            {/* 🔘 Overlay Play Icon */}
             <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover:opacity-100 transition duration-300">
               <PlayCircle className="w-12 h-12 text-white/80 group-hover:scale-110 transition-transform" />
             </div>
 
-            {/* 📽 Title Overlay */}
             <div className="absolute bottom-0 w-full bg-gradient-to-t from-black/80 to-transparent px-4 py-2 text-sm text-white font-medium">
               {video.title || "Untitled Project"}
             </div>
           </motion.div>
         ))}
-      </div>
+      </motion.div>
 
       {/* 📁 View All Link */}
       <Link

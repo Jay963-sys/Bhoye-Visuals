@@ -9,20 +9,20 @@ export default function AboutPreview() {
       id="about"
       className="relative min-h-screen snap-start flex flex-col md:flex-row items-center justify-center gap-12 px-6 py-32 bg-[#202020] text-white overflow-hidden"
     >
-      {/* 🎨 Animated blobs background */}
+      {/* 🔴 Animated blobs */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <div className="absolute w-[60vw] h-[60vw] bg-[#C10801] opacity-30 rounded-full filter blur-3xl animate-pulse-slow top-[-20%] left-[-20%]" />
         <div className="absolute w-[50vw] h-[50vw] bg-[#FF3100] opacity-20 rounded-full filter blur-2xl animate-pulse-slower top-[40%] right-[-15%]" />
         <div className="absolute w-[40vw] h-[40vw] bg-[#ffffff0a] opacity-10 rounded-full filter blur-2xl animate-pulse-slow bottom-[-10%] left-[30%]" />
       </div>
 
-      {/* 🟫 Optional grain overlay */}
+      {/* 🌾 Grain overlay */}
       <div className="absolute inset-0 bg-[url('/grain.png')] opacity-10 mix-blend-overlay z-0 pointer-events-none" />
 
-      {/* 🔲 Gradient overlay */}
+      {/* 🔳 Top gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-transparent z-0" />
 
-      {/* 🧑 Profile image */}
+      {/* 🧑 Profile Image */}
       <motion.div
         className="w-40 h-40 md:w-60 md:h-60 relative z-10 group"
         initial={{ opacity: 0, scale: 0.8, y: 50 }}
@@ -38,7 +38,7 @@ export default function AboutPreview() {
         />
       </motion.div>
 
-      {/* 📄 Text content */}
+      {/* 📝 Text Content */}
       <motion.div
         className="max-w-2xl text-center md:text-left space-y-6 z-10 px-2 md:px-0"
         initial={{ opacity: 0, x: 100 }}
@@ -46,14 +46,17 @@ export default function AboutPreview() {
         transition={{ duration: 1.2, delay: 0.3, ease: "easeOut" }}
         viewport={{ once: true }}
       >
-        <h2 className="text-4xl sm:text-5xl font-bold text-[#FF3100] drop-shadow-md tracking-wide">
+        <h2 className="text-4xl sm:text-5xl font-extrabold tracking-wide text-[#FF3100] drop-shadow-md">
           Who is Boye?
         </h2>
 
         <p className="text-gray-200 text-base sm:text-lg leading-relaxed">
           I&apos;m <span className="font-semibold text-white">Boye</span> — a
-          creative videographer obsessed with capturing emotion, rhythm, and
-          atmosphere. Every frame is intentional. Every cut tells a story.
+          creative videographer obsessed with capturing{" "}
+          <span className="text-[#FF3100] font-medium">
+            emotion, rhythm, and atmosphere
+          </span>
+          . Every frame is intentional. Every cut tells a story.
         </p>
 
         <p className="text-gray-400 text-sm sm:text-base leading-loose">
@@ -64,7 +67,8 @@ export default function AboutPreview() {
         </p>
 
         <p className="text-gray-400 text-sm sm:text-base leading-loose">
-          📍 Based in Chicago — available worldwide.
+          📍 Based in Chicago —{" "}
+          <span className="text-white">available worldwide</span>.
         </p>
       </motion.div>
     </section>
