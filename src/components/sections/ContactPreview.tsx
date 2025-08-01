@@ -31,7 +31,7 @@ export default function ContactPreview() {
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
       >
-        Let’s Create Something Beautiful
+        Let&apos;s Create Something Beautiful
       </motion.h2>
 
       <motion.p
@@ -41,8 +41,8 @@ export default function ContactPreview() {
         transition={{ duration: 0.8, delay: 0.3 }}
         viewport={{ once: true }}
       >
-        Whether it’s a music video, short film, or creative concept — I’m ready
-        to bring your vision to life with cinematic precision.
+        Whether it&apos;s a music video, short film, or creative concept —
+        I&apos;m ready to bring your vision to life with cinematic precision.
       </motion.p>
 
       <motion.div

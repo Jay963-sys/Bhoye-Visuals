@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const clientLogos = [
   { name: "Sony", src: "/logos/sony.svg" },
@@ -41,7 +42,7 @@ export default function Clients() {
         transition={{ duration: 1 }}
         viewport={{ once: true }}
       >
-        Clients We've Worked With
+        Clients We&apos;ve Worked With
       </motion.h2>
 
       {/* 🔁 Horizontal Scroll Carousel */}
@@ -65,9 +66,11 @@ export default function Clients() {
                 ease: "easeInOut",
               }}
             >
-              <img
+              <Image
                 src={client.src}
                 alt={client.name}
+                width={100}
+                height={100}
                 className="h-full object-contain"
               />
             </motion.div>

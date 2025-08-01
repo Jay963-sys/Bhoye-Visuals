@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useUser } from "@clerk/nextjs";
 import { useClerk } from "@clerk/nextjs";
 import { Menu, X } from "lucide-react";
+import Image from "next/image";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -112,9 +113,11 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
         {/* Logo link to homepage */}
         <Link href="/" className="block" aria-label="Homepage">
-          <img
+          <Image
             src="/Logo Dark.svg"
             alt="Bhoye Visuals Logo"
+            width={100}
+            height={50}
             className="h-14 w-auto sm:h-16 transition-all duration-300"
           />
         </Link>

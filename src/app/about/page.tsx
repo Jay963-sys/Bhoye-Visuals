@@ -46,8 +46,8 @@ export default function AboutPage() {
               across every frame.
             </p>
             <p>
-              Whether it’s music videos, brand content, or events — Bhoye blends
-              instinct, artistry, and edge into unforgettable film.
+              Whether it&apos;s music videos, brand content, or events — Bhoye
+              blends instinct, artistry, and edge into unforgettable film.
             </p>
             <p>
               With a sharp eye for detail and a passion for editing that

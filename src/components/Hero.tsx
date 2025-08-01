@@ -93,7 +93,7 @@ export default function Hero() {
           }}
         >
           I craft immersive videos that captivate, communicate, and connect.
-          Let’s bring your vision to life.
+          Let&apos;s bring your vision to life.
         </motion.p>
 
         {/* CTA Buttons */}
