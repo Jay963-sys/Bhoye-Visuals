@@ -110,7 +110,7 @@ export default function Navbar() {
           : "bg-white/5 dark:bg-darkPrimary/50 backdrop-blur-md"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-2 flex justify-between items-center">
         {/* Logo link to homepage */}
         <Link href="/" className="block" aria-label="Homepage">
           <Image
@@ -118,7 +118,7 @@ export default function Navbar() {
             alt="Bhoye Visuals Logo"
             width={60}
             height={30}
-            className="h-14 w-auto sm:h-16 transition-all duration-300"
+            className="h-10 w-auto sm:h-12 transition-all duration-300"
           />
         </Link>
 
