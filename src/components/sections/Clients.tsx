@@ -54,7 +54,7 @@ export default function Clients() {
           {[...clientLogos, ...clientLogos].map((client, i) => (
             <motion.div
               key={`${client.name}-${i}`}
-              className="flex-shrink-0 h-14 md:h-16 bg-white/5 p-3 md:p-4 rounded-xl border border-white/10 backdrop-blur-sm shadow-md transition-transform duration-300 hover:scale-105"
+              className="flex-shrink-0 h-20 md:h-24 w-24 bg-white/5 p-3 md:p-4 rounded-xl border border-white/10 backdrop-blur-sm shadow-md transition-transform duration-300 hover:scale-105"
               animate={{ y: [0, -3, 0] }}
               transition={{
                 duration: 2.5 + i * 0.1,
