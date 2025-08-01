@@ -32,7 +32,7 @@ export default function AboutPreview() {
       >
         <Image
           src="/profile.jpg"
-          alt="Boye's profile"
+          alt="Boye profile"
           fill
           className="rounded-full object-cover border-4 border-[#FF3100] shadow-[0_4px_40px_rgba(255,49,0,0.4)] group-hover:scale-105 transition-transform duration-300"
         />
@@ -51,7 +51,7 @@ export default function AboutPreview() {
         </h2>
 
         <p className="text-gray-200 text-base sm:text-lg leading-relaxed">
-          I'm <span className="font-semibold text-white">Boye</span> — a
+          I&apos;m <span className="font-semibold text-white">Boye</span> — a
           creative videographer obsessed with capturing emotion, rhythm, and
           atmosphere. Every frame is intentional. Every cut tells a story.
         </p>
