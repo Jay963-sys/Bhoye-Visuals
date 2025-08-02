@@ -291,3 +291,183 @@ videographer-portfolio-p
 └─ tsconfig.json
 
 ```
+```
+videographer-portfolio-p
+├─ eslint.config.mjs
+├─ next.config.ts
+├─ package-lock.json
+├─ package.json
+├─ postcss.config.cjs
+├─ prisma
+│  ├─ migrations
+│  │  ├─ 20250726003636_init
+│  │  │  └─ migration.sql
+│  │  ├─ 20250726015742_add_orientation
+│  │  │  └─ migration.sql
+│  │  ├─ 20250726163955_add_public_id
+│  │  │  └─ migration.sql
+│  │  └─ migration_lock.toml
+│  └─ schema.prisma
+├─ public
+│  ├─ audio
+│  │  └─ intro-bg.mp3
+│  ├─ favico.ico
+│  ├─ favicon.ico
+│  ├─ grain.png
+│  ├─ hero-bg.jpg
+│  ├─ Logo Dark.svg
+│  ├─ logos
+│  │  ├─ gucci.svg
+│  │  ├─ max.svg
+│  │  ├─ mtvbase.svg
+│  │  ├─ northface.svg
+│  │  ├─ sony.svg
+│  │  ├─ unitednations.svg
+│  │  └─ youtube.svg
+│  ├─ me.jpg
+│  ├─ noise.png
+│  ├─ noise.svg
+│  ├─ og-image.png
+│  ├─ profile.jpg
+│  └─ videos
+│     └─ hero-bg.mp4
+├─ README.md
+├─ src
+│  ├─ app
+│  │  ├─ about
+│  │  │  └─ page.tsx
+│  │  ├─ admin
+│  │  │  └─ page.tsx
+│  │  ├─ api
+│  │  │  └─ videos
+│  │  │     ├─ latest
+│  │  │     │  └─ route.ts
+│  │  │     ├─ route.ts
+│  │  │     ├─ stats
+│  │  │     │  └─ route.ts
+│  │  │     └─ [id]
+│  │  │        └─ route.ts
+│  │  ├─ contact
+│  │  │  └─ page.tsx
+│  │  ├─ globals.css
+│  │  ├─ layout.tsx
+│  │  ├─ page.tsx
+│  │  ├─ projects
+│  │  │  └─ page.tsx
+│  │  └─ sign-in
+│  │     └─ [[...sign-in]]
+│  │        └─ page.tsx
+│  ├─ components
+│  │  ├─ AdminStats.tsx
+│  │  ├─ Footer.tsx
+│  │  ├─ Hero.tsx
+│  │  ├─ Navbar.tsx
+│  │  ├─ ProjectCard.tsx
+│  │  ├─ sections
+│  │  │  ├─ AboutPreview.tsx
+│  │  │  ├─ Clients.tsx
+│  │  │  ├─ ContactPreview.tsx
+│  │  │  ├─ Services.tsx
+│  │  │  └─ WorksPreview.tsx
+│  │  ├─ UploadForm.tsx
+│  │  └─ VideoListAdmin.tsx
+│  ├─ lib
+│  │  ├─ cloudinary.ts
+│  │  └─ prisma.ts
+│  ├─ middleware.ts
+│  └─ utils
+│     └─ cloudinary.ts
+├─ tailwind.config.ts
+└─ tsconfig.json
+
+```
+```
+videographer-portfolio-p
+├─ eslint.config.mjs
+├─ next.config.ts
+├─ package-lock.json
+├─ package.json
+├─ postcss.config.cjs
+├─ prisma
+│  ├─ migrations
+│  │  ├─ 20250726003636_init
+│  │  │  └─ migration.sql
+│  │  ├─ 20250726015742_add_orientation
+│  │  │  └─ migration.sql
+│  │  ├─ 20250726163955_add_public_id
+│  │  │  └─ migration.sql
+│  │  └─ migration_lock.toml
+│  └─ schema.prisma
+├─ public
+│  ├─ audio
+│  │  └─ intro-bg.mp3
+│  ├─ favico.ico
+│  ├─ favicon.ico
+│  ├─ grain.png
+│  ├─ hero-bg.jpg
+│  ├─ Logo Dark.svg
+│  ├─ logos
+│  │  ├─ gucci.svg
+│  │  ├─ max.svg
+│  │  ├─ mtvbase.svg
+│  │  ├─ northface.svg
+│  │  ├─ sony.svg
+│  │  ├─ unitednations.svg
+│  │  └─ youtube.svg
+│  ├─ me.jpg
+│  ├─ noise.png
+│  ├─ noise.svg
+│  ├─ og-image.png
+│  ├─ profile.jpg
+│  └─ videos
+│     └─ hero-bg.mp4
+├─ README.md
+├─ src
+│  ├─ app
+│  │  ├─ about
+│  │  │  └─ page.tsx
+│  │  ├─ admin
+│  │  │  └─ page.tsx
+│  │  ├─ api
+│  │  │  └─ videos
+│  │  │     ├─ latest
+│  │  │     │  └─ route.ts
+│  │  │     ├─ route.ts
+│  │  │     ├─ stats
+│  │  │     │  └─ route.ts
+│  │  │     └─ [id]
+│  │  │        └─ route.ts
+│  │  ├─ contact
+│  │  │  └─ page.tsx
+│  │  ├─ globals.css
+│  │  ├─ layout.tsx
+│  │  ├─ page.tsx
+│  │  ├─ projects
+│  │  │  └─ page.tsx
+│  │  └─ sign-in
+│  │     └─ [[...sign-in]]
+│  │        └─ page.tsx
+│  ├─ components
+│  │  ├─ AdminStats.tsx
+│  │  ├─ Footer.tsx
+│  │  ├─ Hero.tsx
+│  │  ├─ Navbar.tsx
+│  │  ├─ ProjectCard.tsx
+│  │  ├─ sections
+│  │  │  ├─ AboutPreview.tsx
+│  │  │  ├─ Clients.tsx
+│  │  │  ├─ ContactPreview.tsx
+│  │  │  ├─ Services.tsx
+│  │  │  └─ WorksPreview.tsx
+│  │  ├─ UploadForm.tsx
+│  │  └─ VideoListAdmin.tsx
+│  ├─ lib
+│  │  ├─ cloudinary.ts
+│  │  └─ prisma.ts
+│  ├─ middleware.ts
+│  └─ utils
+│     └─ cloudinary.ts
+├─ tailwind.config.ts
+└─ tsconfig.json
+
+```

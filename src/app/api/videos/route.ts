@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-// Enable body parsing for large video data
 export const config = {
   api: {
     bodyParser: {
@@ -12,55 +11,29 @@ export const config = {
 
 export async function POST(req: NextRequest) {
   try {
-    const formData = await req.formData();
-    const file = formData.get("file") as File;
-    const title = formData.get("title") as string | null;
-    const orientationFromForm = formData.get("orientation") as string | null;
+    const body = await req.json();
+    const { url, title, orientation, publicId } = body;
 
-    if (!file) {
-      return NextResponse.json(
-        { error: "No video file provided" },
-        { status: 400 }
-      );
+    if (!url || !publicId || !orientation) {
+      return NextResponse.json({ error: "Missing metadata" }, { status: 400 });
     }
 
-    // Upload to Cloudinary
-    const cloudinaryRes = await uploadVideoToCloudinary(file);
-
-    if (!cloudinaryRes) {
-      return NextResponse.json(
-        { error: "Cloudinary upload failed" },
-        { status: 500 }
-      );
-    }
-
-    const {
-      secure_url,
-      public_id,
-      orientation: serverOrientation,
-    } = cloudinaryRes;
-
-    // Prefer orientation from form if provided, fallback to Cloudinary metadata
-    const finalOrientation = orientationFromForm || serverOrientation;
-
-    // Save to DB
     const video = await prisma.video.create({
       data: {
-        url: secure_url,
+        url,
         title: title || "Untitled",
-        orientation: finalOrientation,
-        publicId: public_id,
+        orientation,
+        publicId,
       },
     });
 
     return NextResponse.json(video, { status: 201 });
   } catch (err) {
-    console.error("Upload error:", err);
+    console.error("Metadata save error:", err);
     return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }
 
-// Reuse the helper
 async function uploadVideoToCloudinary(file: File): Promise<{
   secure_url: string;
   public_id: string;

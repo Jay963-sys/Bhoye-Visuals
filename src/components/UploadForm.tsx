@@ -4,64 +4,96 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 
 export default function UploadForm() {
-  const [videoUrl, setVideoUrl] = useState("");
   const [uploading, setUploading] = useState(false);
-
-  const getVideoOrientation = (
-    file: File
-  ): Promise<"landscape" | "portrait"> => {
-    return new Promise((resolve) => {
-      const video = document.createElement("video");
-      video.preload = "metadata";
-      video.onloadedmetadata = () => {
-        const orientation =
-          video.videoWidth < video.videoHeight ? "portrait" : "landscape";
-        resolve(orientation);
-      };
-      video.src = URL.createObjectURL(file);
-    });
-  };
+  const [progress, setProgress] = useState(0);
+  const [videoUrl, setVideoUrl] = useState("");
 
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
     if (!file.type.startsWith("video/")) {
-      toast.error("Please select a valid video file.");
+      toast.error("Only video files are allowed.");
+      return;
+    }
+
+    const maxSize = 500 * 1024 * 1024;
+    if (file.size > maxSize) {
+      toast.error("File too large. Max 500MB allowed.");
       return;
     }
 
     setUploading(true);
-    toast.loading("Uploading video...");
+    setProgress(0);
+    toast.loading("Uploading...");
 
     try {
-      const orientation = await getVideoOrientation(file);
-
       const formData = new FormData();
       formData.append("file", file);
-      formData.append("title", file.name.replace(/\.[^/.]+$/, ""));
-      formData.append("orientation", orientation); // ✅ Include orientation
+      formData.append(
+        "upload_preset",
+        process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET!
+      );
 
-      const res = await fetch("/api/videos", {
-        method: "POST",
-        body: formData,
-      });
+      const xhr = new XMLHttpRequest();
+      console.log(
+        "🌐 CLOUD NAME:",
+        process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
+      );
+      console.log(
+        "🌐 UPLOAD PRESET:",
+        process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET
+      );
 
-      if (!res.ok) {
+      xhr.open(
+        "POST",
+        `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/video/upload`
+      );
+
+      xhr.upload.onprogress = (event) => {
+        if (event.lengthComputable) {
+          const percent = Math.round((event.loaded / event.total) * 100);
+          setProgress(percent);
+        }
+      };
+
+      xhr.onload = async () => {
+        const res = JSON.parse(xhr.responseText);
+        console.log("📦 Cloudinary raw response:", res);
+        if (!res.secure_url) {
+          console.error("❌ Upload failed (no secure_url)", res);
+          throw new Error("Upload failed");
+        }
+
+        const orientation = res.height > res.width ? "portrait" : "landscape";
+
+        const metadataRes = await fetch("/api/videos", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            url: res.secure_url,
+            publicId: res.public_id,
+            orientation,
+            title: file.name.replace(/\.[^/.]+$/, ""),
+          }),
+        });
+
+        if (!metadataRes.ok) throw new Error("Failed to save metadata");
+
+        setVideoUrl(res.secure_url);
         toast.dismiss();
-        toast.error("Failed to upload video.");
+        toast.success("Upload complete!");
+      };
+
+      xhr.onerror = () => {
+        toast.dismiss();
+        toast.error("Upload failed.");
         setUploading(false);
-        return;
-      }
+      };
 
-      const video = await res.json();
-      setVideoUrl(video.url);
-      toast.dismiss();
-      toast.success("Upload successful!");
-
-      e.target.value = ""; // ✅ Reset file input
+      xhr.send(formData);
     } catch (err) {
-      console.error("Upload error:", err);
+      console.error(err);
       toast.dismiss();
       toast.error("Something went wrong.");
     } finally {
@@ -77,7 +109,7 @@ export default function UploadForm() {
         htmlFor="video-upload"
         className="block cursor-pointer px-6 py-3 text-center bg-accent text-black font-medium rounded hover:bg-white transition"
       >
-        {uploading ? "Uploading..." : "Choose Video File"}
+        {uploading ? `Uploading... ${progress}%` : "Choose Video File"}
       </label>
 
       <input

@@ -54,7 +54,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className="bg-background text-foreground">
+        <body className="bg-background text-foreground font-body">
           {/* Global Navbar */}
           <Navbar />
 

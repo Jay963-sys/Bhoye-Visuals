@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Oswald:wght@400;600;700&display=swap");
 @import "tailwindcss";
 
 :root {
@@ -22,7 +23,6 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 @keyframes grain {
@@ -154,5 +154,5 @@ body {
 }
 
 .animate-scroll-x-fast {
-  animation: scroll-x-fast 20s linear infinite;
+  animation: scroll-x-fast 25s linear infinite;
 }

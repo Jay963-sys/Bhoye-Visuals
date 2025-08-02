@@ -13,8 +13,8 @@ const config: Config = {
         "brand-gray": "#333333",
       },
       fontFamily: {
-        display: ['"Oswald"', "sans-serif"],
-        body: ['"Inter"', "sans-serif"],
+        body: ["Inter", "sans-serif"],
+        display: ["Oswald", "sans-serif"],
       },
       animation: {
         "pulse-slow": "pulse 8s ease-in-out infinite",
@@ -24,4 +24,5 @@ const config: Config = {
   },
   plugins: [],
 };
+
 export default config;
