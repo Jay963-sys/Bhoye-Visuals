@@ -51,7 +51,7 @@ export default function Hero() {
         }}
       >
         <motion.p
-          className="text-[11px] sm:text-sm md:text-base uppercase tracking-widest text-[#FF3100] font-medium"
+          className="font-display text-[11px] sm:text-sm md:text-base uppercase tracking-widest text-[#FF3100] font-medium"
           variants={{
             hidden: { opacity: 0, y: 20 },
             visible: {
@@ -65,7 +65,7 @@ export default function Hero() {
         </motion.p>
 
         <motion.h1
-          className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight drop-shadow-lg leading-tight"
+          className="font-display text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight drop-shadow-lg leading-tight"
           variants={{
             hidden: { opacity: 0, y: 30 },
             visible: {

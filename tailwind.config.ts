@@ -13,9 +13,10 @@ const config: Config = {
         "brand-gray": "#333333",
       },
       fontFamily: {
-        body: ["Inter", "sans-serif"],
-        display: ["Oswald", "sans-serif"],
+        body: ['"DM Sans"', "sans-serif"],
+        display: ['"Space Grotesk"', "sans-serif"],
       },
+
       animation: {
         "pulse-slow": "pulse 8s ease-in-out infinite",
         "pulse-slower": "pulse 12s ease-in-out infinite",
