@@ -198,6 +198,7 @@ videographer-portfolio-p
 └─ tsconfig.json
 
 ```
+
 ```
 videographer-portfolio-p
 ├─ eslint.config.mjs
@@ -291,6 +292,7 @@ videographer-portfolio-p
 └─ tsconfig.json
 
 ```
+
 ```
 videographer-portfolio-p
 ├─ eslint.config.mjs
@@ -381,6 +383,7 @@ videographer-portfolio-p
 └─ tsconfig.json
 
 ```
+
 ```
 videographer-portfolio-p
 ├─ eslint.config.mjs
@@ -469,5 +472,4 @@ videographer-portfolio-p
 │     └─ cloudinary.ts
 ├─ tailwind.config.ts
 └─ tsconfig.json
-
 ```
