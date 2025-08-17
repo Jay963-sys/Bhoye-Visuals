@@ -28,11 +28,11 @@ export default function AdminStats() {
 
   if (loading) {
     return (
-      <div className="bg-[#ffffff0a] backdrop-blur-sm border border-[#333] text-white shadow-md shadow-[#ffffff0a] p-6 rounded-2xl animate-pulse">
-        <div className="h-6 w-40 bg-gray-700 rounded mb-4" />
+      <div className="bg-white/5 backdrop-blur-sm border border-black text-white shadow-md shadow-black/10 p-6 rounded-2xl animate-pulse">
+        <div className="h-6 w-40 bg-black/30 rounded mb-4" />
         <div className="space-y-2">
-          <div className="h-4 w-60 bg-gray-800 rounded" />
-          <div className="h-4 w-44 bg-gray-800 rounded" />
+          <div className="h-4 w-60 bg-black/40 rounded" />
+          <div className="h-4 w-44 bg-black/40 rounded" />
         </div>
       </div>
     );
@@ -41,11 +41,11 @@ export default function AdminStats() {
   if (!stats) return null;
 
   return (
-    <div className="bg-[#ffffff0a] backdrop-blur-sm border border-[#333] text-white shadow-md shadow-[#FF310020] p-6 rounded-2xl">
-      <h2 className="text-2xl font-bold text-[#FF3100] mb-3 tracking-wide">
+    <div className="bg-white/5 backdrop-blur-sm border border-black text-white shadow-md shadow-black/20 p-6 rounded-2xl">
+      <h2 className="text-2xl font-bold text-white mb-3 tracking-wide">
         Stats Overview
       </h2>
-      <div className="space-y-2 text-[#CCCCCC] text-base leading-relaxed">
+      <div className="space-y-2 text-gray-300 text-base leading-relaxed">
         <p>
           Total Videos:{" "}
           <span className="text-white font-semibold">

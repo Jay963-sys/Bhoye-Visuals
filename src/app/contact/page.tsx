@@ -5,7 +5,7 @@ import { Mail, Instagram, Phone, MapPin } from "lucide-react";
 
 export default function ContactPage() {
   return (
-    <main className="min-h-screen bg-[#202020] text-white px-4 py-20 relative overflow-hidden">
+    <main className="min-h-screen bg-black text-white px-4 py-20 relative overflow-hidden">
       <div className="absolute inset-0 z-0 bg-[url('/noise.svg')] opacity-20 pointer-events-none" />
 
       <div className="max-w-4xl mx-auto z-10 relative space-y-12 text-center">
@@ -13,7 +13,7 @@ export default function ContactPage() {
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-4xl md:text-5xl font-extrabold text-[#FF3100]"
+          className="text-4xl md:text-5xl font-extrabold text-white"
         >
           Let&apos;s Create Magic
         </motion.h1>
@@ -67,7 +67,7 @@ export default function ContactPage() {
         >
           <a
             href="mailto:bhoyevisuals@gmail.com"
-            className="inline-block px-8 py-3 bg-[#FF3100] text-black rounded-full font-bold shadow-xl hover:scale-105 hover:bg-white transition duration-300 uppercase tracking-wide"
+            className="inline-block px-8 py-3 bg-white text-black rounded-full font-bold shadow-xl hover:scale-105 hover:bg-gray-200 transition duration-300 uppercase tracking-wide"
           >
             Send a Message
           </a>
@@ -95,7 +95,7 @@ function ContactCard({
       rel="noopener noreferrer"
       className="flex items-center gap-4 bg-[#ffffff0a] hover:bg-[#ffffff15] border border-white/10 p-5 rounded-2xl transition duration-300 group backdrop-blur-sm shadow-md"
     >
-      <div className="text-[#FF3100] group-hover:scale-110 group-hover:text-white transition duration-300">
+      <div className="text-white group-hover:scale-110 group-hover:text-gray-300 transition duration-300">
         {icon}
       </div>
       <div className="text-left">

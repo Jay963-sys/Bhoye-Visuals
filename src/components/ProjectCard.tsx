@@ -47,7 +47,7 @@ export default function ProjectCard({
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7 }}
       viewport={{ once: true }}
-      className="relative rounded-2xl overflow-hidden border border-[#FF3100]/30 bg-[#202020] shadow-md shadow-[#FF3100]/10 group hover:shadow-xl hover:shadow-[#FF3100]/50 transition-all duration-300"
+      className="relative rounded-2xl overflow-hidden border border-white/20 bg-black shadow-md shadow-white/5 group hover:shadow-xl hover:shadow-white/30 transition-all duration-300"
     >
       <div className={`relative w-full ${aspectClass}`}>
         <video
@@ -62,17 +62,16 @@ export default function ProjectCard({
           playsInline
         />
 
-        <div className="absolute inset-0 bg-gradient-to-t from-[#FF3100]/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-white/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 pointer-events-none" />
       </div>
 
-      <div className="p-4 text-[#E5E5E5]">
-        <h3 className="text-lg font-semibold truncate group-hover:text-[#FF3100] transition duration-300">
+      <div className="p-4 text-gray-200">
+        <h3 className="text-lg font-semibold truncate group-hover:text-white transition duration-300">
           {title.replace(/\.[^/.]+$/, "")}
         </h3>
         {orientation && (
-          <p className="text-sm text-[#CCCCCC] mt-1 capitalize">
-            Orientation:{" "}
-            <span className="text-[#FF3100]/80">{orientation}</span>
+          <p className="text-sm text-gray-400 mt-1 capitalize">
+            Orientation: <span className="text-white/70">{orientation}</span>
           </p>
         )}
       </div>

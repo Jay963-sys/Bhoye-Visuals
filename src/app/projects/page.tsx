@@ -30,16 +30,16 @@ export default function ProjectsPage() {
     filter === "all" ? videos : videos.filter((v) => v.orientation === filter);
 
   return (
-    <main className="min-h-screen bg-[#202020] text-white px-4 py-20 relative overflow-hidden">
+    <main className="min-h-screen bg-black text-white px-4 py-20 relative overflow-hidden">
       <div className="absolute inset-0 z-0 bg-[url('/noise.svg')] opacity-20 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto">
-        {/* ✅ Header */}
-        <h1 className="text-4xl md:text-5xl font-extrabold text-center text-[#FF3100] mb-10 tracking-tight">
+        {/* ⚪ Header */}
+        <h1 className="text-4xl md:text-5xl font-extrabold text-center text-white mb-10 tracking-tight">
           Featured Projects
         </h1>
 
-        {/* ✅ Filter Buttons */}
+        {/* ⚪ Filter Buttons */}
         <div className="flex justify-center flex-wrap gap-4 mb-12">
           {filterOptions.map((type) => {
             const isActive = filter === type;
@@ -50,8 +50,8 @@ export default function ProjectsPage() {
                 className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 border uppercase tracking-wider
                   ${
                     isActive
-                      ? "bg-[#FF3100] text-black border-[#FF3100] shadow-lg shadow-[#FF3100]/40"
-                      : "bg-[#2a2a2a] text-gray-300 border-gray-600 hover:bg-[#C10801]/10 hover:text-white"
+                      ? "bg-white text-black border-white shadow-lg shadow-white/40"
+                      : "bg-[#1a1a1a] text-gray-300 border-gray-600 hover:bg-white/10 hover:text-white"
                   }`}
               >
                 {type}
@@ -60,7 +60,7 @@ export default function ProjectsPage() {
           })}
         </div>
 
-        {/* ✅ Video Grid */}
+        {/* ⚪ Video Grid */}
         {filteredVideos.length === 0 ? (
           <p className="text-gray-500 text-center">No videos available.</p>
         ) : (

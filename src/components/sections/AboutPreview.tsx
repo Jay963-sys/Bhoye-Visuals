@@ -7,13 +7,13 @@ export default function AboutPreview() {
   return (
     <section
       id="about"
-      className="relative min-h-screen snap-start flex flex-col md:flex-row items-center justify-center gap-12 px-6 py-32 bg-[#202020] text-white overflow-hidden"
+      className="relative min-h-screen snap-start flex flex-col md:flex-row items-center justify-center gap-12 px-6 py-32 bg-black text-white overflow-hidden"
     >
-      {/* 🔴 Animated blobs */}
+      {/* ⚪️ Subtle monochrome blobs */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <div className="absolute w-[60vw] h-[60vw] bg-[#C10801] opacity-30 rounded-full filter blur-3xl animate-pulse-slow top-[-20%] left-[-20%]" />
-        <div className="absolute w-[50vw] h-[50vw] bg-[#FF3100] opacity-20 rounded-full filter blur-2xl animate-pulse-slower top-[40%] right-[-15%]" />
-        <div className="absolute w-[40vw] h-[40vw] bg-[#ffffff0a] opacity-10 rounded-full filter blur-2xl animate-pulse-slow bottom-[-10%] left-[30%]" />
+        <div className="absolute w-[60vw] h-[60vw] bg-white/10 rounded-full filter blur-3xl animate-pulse-slow top-[-20%] left-[-20%]" />
+        <div className="absolute w-[50vw] h-[50vw] bg-white/5 rounded-full filter blur-2xl animate-pulse-slower top-[40%] right-[-15%]" />
+        <div className="absolute w-[40vw] h-[40vw] bg-white/5 rounded-full filter blur-2xl animate-pulse-slow bottom-[-10%] left-[30%]" />
       </div>
 
       {/* 🌾 Grain overlay */}
@@ -34,7 +34,7 @@ export default function AboutPreview() {
           src="/profile.jpg"
           alt="Boye profile"
           fill
-          className="rounded-full object-cover border-4 border-[#FF3100] shadow-[0_4px_40px_rgba(255,49,0,0.4)] group-hover:scale-105 transition-transform duration-300"
+          className="rounded-full object-cover border-4 border-white shadow-[0_4px_40px_rgba(255,255,255,0.3)] group-hover:scale-105 transition-transform duration-300"
         />
       </motion.div>
 
@@ -46,14 +46,14 @@ export default function AboutPreview() {
         transition={{ duration: 1.2, delay: 0.3, ease: "easeOut" }}
         viewport={{ once: true }}
       >
-        <h2 className="text-4xl sm:text-5xl font-extrabold tracking-wide text-[#FF3100] drop-shadow-md">
+        <h2 className="text-4xl sm:text-5xl font-extrabold tracking-wide text-white drop-shadow-md">
           Who is Boye?
         </h2>
 
         <p className="text-gray-200 text-base sm:text-lg leading-relaxed">
           I&apos;m <span className="font-semibold text-white">Boye</span> — a
           creative videographer obsessed with capturing{" "}
-          <span className="text-[#FF3100] font-medium">
+          <span className="text-gray-300 font-medium">
             emotion, rhythm, and atmosphere
           </span>
           . Every frame is intentional. Every cut tells a story.

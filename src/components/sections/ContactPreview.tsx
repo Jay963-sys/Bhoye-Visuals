@@ -8,13 +8,13 @@ export default function ContactPreview() {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden min-h-screen snap-start bg-[#111111] text-white flex flex-col items-center justify-center px-6 py-20 md:py-32"
+      className="relative overflow-hidden min-h-screen snap-start bg-black text-white flex flex-col items-center justify-center px-6 py-20 md:py-32"
     >
-      {/* 🎨 Animated Blobs */}
+      {/* ⚪ Animated Blobs (Black & White theme) */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <div className="absolute w-[60vw] h-[60vw] bg-[#C10801] opacity-30 rounded-full blur-3xl animate-pulse-slow top-[-20%] left-[-20%]" />
-        <div className="absolute w-[50vw] h-[50vw] bg-[#FF3100] opacity-20 rounded-full blur-2xl animate-pulse-slower top-[40%] right-[-15%]" />
-        <div className="absolute w-[40vw] h-[40vw] bg-[#ffffff0a] opacity-10 rounded-full blur-2xl animate-pulse-slow bottom-[-10%] left-[30%]" />
+        <div className="absolute w-[60vw] h-[60vw] bg-white/10 opacity-20 rounded-full blur-3xl animate-pulse-slow top-[-20%] left-[-20%]" />
+        <div className="absolute w-[50vw] h-[50vw] bg-white/5 opacity-10 rounded-full blur-2xl animate-pulse-slower top-[40%] right-[-15%]" />
+        <div className="absolute w-[40vw] h-[40vw] bg-white/10 opacity-10 rounded-full blur-2xl animate-pulse-slow bottom-[-10%] left-[30%]" />
       </div>
 
       {/* Film grain */}
@@ -25,7 +25,7 @@ export default function ContactPreview() {
 
       {/* Foreground content */}
       <motion.h2
-        className="text-4xl md:text-5xl font-bold mb-4 text-[#FF3100] drop-shadow-md relative z-10 text-center"
+        className="text-4xl md:text-5xl font-bold mb-4 text-white drop-shadow-md relative z-10 text-center"
         initial={{ opacity: 0, scale: 0.9 }}
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8 }}

@@ -7,10 +7,10 @@ import { FaInstagram, FaYoutube, FaTwitter, FaEnvelope } from "react-icons/fa";
 export default function Footer() {
   return (
     <footer className="relative min-h-[50vh] bg-black text-white px-4 sm:px-6 md:px-10 py-16 flex flex-col items-center justify-center text-center overflow-hidden">
-      {/* 🎨 Animated blobs */}
+      {/* ⚪ Animated blobs (black & white) */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <div className="absolute w-[60vw] h-[60vw] bg-[#C10801] opacity-30 rounded-full blur-3xl animate-pulse-slow top-[-30%] left-[-20%]" />
-        <div className="absolute w-[50vw] h-[50vw] bg-[#FF3100] opacity-20 rounded-full blur-2xl animate-pulse-slower bottom-[-20%] right-[-10%]" />
+        <div className="absolute w-[60vw] h-[60vw] bg-white/10 opacity-20 rounded-full blur-3xl animate-pulse-slow top-[-30%] left-[-20%]" />
+        <div className="absolute w-[50vw] h-[50vw] bg-white/5 opacity-10 rounded-full blur-2xl animate-pulse-slower bottom-[-20%] right-[-10%]" />
         <div className="absolute w-[40vw] h-[40vw] bg-white/10 rounded-full blur-2xl animate-pulse-slow bottom-[-10%] left-[30%]" />
       </div>
 
@@ -97,7 +97,7 @@ export default function Footer() {
             <Link
               href="https://jay-dev-portfolio.vercel.app/"
               target="_blank"
-              className="underline hover:text-[#FF3100] transition-colors duration-300"
+              className="underline hover:text-white transition-colors duration-300"
             >
               Jay.dev
             </Link>

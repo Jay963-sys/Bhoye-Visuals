@@ -6,28 +6,28 @@ import { Wand2 } from "lucide-react";
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-[#202020] text-white px-4 py-20 relative overflow-hidden">
+    <main className="min-h-screen bg-black text-white px-4 py-20 relative overflow-hidden">
       <div className="absolute inset-0 z-0 bg-[url('/noise.svg')] opacity-20 pointer-events-none" />
 
       <div className="max-w-6xl mx-auto space-y-24 relative z-10">
-        {/* 🔶 Heading */}
+        {/* ⚪ Heading */}
         <motion.h1
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl font-extrabold text-center text-[#FF3100] tracking-tight mb-10"
+          className="text-4xl md:text-5xl font-extrabold text-center text-white tracking-tight mb-10"
         >
           About Bhoye Visuals
         </motion.h1>
 
-        {/* 🔶 Profile + Bio */}
+        {/* ⚪ Profile + Bio */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           className="flex flex-col md:flex-row items-center gap-10"
         >
-          <div className="w-44 h-44 relative rounded-full overflow-hidden border-4 border-[#FF3100] shadow-lg shadow-[#FF310050]">
+          <div className="w-44 h-44 relative rounded-full overflow-hidden border-4 border-white shadow-lg shadow-white/20">
             <Image
               src="/me.jpg"
               alt="Bhoye.mov"
@@ -36,11 +36,11 @@ export default function AboutPage() {
             />
           </div>
 
-          <div className="text-base sm:text-lg text-gray-300 leading-relaxed space-y-5 max-w-2xl bg-[#2a2a2a]/60 p-6 rounded-2xl border border-white/10 shadow-lg shadow-black/20">
+          <div className="text-base sm:text-lg text-gray-300 leading-relaxed space-y-5 max-w-2xl bg-[#1a1a1a]/60 p-6 rounded-2xl border border-white/10 shadow-lg shadow-black/20">
             <p>
               <span className="text-white font-semibold">Boye</span> is a
               Chicago-based videographer and creative storyteller capturing{" "}
-              <span className="text-[#FF3100] font-semibold">
+              <span className="text-white font-semibold">
                 raw emotion, bold movement, and striking visuals
               </span>{" "}
               across every frame.
@@ -57,14 +57,14 @@ export default function AboutPage() {
           </div>
         </motion.div>
 
-        {/* 🔶 Skills Section */}
+        {/* ⚪ Skills Section */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
           className="space-y-8"
         >
-          <h2 className="text-2xl sm:text-3xl font-bold text-[#FF3100] flex items-center gap-2 tracking-tight mb-4">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white flex items-center gap-2 tracking-tight mb-4">
             <Wand2 size={24} /> Specialties & Tools
           </h2>
 
@@ -83,7 +83,7 @@ export default function AboutPage() {
             ].map((skill) => (
               <li
                 key={skill}
-                className="bg-[#2a2a2a] border border-[#333] px-3 py-2 rounded-xl text-center transition-all duration-200 hover:border-[#FF3100] hover:text-white hover:shadow-[0_0_10px_#FF3100aa] hover:scale-[1.05]"
+                className="bg-[#1a1a1a] border border-[#333] px-3 py-2 rounded-xl text-center transition-all duration-200 hover:border-white hover:text-white hover:shadow-[0_0_10px_#ffffffaa] hover:scale-[1.05]"
               >
                 {skill}
               </li>

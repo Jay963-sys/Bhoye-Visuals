@@ -27,14 +27,17 @@ export default function Hero() {
       {/* BACKGROUND */}
       <div ref={bgRef} className="absolute inset-0">
         <Image
-          src="/hero-bg.jpg"
+          src="/bhoye.jpg"
           alt="Cinematic background"
           fill
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-black/60" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+        {/* Dark overlay (reduced from 60% → 40%) */}
+        <div className="absolute inset-0 bg-black/40" />
+        {/* Gradient overlay (softened from 60% → 40%) */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+        {/* Grain/texture stays the same */}
         <div className="absolute inset-0 pointer-events-none bg-[url('/grain.png')] animate-grain mix-blend-overlay opacity-20" />
       </div>
 
@@ -51,7 +54,7 @@ export default function Hero() {
         }}
       >
         <motion.p
-          className="font-display text-[11px] sm:text-sm md:text-base uppercase tracking-widest text-[#FF3100] font-medium"
+          className="font-display text-[11px] sm:text-sm md:text-base uppercase tracking-widest text-gray-300 font-medium"
           variants={{
             hidden: { opacity: 0, y: 20 },
             visible: {
@@ -79,7 +82,7 @@ export default function Hero() {
         </motion.h1>
 
         <motion.p
-          className="text-sm sm:text-lg md:text-xl text-gray-300 max-w-2xl mx-auto drop-shadow leading-relaxed"
+          className="text-sm sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto drop-shadow leading-relaxed"
           variants={{
             hidden: { opacity: 0, y: 30 },
             visible: {
@@ -105,12 +108,12 @@ export default function Hero() {
           }}
         >
           <Link href="#works">
-            <button className="px-6 py-3 bg-[#FF3100] hover:bg-[#C10801] text-white rounded-2xl transition shadow-md hover:scale-105">
+            <button className="px-6 py-3 bg-white text-black hover:bg-black hover:text-white border border-white rounded-2xl transition shadow-md hover:scale-105">
               View Work
             </button>
           </Link>
           <Link href="#contact">
-            <button className="px-6 py-3 border border-white hover:bg-white hover:text-black rounded-2xl transition shadow-md hover:scale-105">
+            <button className="px-6 py-3 border border-white text-white hover:bg-white hover:text-black rounded-2xl transition shadow-md hover:scale-105">
               Contact
             </button>
           </Link>
@@ -131,27 +134,27 @@ export default function Hero() {
           <Link
             href="https://www.instagram.com/bhoyevisuals"
             target="_blank"
-            className="hover:text-[#FF3100] transition"
+            className="hover:text-gray-400 transition"
           >
             <FaInstagram />
           </Link>
           <Link
             href="https://youtube.com/@bhoyevisual"
             target="_blank"
-            className="hover:text-[#FF3100] transition"
+            className="hover:text-gray-400 transition"
           >
             <FaYoutube />
           </Link>
           <Link
             href="https://x.com/bhoyevisuals"
             target="_blank"
-            className="hover:text-[#FF3100] transition"
+            className="hover:text-gray-400 transition"
           >
             <FaTwitter />
           </Link>
           <Link
             href="mailto:Bhoyevisuals@gmail.com"
-            className="hover:text-[#FF3100] transition"
+            className="hover:text-gray-400 transition"
           >
             <FaEnvelope />
           </Link>
@@ -159,7 +162,7 @@ export default function Hero() {
       </motion.div>
 
       {/* Bottom fade for smooth transition */}
-      <div className="absolute bottom-0 left-0 w-full h-16 sm:h-24 bg-gradient-to-b from-transparent to-[#202020] z-10 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-full h-16 sm:h-24 bg-gradient-to-b from-transparent to-black z-10 pointer-events-none" />
     </section>
   );
 }
