@@ -32,7 +32,7 @@ export default function Clients() {
 
       {/* Title */}
       <motion.h2
-        className="text-3xl sm:text-4xl md:text-5xl font-bold mb-16 text-center text-white drop-shadow-md z-10"
+        className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-center bg-gradient-to-r from-[#FF3100] to-[#C10801] bg-clip-text text-transparent z-10"
         initial={{ opacity: 0, y: -30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
@@ -41,7 +41,16 @@ export default function Clients() {
         Clients We&apos;ve Worked With
       </motion.h2>
 
-      {/* Static Grid of Logos */}
+      <motion.p
+        className="text-center max-w-2xl text-white/80 text-lg md:text-xl mb-8 leading-relaxed drop-shadow-sm relative z-10"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.3 }}
+        viewport={{ once: true }}
+      >
+        From local talent to global brands — captured with vision
+      </motion.p>
+
       <motion.div
         className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8 md:gap-12 z-10 max-w-6xl w-full"
         initial={{ opacity: 0 }}
@@ -52,7 +61,8 @@ export default function Clients() {
         {clientLogos.map((client, i) => (
           <motion.div
             key={client.name}
-            className="flex flex-col items-center bg-white/5 p-6 rounded-xl border border-white/10 backdrop-blur-sm shadow-md transition-transform duration-300 hover:scale-105"
+            className="flex flex-col items-center bg-white/5 p-6 rounded-xl border border-white/10 backdrop-blur-sm shadow-md 
+      transition-transform duration-300 hover:scale-105 hover:border-[#FF3100]/60 hover:shadow-[0_0_20px_#FF3100]/30"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.1, duration: 0.6 }}

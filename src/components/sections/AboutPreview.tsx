@@ -9,11 +9,11 @@ export default function AboutPreview() {
       id="about"
       className="relative min-h-screen snap-start flex flex-col md:flex-row items-center justify-center gap-12 px-6 py-32 bg-black text-white overflow-hidden"
     >
-      {/* ⚪️ Subtle monochrome blobs */}
+      {/* 🌈 Subtle blobs with brand tint */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <div className="absolute w-[60vw] h-[60vw] bg-white/10 rounded-full filter blur-3xl animate-pulse-slow top-[-20%] left-[-20%]" />
+        <div className="absolute w-[60vw] h-[60vw] bg-[#FF3100]/10 rounded-full filter blur-3xl animate-pulse-slow top-[-20%] left-[-20%]" />
         <div className="absolute w-[50vw] h-[50vw] bg-white/5 rounded-full filter blur-2xl animate-pulse-slower top-[40%] right-[-15%]" />
-        <div className="absolute w-[40vw] h-[40vw] bg-white/5 rounded-full filter blur-2xl animate-pulse-slow bottom-[-10%] left-[30%]" />
+        <div className="absolute w-[40vw] h-[40vw] bg-[#C10801]/10 rounded-full filter blur-2xl animate-pulse-slow bottom-[-10%] left-[30%]" />
       </div>
 
       {/* 🌾 Grain overlay */}
@@ -34,7 +34,7 @@ export default function AboutPreview() {
           src="/profile.jpg"
           alt="Boye profile"
           fill
-          className="rounded-full object-cover border-4 border-white shadow-[0_4px_40px_rgba(255,255,255,0.3)] group-hover:scale-105 transition-transform duration-300"
+          className="rounded-full object-cover border-4 border-[#FF3100] shadow-[0_4px_40px_rgba(255,49,0,0.3)] group-hover:scale-105 transition-transform duration-300"
         />
       </motion.div>
 
@@ -46,14 +46,14 @@ export default function AboutPreview() {
         transition={{ duration: 1.2, delay: 0.3, ease: "easeOut" }}
         viewport={{ once: true }}
       >
-        <h2 className="text-4xl sm:text-5xl font-extrabold tracking-wide text-white drop-shadow-md">
-          Who is Boye?
+        <h2 className="text-4xl sm:text-5xl font-extrabold tracking-wide drop-shadow-md">
+          Who is <span className="text-[#FF3100]">Boye?</span>
         </h2>
 
         <p className="text-gray-200 text-base sm:text-lg leading-relaxed">
           I&apos;m <span className="font-semibold text-white">Boye</span> — a
           creative videographer obsessed with capturing{" "}
-          <span className="text-gray-300 font-medium">
+          <span className="text-[#FF3100] font-semibold">
             emotion, rhythm, and atmosphere
           </span>
           . Every frame is intentional. Every cut tells a story.
@@ -68,7 +68,10 @@ export default function AboutPreview() {
 
         <p className="text-gray-400 text-sm sm:text-base leading-loose">
           📍 Based in Chicago —{" "}
-          <span className="text-white">available worldwide</span>.
+          <span className="text-[#C10801] font-medium">
+            available worldwide
+          </span>
+          .
         </p>
       </motion.div>
     </section>

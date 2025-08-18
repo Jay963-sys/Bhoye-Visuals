@@ -25,13 +25,14 @@ export default function ContactPreview() {
 
       {/* Foreground content */}
       <motion.h2
-        className="text-4xl md:text-5xl font-bold mb-4 text-white drop-shadow-md relative z-10 text-center"
+        className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-center bg-gradient-to-r from-[#FF3100] to-[#C10801] bg-clip-text text-transparent z-10"
         initial={{ opacity: 0, scale: 0.9 }}
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
       >
         Let&apos;s Create Something Beautiful
+        <span className="absolute left-1/2 -bottom-2 w-28 h-[3px] bg-gradient-to-r from-[#FF3100] to-[#C10801] rounded-full transform -translate-x-1/2"></span>
       </motion.h2>
 
       <motion.p
@@ -54,14 +55,18 @@ export default function ContactPreview() {
       >
         <Link
           href="/contact"
-          className="flex items-center gap-2 px-7 py-3 rounded-full border border-white/10 backdrop-blur bg-white/5 hover:bg-white/10 transition-all duration-300 hover:scale-105 font-medium text-lg"
+          className="flex items-center gap-2 px-7 py-3 rounded-full border border-white/10 backdrop-blur bg-white/5 
+    transition-all duration-300 hover:scale-105 font-medium text-lg 
+    hover:bg-gradient-to-r hover:from-[#FF3100]/20 hover:to-[#C10801]/20 hover:border-[#FF3100]/40 hover:shadow-[0_0_20px_#FF3100]/30"
         >
           Get in Touch <Send size={18} />
         </Link>
 
         <Link
           href="mailto:bhoyevisuals@gmail.com"
-          className="flex items-center gap-2 px-6 py-3 rounded-full border border-white/10 backdrop-blur bg-white/5 hover:bg-white/10 transition-all duration-300 hover:scale-105 font-medium text-lg"
+          className="flex items-center gap-2 px-6 py-3 rounded-full border border-white/10 backdrop-blur bg-white/5 
+    transition-all duration-300 hover:scale-105 font-medium text-lg
+    hover:bg-gradient-to-r hover:from-[#FF3100]/20 hover:to-[#C10801]/20 hover:border-[#FF3100]/40 hover:shadow-[0_0_20px_#FF3100]/30"
         >
           <Mail size={18} /> Email Me
         </Link>
@@ -78,23 +83,23 @@ export default function ContactPreview() {
         <Link
           href="https://www.instagram.com/bhoyevisuals?igsh=MWRjcmZ4YzR2MmY4eA=="
           target="_blank"
-          className="hover:scale-110 transition"
+          className="hover:text-[#FF3100] transition"
         >
-          <Instagram size={28} className="text-white/80 hover:text-white" />
+          <Instagram size={28} className="hover:text-[#FF3100] transition" />
         </Link>
         <Link
           href="https://youtube.com/@bhoyevisual?si=UOC1QZJwPHd-pEz_"
           target="_blank"
-          className="hover:scale-110 transition"
+          className="hover:text-[#FF3100] transition"
         >
-          <Youtube size={28} className="text-white/80 hover:text-white" />
+          <Youtube size={28} className="hover:text-[#FF3100] transition" />
         </Link>
         <Link
           href="https://x.com/bhoyevisuals?s=11&t=vSVbjHCHW_QG5tU6-96n8g"
           target="_blank"
-          className="hover:scale-110 transition"
+          className="hover:text-[#FF3100] transition"
         >
-          <Twitter size={28} className="text-white/80 hover:text-white" />
+          <Twitter size={28} className="hover:text-[#FF3100] transition" />
         </Link>
       </motion.div>
     </section>

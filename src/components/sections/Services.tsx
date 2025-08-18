@@ -1,28 +1,28 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Camera, VideoIcon, Film, Megaphone } from "lucide-react";
+import { Camera, Heart, Film, Megaphone } from "lucide-react";
 
 const services = [
   {
-    title: "Music Videos",
-    desc: "Visually compelling stories crafted for artists of every genre.",
-    icon: <VideoIcon className="w-8 h-8 text-white" />,
+    title: "Weddings",
+    desc: "Timeless wedding films that beautifully preserve your most important day.",
+    icon: <Heart className="w-8 h-8 text-[#FF3100]" />,
   },
   {
     title: "Event Coverage",
     desc: "Capture unforgettable moments with precision and professionalism.",
-    icon: <Camera className="w-8 h-8 text-white" />,
+    icon: <Camera className="w-8 h-8 text-[#FF3100]" />,
   },
   {
     title: "Short Films",
     desc: "Bring narratives to life with cinematic visuals and impactful pacing.",
-    icon: <Film className="w-8 h-8 text-white" />,
+    icon: <Film className="w-8 h-8 text-[#FF3100]" />,
   },
   {
     title: "Brand Storytelling",
     desc: "Promote your mission through powerful, emotional storytelling.",
-    icon: <Megaphone className="w-8 h-8 text-white" />,
+    icon: <Megaphone className="w-8 h-8 text-[#FF3100]" />,
   },
 ];
 
@@ -47,11 +47,11 @@ export default function Services() {
       id="services"
       className="relative overflow-hidden min-h-screen snap-start bg-black text-white px-4 sm:px-6 md:px-10 py-20 md:py-28 flex flex-col items-center justify-center"
     >
-      {/* ⚪️ Monochrome Blobs */}
+      {/* 🌈 Blobs with subtle brand accents */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <div className="absolute w-[60vw] h-[60vw] bg-white/10 rounded-full filter blur-3xl animate-pulse-slow top-[-20%] left-[-20%]" />
+        <div className="absolute w-[60vw] h-[60vw] bg-[#FF3100]/10 rounded-full filter blur-3xl animate-pulse-slow top-[-20%] left-[-20%]" />
         <div className="absolute w-[50vw] h-[50vw] bg-white/5 rounded-full filter blur-2xl animate-pulse-slower top-[40%] right-[-15%]" />
-        <div className="absolute w-[40vw] h-[40vw] bg-white/5 rounded-full filter blur-2xl animate-pulse-slow bottom-[-10%] left-[30%]" />
+        <div className="absolute w-[40vw] h-[40vw] bg-[#C10801]/10 rounded-full filter blur-2xl animate-pulse-slow bottom-[-10%] left-[30%]" />
       </div>
 
       {/* 🌾 Film grain overlay */}
@@ -62,7 +62,7 @@ export default function Services() {
 
       {/* 🧠 Section Title */}
       <motion.h2
-        className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-center text-white z-10"
+        className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-center bg-gradient-to-r from-[#FF3100] to-[#C10801] bg-clip-text text-transparent z-10"
         initial={{ opacity: 0, y: -30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
@@ -95,7 +95,7 @@ export default function Services() {
           <motion.div
             key={index}
             variants={cardVariants}
-            className="bg-[#111] border border-gray-600 p-6 rounded-2xl shadow-md transition-all duration-300 hover:border-white hover:shadow-[0_0_24px_rgba(255,255,255,0.5)] hover:-translate-y-1.5"
+            className="bg-[#111] border border-gray-700 p-6 rounded-2xl shadow-md transition-all duration-300 hover:border-[#FF3100]/70 hover:shadow-[0_0_24px_rgba(255,49,0,0.4)] hover:-translate-y-1.5"
           >
             <div className="flex items-center gap-3 mb-4">
               {service.icon}

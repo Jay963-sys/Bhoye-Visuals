@@ -64,13 +64,15 @@ export default function WorksPreview() {
 
       {/* 🧠 Section Title */}
       <motion.h2
-        className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-center text-white z-10"
+        className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-center bg-gradient-to-r from-[#FF3100] to-[#C10801] bg-clip-text text-transparent z-10"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
         viewport={{ once: true }}
       >
         Featured Works
+        {/* 🔴 Subtle red underline */}
+        <span className="absolute left-1/2 -bottom-2 w-16 h-1 bg-gradient-to-r from-[#FF3100] to-[#C10801] rounded-full -translate-x-1/2" />
       </motion.h2>
 
       {/* Subtitle */}
@@ -95,7 +97,8 @@ export default function WorksPreview() {
         {videos.map((video, i) => (
           <motion.div
             key={video.id}
-            className="group relative aspect-video bg-neutral-900 rounded-2xl overflow-hidden border border-white/20 hover:border-white hover:shadow-[0_0_24px_rgba(255,255,255,0.5)] transition duration-300 cursor-pointer"
+            className="group relative aspect-video bg-neutral-900 rounded-2xl overflow-hidden border border-white/20 
+                 hover:border-[#FF3100] hover:shadow-[0_0_24px_rgba(255,49,0,0.6)] transition duration-300 cursor-pointer"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: i * 0.2 }}
@@ -113,8 +116,9 @@ export default function WorksPreview() {
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
 
+            {/* 🔴 Play icon hover glow */}
             <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300">
-              <PlayCircle className="w-12 h-12 text-white/80 group-hover:scale-110 transition-transform" />
+              <PlayCircle className="w-12 h-12 text-white/80 group-hover:text-[#FF3100] group-hover:scale-110 transition-transform" />
             </div>
 
             <div className="absolute bottom-0 w-full bg-gradient-to-t from-black/80 to-transparent px-4 py-2 text-sm text-white font-medium">
@@ -127,7 +131,9 @@ export default function WorksPreview() {
       {/* 📁 View All Link */}
       <Link
         href="/projects"
-        className="relative z-10 mt-12 text-sm sm:text-base font-semibold text-white border border-white hover:bg-white hover:text-black px-6 py-2 rounded-full transition-all duration-300 shadow-md"
+        className="relative z-10 mt-12 text-sm sm:text-base font-semibold text-white border border-white/40 
+             hover:bg-gradient-to-r hover:from-[#FF3100] hover:to-[#C10801] hover:border-transparent 
+             px-6 py-2 rounded-full transition-all duration-300 shadow-md"
       >
         View All Works →
       </Link>

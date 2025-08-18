@@ -9,11 +9,13 @@ export default function ContactPage() {
       <div className="absolute inset-0 z-0 bg-[url('/noise.svg')] opacity-20 pointer-events-none" />
 
       <div className="max-w-4xl mx-auto z-10 relative space-y-12 text-center">
+        {/* 🔥 Heading */}
         <motion.h1
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-4xl md:text-5xl font-extrabold text-white"
+          className="text-4xl md:text-5xl font-extrabold 
+                     bg-gradient-to-r from-[#FF3100] to-[#C10801] bg-clip-text text-transparent"
         >
           Let&apos;s Create Magic
         </motion.h1>
@@ -28,6 +30,7 @@ export default function ContactPage() {
           hello — I&apos;d love to hear from you.
         </motion.p>
 
+        {/* 🔥 Contact Cards */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -60,6 +63,7 @@ export default function ContactPage() {
           />
         </motion.div>
 
+        {/* 🔥 CTA Button */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -67,7 +71,11 @@ export default function ContactPage() {
         >
           <a
             href="mailto:bhoyevisuals@gmail.com"
-            className="inline-block px-8 py-3 bg-white text-black rounded-full font-bold shadow-xl hover:scale-105 hover:bg-gray-200 transition duration-300 uppercase tracking-wide"
+            className="inline-block px-8 py-3 
+                       bg-gradient-to-r from-[#FF3100] to-[#C10801] text-white 
+                       rounded-full font-bold shadow-[0_0_15px_#FF3100aa] 
+                       hover:scale-105 hover:shadow-[0_0_25px_#FF3100cc] 
+                       transition duration-300 uppercase tracking-wide"
           >
             Send a Message
           </a>
@@ -93,9 +101,13 @@ function ContactCard({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex items-center gap-4 bg-[#ffffff0a] hover:bg-[#ffffff15] border border-white/10 p-5 rounded-2xl transition duration-300 group backdrop-blur-sm shadow-md"
+      className="flex items-center gap-4 bg-[#ffffff0a] border border-white/10 
+                 p-5 rounded-2xl transition duration-300 group 
+                 backdrop-blur-sm shadow-md hover:border-[#FF3100]/60 
+                 hover:shadow-[0_0_12px_#FF3100aa]"
     >
-      <div className="text-white group-hover:scale-110 group-hover:text-gray-300 transition duration-300">
+      {/* Icon with orange glow on hover */}
+      <div className="text-white transition duration-300 group-hover:text-[#FF3100] group-hover:scale-110">
         {icon}
       </div>
       <div className="text-left">

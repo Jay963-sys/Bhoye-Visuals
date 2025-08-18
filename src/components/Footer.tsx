@@ -30,28 +30,16 @@ export default function Footer() {
       >
         {/* 🔗 Nav Links */}
         <div className="flex flex-wrap justify-center gap-6 text-sm md:text-base text-white/80">
-          <Link
-            href="/#about"
-            className="hover:text-white transition duration-300"
-          >
+          <Link href="/#about" className="hover:text-[#FF3100] transition">
             About
           </Link>
-          <Link
-            href="/#works"
-            className="hover:text-white transition duration-300"
-          >
+          <Link href="/#works" className="hover:text-[#FF3100] transition">
             Works
           </Link>
-          <Link
-            href="/#clients"
-            className="hover:text-white transition duration-300"
-          >
+          <Link href="/#clients" className="hover:text-[#FF3100] transition">
             Clients
           </Link>
-          <Link
-            href="/#contact"
-            className="hover:text-white transition duration-300"
-          >
+          <Link href="/#contact" className="hover:text-[#FF3100] transition">
             Contact
           </Link>
         </div>
@@ -61,27 +49,27 @@ export default function Footer() {
           <Link
             href="https://www.instagram.com/bhoyevisuals?igsh=MWRjcmZ4YzR2MmY4eA=="
             target="_blank"
-            className="hover:text-white transition duration-300"
+            className="hover:text-[#FF3100] transition"
           >
             <FaInstagram />
           </Link>
           <Link
             href="https://youtube.com/@bhoyevisual?si=UOC1QZJwPHd-pEz_"
             target="_blank"
-            className="hover:text-white transition duration-300"
+            className="hover:text-[#FF3100] transition"
           >
             <FaYoutube />
           </Link>
           <Link
             href="https://x.com/bhoyevisuals?s=11&t=vSVbjHCHW_QG5tU6-96n8g"
             target="_blank"
-            className="hover:text-white transition duration-300"
+            className="hover:text-[#FF3100] transition"
           >
             <FaTwitter />
           </Link>
           <Link
             href="mailto:bhoyevisuals@gmail.com"
-            className="hover:text-white transition duration-300"
+            className="hover:text-[#FF3100] transition"
           >
             <FaEnvelope />
           </Link>
@@ -97,7 +85,7 @@ export default function Footer() {
             <Link
               href="https://jay-dev-portfolio.vercel.app/"
               target="_blank"
-              className="underline hover:text-white transition-colors duration-300"
+              className="underline hover:text-[#FF3100] transition-colors duration-300"
             >
               Jay.dev
             </Link>

@@ -33,11 +33,13 @@ export default function Hero() {
           className="object-cover"
           priority
         />
-        {/* Dark overlay (reduced from 60% → 40%) */}
+        {/* Dark overlay */}
         <div className="absolute inset-0 bg-black/40" />
-        {/* Gradient overlay (softened from 60% → 40%) */}
+        {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-        {/* Grain/texture stays the same */}
+        {/* Subtle brand tint */}
+        <div className="absolute inset-0 bg-gradient-radial from-[#FF3100]/10 via-transparent to-transparent opacity-40" />
+        {/* Grain/texture */}
         <div className="absolute inset-0 pointer-events-none bg-[url('/grain.png')] animate-grain mix-blend-overlay opacity-20" />
       </div>
 
@@ -57,39 +59,28 @@ export default function Hero() {
           className="font-display text-[11px] sm:text-sm md:text-base uppercase tracking-widest text-gray-300 font-medium"
           variants={{
             hidden: { opacity: 0, y: 20 },
-            visible: {
-              opacity: 1,
-              y: 0,
-              transition: { duration: 0.4 },
-            },
+            visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
           }}
         >
           Bhoye Visuals — Videographer | Editor | Director
         </motion.p>
 
         <motion.h1
-          className="font-display text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight drop-shadow-lg leading-tight"
+          className="font-display text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight drop-shadow-lg leading-tight text-white"
           variants={{
             hidden: { opacity: 0, y: 30 },
-            visible: {
-              opacity: 1,
-              y: 0,
-              transition: { duration: 1 },
-            },
+            visible: { opacity: 1, y: 0, transition: { duration: 1 } },
           }}
         >
-          Cinematic Visuals, Bold Stories.
+          Cinematic Visuals, Bold Stories.{" "}
+          <span className="text-[#FF3100]"></span>
         </motion.h1>
 
         <motion.p
-          className="text-sm sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto drop-shadow leading-relaxed"
+          className="text-sm sm:text-lg md:text-xl text-gray-300 max-w-2xl mx-auto drop-shadow leading-relaxed"
           variants={{
             hidden: { opacity: 0, y: 30 },
-            visible: {
-              opacity: 1,
-              y: 0,
-              transition: { duration: 1 },
-            },
+            visible: { opacity: 1, y: 0, transition: { duration: 1 } },
           }}
         >
           I craft immersive videos that captivate, communicate, and connect.
@@ -100,20 +91,20 @@ export default function Hero() {
           className="flex justify-center flex-wrap gap-4 mt-6"
           variants={{
             hidden: { opacity: 0, y: 20 },
-            visible: {
-              opacity: 1,
-              y: 0,
-              transition: { duration: 0.8 },
-            },
+            visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
           }}
         >
           <Link href="#works">
-            <button className="px-6 py-3 bg-white text-black hover:bg-black hover:text-white border border-white rounded-2xl transition shadow-md hover:scale-105">
+            <button
+              className="px-6 py-3 rounded-2xl transition shadow-md hover:scale-105 
+              bg-gradient-to-r from-[#FF3100] to-[#C10801] text-white font-medium
+              hover:shadow-[0_0_24px_rgba(255,49,0,0.5)]"
+            >
               View Work
             </button>
           </Link>
           <Link href="#contact">
-            <button className="px-6 py-3 border border-white text-white hover:bg-white hover:text-black rounded-2xl transition shadow-md hover:scale-105">
+            <button className="px-6 py-3 border border-white text-white rounded-2xl transition shadow-md hover:scale-105 hover:border-[#FF3100] hover:text-[#FF3100]">
               Contact
             </button>
           </Link>
@@ -124,44 +115,40 @@ export default function Hero() {
           className="mt-8 flex justify-center gap-6 text-white text-xl sm:text-2xl"
           variants={{
             hidden: { opacity: 0, y: 20 },
-            visible: {
-              opacity: 1,
-              y: 0,
-              transition: { duration: 0.8 },
-            },
+            visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
           }}
         >
           <Link
             href="https://www.instagram.com/bhoyevisuals"
             target="_blank"
-            className="hover:text-gray-400 transition"
+            className="hover:text-[#FF3100] transition"
           >
             <FaInstagram />
           </Link>
           <Link
             href="https://youtube.com/@bhoyevisual"
             target="_blank"
-            className="hover:text-gray-400 transition"
+            className="hover:text-[#FF3100] transition"
           >
             <FaYoutube />
           </Link>
           <Link
             href="https://x.com/bhoyevisuals"
             target="_blank"
-            className="hover:text-gray-400 transition"
+            className="hover:text-[#FF3100] transition"
           >
             <FaTwitter />
           </Link>
           <Link
             href="mailto:Bhoyevisuals@gmail.com"
-            className="hover:text-gray-400 transition"
+            className="hover:text-[#FF3100] transition"
           >
             <FaEnvelope />
           </Link>
         </motion.div>
       </motion.div>
 
-      {/* Bottom fade for smooth transition */}
+      {/* Bottom fade */}
       <div className="absolute bottom-0 left-0 w-full h-16 sm:h-24 bg-gradient-to-b from-transparent to-black z-10 pointer-events-none" />
     </section>
   );
