@@ -7,11 +7,15 @@ const clientLogos = [
   { name: "Pepsi", src: "/logos/pepsi.svg" },
   { name: "MTV Base", src: "/logos/mtvbase.svg" },
   { name: "United Nations", src: "/logos/unitednations.svg" },
+  { name: "Tesla", src: "/logos/tesla.svg" },
+  { name: "Davido", src: "/logos/davido.svg" },
+  { name: "Samsung", src: "/logos/samsung.svg" },
   { name: "YouTube", src: "/logos/youtube.svg" },
   { name: "The North Face", src: "/logos/northface.svg" },
   { name: "Max", src: "/logos/max.svg" },
   { name: "Gucci", src: "/logos/gucci.svg" },
   { name: "Martell", src: "/logos/martell.svg" },
+  { name: "Coca-Cola", src: "/logos/cocacola.svg" },
 ];
 
 export default function Clients() {

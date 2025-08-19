@@ -7,6 +7,7 @@ import { useUser } from "@clerk/nextjs";
 import { useClerk } from "@clerk/nextjs";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
+import { usePathname } from "next/navigation"; // ✅
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -16,6 +17,7 @@ export default function Navbar() {
   const { user, isSignedIn } = useUser();
   const { signOut } = useClerk();
   const role = user?.publicMetadata?.role;
+  const pathname = usePathname(); // ✅ current route
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -43,29 +45,31 @@ export default function Navbar() {
 
   const handleLinkClick = () => setMenuOpen(false);
 
+  const links = [
+    { href: "/about", label: "About" },
+    { href: "/projects", label: "Projects" },
+    { href: "/contact", label: "Contact" },
+  ];
+
   const navLinks = (
     <>
-      <Link
-        href="/about"
-        onClick={handleLinkClick}
-        className="hover:text-burnt transition"
-      >
-        About
-      </Link>
-      <Link
-        href="/projects"
-        onClick={handleLinkClick}
-        className="hover:text-burnt transition"
-      >
-        Projects
-      </Link>
-      <Link
-        href="/contact"
-        onClick={handleLinkClick}
-        className="hover:text-burnt transition"
-      >
-        Contact
-      </Link>
+      {links.map((link) => {
+        const isActive = pathname === link.href; // ✅ check match
+        return (
+          <Link
+            key={link.href}
+            href={link.href}
+            onClick={handleLinkClick}
+            className={`transition font-medium ${
+              isActive
+                ? "text-[#FF3100] drop-shadow-[0_0_8px_#FF3100]" // ✅ glow in brand color
+                : "text-white hover:text-[#FF3100]/80"
+            }`}
+          >
+            {link.label}
+          </Link>
+        );
+      })}
 
       {!isSignedIn ? (
         <Link
@@ -80,7 +84,11 @@ export default function Navbar() {
           <Link
             href="/admin"
             onClick={handleLinkClick}
-            className="hover:text-burnt text-sm"
+            className={`text-sm ${
+              pathname === "/admin"
+                ? "text-[#FF3100] drop-shadow-[0_0_8px_#FF3100]"
+                : "hover:text-[#FF3100]/80"
+            }`}
           >
             Admin Panel
           </Link>
@@ -90,7 +98,7 @@ export default function Navbar() {
                 window.location.href = "/";
               });
             }}
-            className="text-sm hover:text-burnt"
+            className="text-sm hover:text-[#FF3100]/80"
           >
             Sign Out
           </button>
@@ -122,7 +130,7 @@ export default function Navbar() {
           />
         </Link>
 
-        <div className="hidden md:flex gap-6 text-white">{navLinks}</div>
+        <div className="hidden md:flex gap-6">{navLinks}</div>
 
         {/* Mobile menu toggle */}
         <button
