@@ -54,7 +54,7 @@ export default function Navbar() {
   const navLinks = (
     <>
       {links.map((link) => {
-        const isActive = pathname === link.href; // ✅ check match
+        const isActive = pathname === link.href;
         return (
           <Link
             key={link.href}
@@ -62,7 +62,7 @@ export default function Navbar() {
             onClick={handleLinkClick}
             className={`transition font-medium ${
               isActive
-                ? "text-[#FF3100] drop-shadow-[0_0_8px_#FF3100]" // ✅ glow in brand color
+                ? "text-[#FF3100] drop-shadow-[0_0_8px_#FF3100]"
                 : "text-white hover:text-[#FF3100]/80"
             }`}
           >
