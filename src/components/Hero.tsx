@@ -26,13 +26,17 @@ export default function Hero() {
     <section className="relative h-screen bg-black text-white overflow-hidden flex items-center justify-center pt-24 md:pt-32 pb-10 md:pb-16">
       {/* BACKGROUND */}
       <div ref={bgRef} className="absolute inset-0">
-        <Image
-          src="/bhoye.jpg"
-          alt="Cinematic background"
-          fill
-          className="object-cover"
-          priority
-        />
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/water.mp4" type="video/mp4" />
+        </video>
+
         {/* Dark overlay */}
         <div className="absolute inset-0 bg-black/40" />
         {/* Gradient overlay */}
@@ -62,19 +66,25 @@ export default function Hero() {
             visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
           }}
         >
-          Bhoye Visuals — Videographer | Editor | Director
+          Bhoye Visuals — Film Maker | Editor | Director
         </motion.p>
 
-        <motion.h1
-          className="font-display text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight drop-shadow-lg leading-tight text-white"
+        <motion.div
+          className="flex justify-center"
           variants={{
             hidden: { opacity: 0, y: 30 },
             visible: { opacity: 1, y: 0, transition: { duration: 1 } },
           }}
         >
-          Cinematic Visuals, Bold Stories.{" "}
-          <span className="text-[#FF3100]"></span>
-        </motion.h1>
+          <Image
+            src="/Logo Dark.svg"
+            alt="Bhoye Visuals Logo"
+            width={300}
+            height={120}
+            className="w-48 sm:w-64 md:w-80 h-auto mx-auto drop-shadow-[0_0_25px_rgba(255,49,0,0.3)]"
+            priority
+          />
+        </motion.div>
 
         <motion.p
           className="text-sm sm:text-lg md:text-xl text-gray-300 max-w-2xl mx-auto drop-shadow leading-relaxed"

@@ -46,15 +46,10 @@ export default function ContactPage() {
           <ContactCard
             icon={<Instagram size={28} />}
             label="Instagram"
-            value="@bhoye.mov"
+            value="@bhoyevisuals"
             href="https://www.instagram.com/bhoyevisuals"
           />
-          <ContactCard
-            icon={<Phone size={28} />}
-            label="Phone"
-            value="+1 (708) 362 1740"
-            href="tel:+17083621740"
-          />
+
           <ContactCard
             icon={<MapPin size={28} />}
             label="Location"

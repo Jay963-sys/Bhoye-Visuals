@@ -100,24 +100,39 @@ export default function FullRateCard() {
 
   const rateCards: RateCardItem[] = [
     {
-      title: "Event Coverage",
-      desc: "Up to 4 hours, 1 camera operator, basic edit",
-      price: "$500",
+      title: " Basic event Package",
+      price: "$1500",
+      desc: " 5-6 hours coverage, 1 camera, highlight video and speeches",
     },
     {
-      title: "Music Video",
-      desc: "Full-day shoot, 4K camera, basic grading",
-      price: "$1,000",
+      title: "Mid Tier event Package",
+      price: "$3500",
+      desc: " 8-10 hours, two camera, highlight + full video",
     },
     {
-      title: "Wedding Package",
-      desc: "Full-day, highlights + drone",
-      price: "$1,500",
+      title: "High end event Package",
+      price: "$6500+",
+      desc: "Full day + prep, multiple cameras, drone, premium editing, longer derivables, extras",
     },
     {
-      title: "Brand Shoot",
-      desc: "2 min promo, 2 revisions",
-      price: "$1,000",
+      title: "Small event / Short Shoot",
+      price: "$1200",
+      desc: "1-3 hrs, 1 camera, 1 highlight reel",
+    },
+    {
+      title: " Corporate / Promo Video",
+      price: "$2000 - $5000+ depending on scale",
+      desc: "Script/planning, multiple cameras, full edit, location/travel costs",
+    },
+    {
+      title: " Hourly Rate",
+      price: "$200/hr",
+      desc: "Smaller Jobs, or incremental work(editing, extra shooting)",
+    },
+    {
+      title: " Additional reels",
+      price: "$200",
+      desc: "",
     },
   ];
 
@@ -154,14 +169,7 @@ export default function FullRateCard() {
               </div>
             ))}
 
-            <div className="rounded-xl p-4 bg-black/30 border border-white/10">
-              <h4 className="text-lg font-semibold text-white">Add-ons</h4>
-              <ul className="text-sm text-[#CCCCCC] list-disc ml-5 mt-2">
-                <li>Drone Footage — $200</li>
-                <li>Extra Hour — $100 / hr</li>
-                <li>Additional Revision — $150</li>
-              </ul>
-            </div>
+            <div className="rounded-xl p-4 bg-black/30 border border-white/10"></div>
           </div>
         </motion.div>
 
@@ -216,10 +224,11 @@ export default function FullRateCard() {
                     }
                     className="w-full appearance-none rounded-lg p-3 bg-[#1c1c1c] text-white border border-white/10 focus:border-[#FF3100] focus:ring-1 focus:ring-[#FF3100] outline-none transition"
                   >
-                    <option>Event Coverage</option>
-                    <option>Music Video</option>
-                    <option>Wedding Package</option>
-                    <option>Brand Shoot</option>
+                    <option>Basic Event Coverage</option>
+                    <option>Mid Tier Event Coverage</option>
+                    <option>High End Event Coverage</option>
+                    <option>Small Event / Short Shoot</option>
+                    <option>Corporate / Promo Video</option>
                     <option>Other</option>
                   </select>
                   <svg

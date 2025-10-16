@@ -5,24 +5,39 @@ import { motion } from "framer-motion";
 
 const packages = [
   {
-    title: "Event Coverage",
-    price: "$500",
-    desc: "Up to 4 hours, 1 camera operator, basic edit",
+    title: " Basic event Package",
+    price: "$1500",
+    desc: " 5-6 hours coverage, 1 camera, highlight video and speeches",
   },
   {
-    title: "Music Video",
-    price: "$1000",
-    desc: "Full-day shoot, 4K camera, basic grading",
+    title: "Mid Tier event Package",
+    price: "$3500",
+    desc: " 8-10 hours, two camera, highlight + full video",
   },
   {
-    title: "Wedding Package",
-    price: "$1000",
-    desc: "Full-day, 2 videographers, highlight + drone",
+    title: "High end event Package",
+    price: "$6500+",
+    desc: "Full day + prep, multiple cameras, drone, premium editing, longer derivables, extras",
   },
   {
-    title: "Brand Shoot",
-    price: "$500",
-    desc: "2 min promo, 2 revisions, on-site",
+    title: "Small event / Short Shoot",
+    price: "$1200",
+    desc: "1-3 hrs, 1 camera, 1 highlight reel",
+  },
+  {
+    title: " Corporate / Promo Video",
+    price: "$2000 - $5000+ depending on scale",
+    desc: "Script/planning, multiple cameras, full edit, location/travel costs",
+  },
+  {
+    title: " Hourly Rate",
+    price: "$200/hr",
+    desc: "Smaller Jobs, or incremental work(editing, extra shooting)",
+  },
+  {
+    title: " Additional reels",
+    price: "$200",
+    desc: "",
   },
 ];
 
