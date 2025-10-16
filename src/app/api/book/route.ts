@@ -1,9 +1,18 @@
 import nodemailer from "nodemailer";
 import { NextResponse } from "next/server";
 
+interface BookingData {
+  name: string;
+  email: string;
+  phone?: string;
+  shootType: string;
+  date?: string;
+  message?: string;
+}
+
 export async function POST(request: Request) {
   try {
-    const data = await request.json();
+    const data: BookingData = await request.json();
     const { name, email, phone, shootType, date, message } = data;
 
     const USER = process.env.EMAIL_USER;
@@ -41,9 +50,13 @@ export async function POST(request: Request) {
         <table style="width:100%; border-collapse:collapse; color: #E5E5E5;">
           <tr><td style="padding:8px 0;"><strong>Name:</strong></td><td>${name}</td></tr>
           <tr><td style="padding:8px 0;"><strong>Email:</strong></td><td>${email}</td></tr>
-          <tr><td style="padding:8px 0;"><strong>Phone:</strong></td><td>${phone}</td></tr>
+          <tr><td style="padding:8px 0;"><strong>Phone:</strong></td><td>${
+            phone || "—"
+          }</td></tr>
           <tr><td style="padding:8px 0;"><strong>Shoot Type:</strong></td><td>${shootType}</td></tr>
-          <tr><td style="padding:8px 0;"><strong>Date:</strong></td><td>${date}</td></tr>
+          <tr><td style="padding:8px 0;"><strong>Date:</strong></td><td>${
+            date || "—"
+          }</td></tr>
           <tr><td style="padding:8px 0;"><strong>Message:</strong></td><td>${
             message || "—"
           }</td></tr>
@@ -64,7 +77,7 @@ export async function POST(request: Request) {
       { success: true, message: "Booking email sent successfully" },
       { status: 200 }
     );
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Booking email error:", error);
     return NextResponse.json(
       { error: "Failed to send booking email" },

@@ -6,10 +6,25 @@ import { motion } from "framer-motion";
 type FormState = {
   name: string;
   email: string;
-  phone?: string;
+  phone: string;
   shootType: string;
-  date?: string;
-  message?: string;
+  date: string;
+  message: string;
+};
+
+type RateCardItem = {
+  title: string;
+  desc: string;
+  price: string;
+};
+
+type FormInputProps = {
+  label: string;
+  field: keyof FormState;
+  type: string;
+  required?: boolean;
+  value: string;
+  onChange: (value: string) => void;
 };
 
 export default function FullRateCard() {
@@ -21,10 +36,31 @@ export default function FullRateCard() {
     date: "",
     message: "",
   });
-  const [loading, setLoading] = useState(false);
-  const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [sent, setSent] = useState<boolean>(false);
 
-  async function handleSubmit(e: React.FormEvent) {
+  // Reusable FormInput component
+  const FormInput = ({
+    label,
+    field,
+    type,
+    required = true,
+    value,
+    onChange,
+  }: FormInputProps) => (
+    <div>
+      <label className="text-sm text-[#CCCCCC] block mb-1">{label}</label>
+      <input
+        required={required}
+        type={type}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="w-full rounded-lg p-3 bg-[#1c1c1c] text-white border border-white/10 focus:border-[#FF3100] focus:ring-1 focus:ring-[#FF3100] outline-none transition"
+      />
+    </div>
+  );
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setLoading(true);
     setSent(false);
@@ -50,13 +86,40 @@ export default function FullRateCard() {
         const json = await res.json();
         alert(`Failed to send: ${json.error || "Unknown error"}`);
       }
-    } catch {
+    } catch (error) {
       alert("Network error sending message.");
     } finally {
       setLoading(false);
       setTimeout(() => setSent(false), 2000);
     }
   }
+
+  const updateFormField = (field: keyof FormState, value: string) => {
+    setForm((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const rateCards: RateCardItem[] = [
+    {
+      title: "Event Coverage",
+      desc: "Up to 4 hours, 1 camera operator, basic edit",
+      price: "$500",
+    },
+    {
+      title: "Music Video",
+      desc: "Full-day shoot, 4K camera, basic grading",
+      price: "$1,000",
+    },
+    {
+      title: "Wedding Package",
+      desc: "Full-day, highlights + drone",
+      price: "$1,500",
+    },
+    {
+      title: "Brand Shoot",
+      desc: "2 min promo, 2 revisions",
+      price: "$1,000",
+    },
+  ];
 
   return (
     <section
@@ -79,28 +142,7 @@ export default function FullRateCard() {
           </p>
 
           <div className="space-y-4">
-            {[
-              {
-                title: "Event Coverage",
-                desc: "Up to 4 hours, 1 camera operator, basic edit",
-                price: "$500",
-              },
-              {
-                title: "Music Video",
-                desc: "Full-day shoot, 4K camera, basic grading",
-                price: "$1,000",
-              },
-              {
-                title: "Wedding Package",
-                desc: "Full-day, highlights + drone",
-                price: "$1,500",
-              },
-              {
-                title: "Brand Shoot",
-                desc: "2 min promo, 2 revisions",
-                price: "$1,000",
-              },
-            ].map(({ title, desc, price }) => (
+            {rateCards.map(({ title, desc, price }) => (
               <div
                 key={title}
                 className="rounded-xl p-4 bg-black/30 border border-white/10"
@@ -134,26 +176,32 @@ export default function FullRateCard() {
               Book a Session
             </h3>
             <form onSubmit={handleSubmit} className="space-y-3">
-              {[
-                { label: "Name", key: "name", type: "text" },
-                { label: "Email", key: "email", type: "email" },
-                { label: "Phone", key: "phone", type: "text" },
-              ].map(({ label, key, type }) => (
-                <div key={key}>
-                  <label className="text-sm text-[#CCCCCC] block mb-1">
-                    {label}
-                  </label>
-                  <input
-                    required={key !== "phone"}
-                    type={type}
-                    value={(form as any)[key]}
-                    onChange={(e) =>
-                      setForm({ ...form, [key]: e.target.value })
-                    }
-                    className="w-full rounded-lg p-3 bg-[#1c1c1c] text-white border border-white/10 focus:border-[#FF3100] focus:ring-1 focus:ring-[#FF3100] outline-none transition"
-                  />
-                </div>
-              ))}
+              <FormInput
+                label="Name"
+                field="name"
+                type="text"
+                required
+                value={form.name}
+                onChange={(value) => updateFormField("name", value)}
+              />
+
+              <FormInput
+                label="Email"
+                field="email"
+                type="email"
+                required
+                value={form.email}
+                onChange={(value) => updateFormField("email", value)}
+              />
+
+              <FormInput
+                label="Phone"
+                field="phone"
+                type="text"
+                required={false}
+                value={form.phone}
+                onChange={(value) => updateFormField("phone", value)}
+              />
 
               {/* Type of Shoot */}
               <div>
@@ -164,7 +212,7 @@ export default function FullRateCard() {
                   <select
                     value={form.shootType}
                     onChange={(e) =>
-                      setForm({ ...form, shootType: e.target.value })
+                      updateFormField("shootType", e.target.value)
                     }
                     className="w-full appearance-none rounded-lg p-3 bg-[#1c1c1c] text-white border border-white/10 focus:border-[#FF3100] focus:ring-1 focus:ring-[#FF3100] outline-none transition"
                   >
@@ -200,7 +248,7 @@ export default function FullRateCard() {
                 <input
                   type="date"
                   value={form.date}
-                  onChange={(e) => setForm({ ...form, date: e.target.value })}
+                  onChange={(e) => updateFormField("date", e.target.value)}
                   className="w-full rounded-lg p-3 bg-[#1c1c1c] text-white border border-white/10 focus:border-[#FF3100] focus:ring-1 focus:ring-[#FF3100] outline-none transition [color-scheme:dark]"
                 />
               </div>
@@ -212,9 +260,7 @@ export default function FullRateCard() {
                 </label>
                 <textarea
                   value={form.message}
-                  onChange={(e) =>
-                    setForm({ ...form, message: e.target.value })
-                  }
+                  onChange={(e) => updateFormField("message", e.target.value)}
                   rows={4}
                   className="w-full rounded-lg p-3 bg-[#1c1c1c] text-white border border-white/10 focus:border-[#FF3100] focus:ring-1 focus:ring-[#FF3100] outline-none transition"
                 />
