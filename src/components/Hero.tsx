@@ -85,7 +85,7 @@ export default function Hero() {
             alt="Bhoye Visuals Logo"
             width={300}
             height={120}
-            className="w-48 sm:w-64 md:w-80 h-auto mx-auto drop-shadow-[0_0_25px_rgba(255,49,0,0.3)]"
+            className="w-36 sm:w-48 md:w-64 lg:w-80 xl:w-96 h-auto mx-auto drop-shadow-[0_0_25px_rgba(255,49,0,0.3)]"
             priority
           />
         </motion.div>

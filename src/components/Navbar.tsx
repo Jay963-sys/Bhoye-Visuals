@@ -7,7 +7,7 @@ import { useUser } from "@clerk/nextjs";
 import { useClerk } from "@clerk/nextjs";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
-import { usePathname } from "next/navigation"; // ✅
+import { usePathname } from "next/navigation"; 
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -17,7 +17,7 @@ export default function Navbar() {
   const { user, isSignedIn } = useUser();
   const { signOut } = useClerk();
   const role = user?.publicMetadata?.role;
-  const pathname = usePathname(); // ✅ current route
+  const pathname = usePathname(); 
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
