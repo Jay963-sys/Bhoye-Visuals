@@ -32,7 +32,8 @@ export default function Hero() {
           muted
           playsInline
           preload="auto"
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-1000"
+          onCanPlay={(e) => e.currentTarget.classList.add("opacity-100")}
         >
           <source
             src="https://14wyrkgruiwcmejp.public.blob.vercel-storage.com/water.mp4"
