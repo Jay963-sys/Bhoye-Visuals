@@ -4,8 +4,10 @@ import AboutPreview from "../components/sections/AboutPreview";
 import Services from "../components/sections/Services";
 import WorksPreview from "../components/sections/WorksPreview";
 import Clients from "../components/sections/Clients";
+import FullRateCard from "../components/sections/Check";
 import ContactPreview from "../components/sections/ContactPreview";
 import Footer from "../components/Footer";
+import { i } from "framer-motion/client";
 
 export default function Home() {
   return (
@@ -30,6 +32,10 @@ export default function Home() {
 
       <section id="clients">
         <Clients />
+      </section>
+
+      <section id="booking">
+        <FullRateCard />
       </section>
 
       <section id="contact">

@@ -76,9 +76,7 @@ export default function Navbar() {
           href="/sign-in"
           onClick={handleLinkClick}
           className="text-sm opacity-60 hover:opacity-100 transition"
-        >
-          Admin Login
-        </Link>
+        ></Link>
       ) : role === "admin" ? (
         <>
           <Link

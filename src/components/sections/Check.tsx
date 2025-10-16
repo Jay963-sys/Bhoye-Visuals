@@ -1,0 +1,290 @@
+"use client";
+
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+
+type FormState = {
+  name: string;
+  email: string;
+  phone?: string;
+  shootType: string;
+  date?: string;
+  message?: string;
+};
+
+export default function FullRateCard() {
+  const [form, setForm] = useState<FormState>({
+    name: "",
+    email: "",
+    phone: "",
+    shootType: "Event Coverage",
+    date: "",
+    message: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [sent, setSent] = useState(false);
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setLoading(true);
+    setSent(false);
+
+    try {
+      const res = await fetch("/api/book", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      if (res.ok) {
+        setSent(true);
+        setForm({
+          name: "",
+          email: "",
+          phone: "",
+          shootType: "Event Coverage",
+          date: "",
+          message: "",
+        });
+      } else {
+        const json = await res.json();
+        alert(`Failed to send: ${json.error || "Unknown error"}`);
+      }
+    } catch {
+      alert("Network error sending message.");
+    } finally {
+      setLoading(false);
+      setTimeout(() => setSent(false), 2000);
+    }
+  }
+
+  return (
+    <section
+      id="booking"
+      className="relative min-h-screen bg-black text-white flex flex-col items-center justify-center px-6 md:px-12 py-24"
+    >
+      <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10">
+        {/* === Rate Card Section === */}
+        <motion.div
+          initial={{ opacity: 0, x: -10 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.35 }}
+        >
+          <h2 className="text-3xl font-bold text-[#FF3100] mb-4">
+            Rates & Booking
+          </h2>
+          <p className="text-[#CCCCCC] mb-6">
+            Detailed packages, add-ons and custom quotes available — fill the
+            form to start the conversation.
+          </p>
+
+          <div className="space-y-4">
+            {[
+              {
+                title: "Event Coverage",
+                desc: "Up to 4 hours, 1 camera operator, basic edit",
+                price: "$500",
+              },
+              {
+                title: "Music Video",
+                desc: "Full-day shoot, 4K camera, basic grading",
+                price: "$1,000",
+              },
+              {
+                title: "Wedding Package",
+                desc: "Full-day, highlights + drone",
+                price: "$1,500",
+              },
+              {
+                title: "Brand Shoot",
+                desc: "2 min promo, 2 revisions",
+                price: "$1,000",
+              },
+            ].map(({ title, desc, price }) => (
+              <div
+                key={title}
+                className="rounded-xl p-4 bg-black/30 border border-white/10"
+              >
+                <h3 className="text-xl font-semibold text-white">{title}</h3>
+                <p className="text-sm text-[#CCCCCC]">
+                  {desc} — <strong className="text-[#FF3100]">{price}</strong>
+                </p>
+              </div>
+            ))}
+
+            <div className="rounded-xl p-4 bg-black/30 border border-white/10">
+              <h4 className="text-lg font-semibold text-white">Add-ons</h4>
+              <ul className="text-sm text-[#CCCCCC] list-disc ml-5 mt-2">
+                <li>Drone Footage — $200</li>
+                <li>Extra Hour — $100 / hr</li>
+                <li>Additional Revision — $150</li>
+              </ul>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* === Booking Form Section === */}
+        <motion.div
+          initial={{ opacity: 0, x: 10 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.35 }}
+        >
+          <div className="rounded-2xl p-6 bg-black/30 backdrop-blur-sm border border-white/10">
+            <h3 className="text-xl font-bold text-white mb-4">
+              Book a Session
+            </h3>
+            <form onSubmit={handleSubmit} className="space-y-3">
+              {[
+                { label: "Name", key: "name", type: "text" },
+                { label: "Email", key: "email", type: "email" },
+                { label: "Phone", key: "phone", type: "text" },
+              ].map(({ label, key, type }) => (
+                <div key={key}>
+                  <label className="text-sm text-[#CCCCCC] block mb-1">
+                    {label}
+                  </label>
+                  <input
+                    required={key !== "phone"}
+                    type={type}
+                    value={(form as any)[key]}
+                    onChange={(e) =>
+                      setForm({ ...form, [key]: e.target.value })
+                    }
+                    className="w-full rounded-lg p-3 bg-[#1c1c1c] text-white border border-white/10 focus:border-[#FF3100] focus:ring-1 focus:ring-[#FF3100] outline-none transition"
+                  />
+                </div>
+              ))}
+
+              {/* Type of Shoot */}
+              <div>
+                <label className="text-sm text-[#CCCCCC] block mb-1">
+                  Type of Shoot
+                </label>
+                <div className="relative">
+                  <select
+                    value={form.shootType}
+                    onChange={(e) =>
+                      setForm({ ...form, shootType: e.target.value })
+                    }
+                    className="w-full appearance-none rounded-lg p-3 bg-[#1c1c1c] text-white border border-white/10 focus:border-[#FF3100] focus:ring-1 focus:ring-[#FF3100] outline-none transition"
+                  >
+                    <option>Event Coverage</option>
+                    <option>Music Video</option>
+                    <option>Wedding Package</option>
+                    <option>Brand Shoot</option>
+                    <option>Other</option>
+                  </select>
+                  <svg
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-[#FF3100] pointer-events-none"
+                    width="18"
+                    height="18"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      d="M6 9l6 6 6-6"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </div>
+              </div>
+
+              {/* Date Picker */}
+              <div>
+                <label className="text-sm text-[#CCCCCC] block mb-1">
+                  Preferred Date
+                </label>
+                <input
+                  type="date"
+                  value={form.date}
+                  onChange={(e) => setForm({ ...form, date: e.target.value })}
+                  className="w-full rounded-lg p-3 bg-[#1c1c1c] text-white border border-white/10 focus:border-[#FF3100] focus:ring-1 focus:ring-[#FF3100] outline-none transition [color-scheme:dark]"
+                />
+              </div>
+
+              {/* Message */}
+              <div>
+                <label className="text-sm text-[#CCCCCC] block mb-1">
+                  Message
+                </label>
+                <textarea
+                  value={form.message}
+                  onChange={(e) =>
+                    setForm({ ...form, message: e.target.value })
+                  }
+                  rows={4}
+                  className="w-full rounded-lg p-3 bg-[#1c1c1c] text-white border border-white/10 focus:border-[#FF3100] focus:ring-1 focus:ring-[#FF3100] outline-none transition"
+                />
+              </div>
+
+              {/* === Button + Info === */}
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mt-4">
+                <div className="text-sm text-[#CCCCCC] text-center sm:text-left">
+                  We typically respond within 24 hrs.
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={loading || sent}
+                  className={`relative flex items-center justify-center gap-2 w-full sm:w-auto px-5 py-3 rounded-xl font-bold uppercase transition-all duration-200 active:scale-95
+                    ${
+                      sent
+                        ? "bg-green-500 text-white"
+                        : "bg-[#FF3100] text-black hover:bg-[#ff4f26]"
+                    }
+                    ${loading ? "opacity-70 cursor-not-allowed" : ""}
+                  `}
+                >
+                  {loading && (
+                    <svg
+                      className="animate-spin h-5 w-5 text-black"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      />
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                      />
+                    </svg>
+                  )}
+
+                  {sent && (
+                    <svg
+                      className="h-5 w-5 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth="3"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                  )}
+
+                  {loading ? "Sending..." : sent ? "Sent!" : "Send Message"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
