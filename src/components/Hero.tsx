@@ -34,7 +34,10 @@ export default function Hero() {
           preload="auto"
           className="absolute inset-0 w-full h-full object-cover"
         >
-          <source src="/water.mp4" type="video/mp4" />
+          <source
+            src="https://14wyrkgruiwcmejp.public.blob.vercel-storage.com/water.mp4"
+            type="video/mp4"
+          />
         </video>
 
         {/* Dark overlay */}

@@ -1,10 +1,9 @@
+// middleware.ts
 import { clerkMiddleware } from "@clerk/nextjs/server";
 
 export default clerkMiddleware();
 
+// ✅ Only protect /admin and /api routes
 export const config = {
-  matcher: [
-    "/((?!_next|sign-in|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
-    "/(api|trpc)(.*)",
-  ],
+  matcher: ["/admin(.*)", "/api/(.*)"],
 };
