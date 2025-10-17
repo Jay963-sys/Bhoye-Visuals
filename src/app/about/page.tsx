@@ -72,16 +72,16 @@ export default function AboutPage() {
           </p>
           <p>
             My journey started with a simple love for storytelling through
-            visuals. Over the years, I’ve worked on diverse freelance projects,
-            from brand campaigns and event highlights to cinematic visuals that
-            bring concepts to life. Every project is an opportunity for me to
-            push boundaries, both technically and creatively.
+            visuals. Over the years, I&apos;ve worked on diverse freelance
+            projects, from brand campaigns and event highlights to cinematic
+            visuals that bring concepts to life. Every project is an opportunity
+            for me to push boundaries, both technically and creatively.
           </p>
           <p>
-            Beyond editing and filming, I’m deeply interested in the future of
-            media. I’m currently exploring how AI can enhance storytelling,
-            streamline post-production, and open new creative possibilities in
-            modern videography.
+            Beyond editing and filming, I&apos;m deeply interested in the future
+            of media. I&apos;m currently exploring how AI can enhance
+            storytelling, streamline post-production, and open new creative
+            possibilities in modern videography.
           </p>
           <p>
             Whether behind the camera or in the edit suite, my goal remains the
@@ -93,7 +93,7 @@ export default function AboutPage() {
                 href="/contact"
                 className="text-[#FF3100] hover:text-[#FF3100]/80 underline underline-offset-4 transition-colors"
               >
-                Let’s connect
+                Let&apos;s connect
               </Link>{" "}
               and discuss your next project.
             </span>
