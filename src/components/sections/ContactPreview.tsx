@@ -2,7 +2,14 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Send, Mail, Instagram, Youtube, Twitter } from "lucide-react";
+import {
+  Send,
+  Mail,
+  Instagram,
+  Youtube,
+  Twitter,
+  Linkedin,
+} from "lucide-react";
 
 export default function ContactPreview() {
   return (
@@ -95,11 +102,11 @@ export default function ContactPreview() {
           <Youtube size={28} className="hover:text-[#FF3100] transition" />
         </Link>
         <Link
-          href="https://x.com/bhoyevisuals?s=11&t=vSVbjHCHW_QG5tU6-96n8g"
+          href="https://www.linkedin.com/in/adeboye-samuel?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
           target="_blank"
           className="hover:text-[#FF3100] transition"
         >
-          <Twitter size={28} className="hover:text-[#FF3100] transition" />
+          <Linkedin size={28} className="hover:text-[#FF3100] transition" />
         </Link>
       </motion.div>
     </section>

@@ -1,12 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, Instagram, Phone, MapPin } from "lucide-react";
+import { Mail, Instagram, Linkedin, Youtube } from "lucide-react";
+import FullRateCard from "@/components/sections/Check";
 
 export default function ContactPage() {
   return (
     <main className="min-h-screen bg-black text-white px-4 py-20 relative overflow-hidden">
-      <div className="absolute inset-0 z-0 bg-[url('/noise.svg')] opacity-20 pointer-events-none" />
+      <div className="absolute inset-0 z-0 bg-[url('')] opacity-20 pointer-events-none" />
 
       <div className="max-w-4xl mx-auto z-10 relative space-y-12 text-center">
         {/* 🔥 Heading */}
@@ -51,31 +52,21 @@ export default function ContactPage() {
           />
 
           <ContactCard
-            icon={<MapPin size={28} />}
-            label="Location"
-            value="Chicago, IL"
-            href="https://maps.app.goo.gl/zJR2368xwFku5E3R9?g_st=ipc"
+            icon={<Linkedin size={28} />}
+            label="Linkedin"
+            value="@AdeboyeSamuel"
+            href="https://www.linkedin.com/in/adeboye-samuel?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
+          />
+
+          <ContactCard
+            icon={<Youtube size={28} />}
+            label="Youtube"
+            value="@bhoyevisual"
+            href="https://youtube.com/@bhoyevisual"
           />
         </motion.div>
-
-        {/* 🔥 CTA Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9, duration: 0.6 }}
-        >
-          <a
-            href="mailto:bhoyevisuals@gmail.com"
-            className="inline-block px-8 py-3 
-                       bg-gradient-to-r from-[#FF3100] to-[#C10801] text-white 
-                       rounded-full font-bold shadow-[0_0_15px_#FF3100aa] 
-                       hover:scale-105 hover:shadow-[0_0_25px_#FF3100cc] 
-                       transition duration-300 uppercase tracking-wide"
-          >
-            Send a Message
-          </a>
-        </motion.div>
       </div>
+      <FullRateCard></FullRateCard>
     </main>
   );
 }

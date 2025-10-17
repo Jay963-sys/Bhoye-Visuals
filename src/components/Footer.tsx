@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { FaInstagram, FaYoutube, FaTwitter, FaEnvelope } from "react-icons/fa";
+import { FaInstagram, FaYoutube, FaLinkedin, FaEnvelope } from "react-icons/fa";
 
 export default function Footer() {
   return (
@@ -61,11 +61,11 @@ export default function Footer() {
             <FaYoutube />
           </Link>
           <Link
-            href="https://x.com/bhoyevisuals?s=11&t=vSVbjHCHW_QG5tU6-96n8g"
+            href="https://www.linkedin.com/in/adeboye-samuel?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
             target="_blank"
             className="hover:text-[#FF3100] transition"
           >
-            <FaTwitter />
+            <FaLinkedin />
           </Link>
           <Link
             href="mailto:bhoyevisuals@gmail.com"
@@ -81,7 +81,7 @@ export default function Footer() {
             © {new Date().getFullYear()} Bhoye Visuals. All rights reserved.
           </p>
           <p>
-            Designed with ❤️ by{" "}
+            Designed by{" "}
             <Link
               href="https://jay-dev-portfolio.vercel.app/"
               target="_blank"

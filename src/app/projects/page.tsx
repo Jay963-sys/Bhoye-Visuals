@@ -31,7 +31,7 @@ export default function ProjectsPage() {
 
   return (
     <main className="min-h-screen bg-black text-white px-4 py-20 relative overflow-hidden">
-      <div className="absolute inset-0 z-0 bg-[url('/noise.svg')] opacity-20 pointer-events-none" />
+      <div className="absolute inset-0 z-0 bg-[url('')] opacity-20 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto">
         {/* 🔥 Header with gradient */}

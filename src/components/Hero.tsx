@@ -4,7 +4,13 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
-import { FaInstagram, FaYoutube, FaTwitter, FaEnvelope } from "react-icons/fa";
+import {
+  FaInstagram,
+  FaYoutube,
+  FaTwitter,
+  FaEnvelope,
+  FaLinkedin,
+} from "react-icons/fa";
 
 export default function Hero() {
   const bgRef = useRef<HTMLDivElement>(null);
@@ -147,11 +153,11 @@ export default function Hero() {
             <FaYoutube />
           </Link>
           <Link
-            href="https://x.com/bhoyevisuals"
+            href="https://www.linkedin.com/in/adeboye-samuel?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
             target="_blank"
             className="hover:text-[#FF3100] transition"
           >
-            <FaTwitter />
+            <FaLinkedin />
           </Link>
           <Link
             href="mailto:Bhoyevisuals@gmail.com"
