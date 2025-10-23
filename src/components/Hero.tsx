@@ -4,13 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
-import {
-  FaInstagram,
-  FaYoutube,
-  FaTwitter,
-  FaEnvelope,
-  FaLinkedin,
-} from "react-icons/fa";
+import { FaInstagram, FaYoutube, FaEnvelope, FaLinkedin } from "react-icons/fa";
 
 export default function Hero() {
   const bgRef = useRef<HTMLDivElement>(null);
@@ -123,7 +117,7 @@ export default function Hero() {
               View Work
             </button>
           </Link>
-          <Link href="#contact">
+          <Link href="/contact">
             <button className="px-6 py-3 border border-white text-white rounded-2xl transition shadow-md hover:scale-105 hover:border-[#FF3100] hover:text-[#FF3100]">
               Contact
             </button>
