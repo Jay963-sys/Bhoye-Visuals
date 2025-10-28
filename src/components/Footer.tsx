@@ -68,7 +68,7 @@ export default function Footer() {
             <FaLinkedin />
           </Link>
           <Link
-            href="mailto:bhoyevisuals@gmail.com"
+            href="mailto:bhoyevisualsllc@gmail.com"
             className="hover:text-[#FF3100] transition"
           >
             <FaEnvelope />

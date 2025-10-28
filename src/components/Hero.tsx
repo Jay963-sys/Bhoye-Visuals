@@ -154,7 +154,7 @@ export default function Hero() {
             <FaLinkedin />
           </Link>
           <Link
-            href="mailto:Bhoyevisuals@gmail.com"
+            href="mailto:Bhoyevisualsllc@gmail.com"
             className="hover:text-[#FF3100] transition"
           >
             <FaEnvelope />

@@ -70,7 +70,7 @@ export default function ContactPreview() {
         </Link>
 
         <Link
-          href="mailto:bhoyevisuals@gmail.com"
+          href="mailto:bhoyevisualsllc@gmail.com"
           className="flex items-center gap-2 px-6 py-3 rounded-full border border-white/10 backdrop-blur bg-white/5 
     transition-all duration-300 hover:scale-105 font-medium text-lg
     hover:bg-gradient-to-r hover:from-[#FF3100]/20 hover:to-[#C10801]/20 hover:border-[#FF3100]/40 hover:shadow-[0_0_20px_#FF3100]/30"
