@@ -76,9 +76,6 @@ export async function POST(request: Request) {
       html: htmlContentToVideographer,
     });
 
-    // ------------------------
-    // ✉️ Acknowledgment Email to Client
-    // ------------------------
     const htmlContentToClient = `
       <div style="font-family: Arial, sans-serif; background-color: #202020; color: #ffffff; padding: 24px; border-radius: 12px; max-width: 600px; margin: auto;">
         ${
@@ -92,7 +89,6 @@ export async function POST(request: Request) {
     }</strong> has been received.</p>
         <p style="color: #CCCCCC; margin-bottom: 24px;">
           We’ll review your details and get back to you as soon as possible.  
-          In the meantime, feel free to reply to this email if you have any additional information or questions.
         </p>
         <hr style="border:none; border-top:1px solid #333; margin:24px 0;">
         <p style="font-size: 13px; color: #999;">With appreciation,<br><strong>${SITE}</strong><br>
