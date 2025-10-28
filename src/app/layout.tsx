@@ -20,16 +20,16 @@ export const metadata: Metadata = {
     "wedding video",
     "event shoot",
   ],
-  authors: [{ name: "Bhoye.mov", url: "https://bhoyevisuals.vercel.app" }],
-  metadataBase: new URL("https://bhoyevisuals.vercel.app"),
+  authors: [{ name: "Bhoye.mov", url: "https://bhoyevisuals.com" }],
+  metadataBase: new URL("https://bhoyevisuals.com"),
   openGraph: {
     title: "Bhoye Visuals",
     description: "Cinematic storytelling through visual direction and film.",
-    url: "https://bhoyevisuals.vercel.app",
+    url: "https://bhoyevisuals.com",
     siteName: "Bhoye Visuals",
     images: [
       {
-        url: "/og-image.png",
+        url: "/Logo Dark.svg",
         width: 1200,
         height: 630,
         alt: "Bhoye Visuals Open Graph Image",
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Bhoye Visuals",
     description: "Cinematic storytelling through visual direction and film.",
-    images: ["/og-image.png"],
+    images: ["/LogoDark.svg"],
     creator: "@bhoyevisuals",
   },
 };
