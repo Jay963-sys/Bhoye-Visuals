@@ -3,7 +3,6 @@
 import React, { useState, useCallback } from "react";
 import { motion } from "framer-motion";
 
-// === Types ===
 type FormState = {
   name: string;
   email: string;
@@ -43,7 +42,7 @@ const FormInput = React.memo(
       let val = e.target.value;
 
       if (field === "phone") {
-        val = val.replace(/[^0-9]/g, ""); // allow digits only
+        val = val.replace(/[^0-9]/g, "");
         if (val.length > 11) return; // limit to 11 digits
       }
 
@@ -52,7 +51,9 @@ const FormInput = React.memo(
 
     return (
       <div>
-        <label className="text-sm text-[#CCCCCC] block mb-1">{label}</label>
+        <label className="text-sm text-[#CCCCCC] block mb-1">
+          {label} {required && <span className="text-[#FF3100]">*</span>}
+        </label>
         <input
           required={required}
           type={type}
@@ -73,7 +74,6 @@ const FormInput = React.memo(
 
 FormInput.displayName = "FormInput";
 
-// === Main Component ===
 export default function FullRateCard() {
   const [form, setForm] = useState<FormState>({
     name: "",
@@ -95,6 +95,20 @@ export default function FullRateCard() {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    // Simple validation before sending
+    if (
+      !form.name.trim() ||
+      !form.email.trim() ||
+      !form.phone.trim() ||
+      !form.shootType.trim() ||
+      !form.date.trim() ||
+      !form.message.trim()
+    ) {
+      alert("Please fill out all required fields before submitting.");
+      return;
+    }
+
     setLoading(true);
     setSent(false);
 
@@ -228,7 +242,6 @@ export default function FullRateCard() {
               label="Phone"
               field="phone"
               type="text"
-              required={false}
               value={form.phone}
               onChange={(value) => updateFormField("phone", value)}
             />
@@ -236,15 +249,17 @@ export default function FullRateCard() {
             {/* Type of Shoot */}
             <div>
               <label className="text-sm text-[#CCCCCC] block mb-1">
-                Type of Shoot
+                Type of Shoot <span className="text-[#FF3100]">*</span>
               </label>
               <div className="relative">
                 <select
+                  required
                   value={form.shootType}
                   onChange={(e) => updateFormField("shootType", e.target.value)}
                   className="w-full appearance-none rounded-lg p-3 bg-[#1c1c1c] text-white border border-white/10 
                              focus:border-[#FF3100] focus:ring-1 focus:ring-[#FF3100] outline-none transition"
                 >
+                  <option value="">Select type</option>
                   <option>Basic Event Coverage</option>
                   <option>Mid Tier Event Coverage</option>
                   <option>High End Event Coverage</option>
@@ -273,12 +288,13 @@ export default function FullRateCard() {
             {/* Date Picker */}
             <div>
               <label className="text-sm text-[#CCCCCC] block mb-1">
-                Preferred Date
+                Preferred Date <span className="text-[#FF3100]">*</span>
               </label>
               <input
+                required
                 type="date"
                 value={form.date}
-                min={new Date().toISOString().split("T")[0]} // ⬅ Prevent past dates
+                min={new Date().toISOString().split("T")[0]} // no past dates
                 onChange={(e) => updateFormField("date", e.target.value)}
                 className="w-full rounded-lg p-3 bg-[#1c1c1c] text-white border border-white/10 
                focus:border-[#FF3100] focus:ring-1 focus:ring-[#FF3100] outline-none transition [color-scheme:dark]"
@@ -288,9 +304,10 @@ export default function FullRateCard() {
             {/* Message */}
             <div>
               <label className="text-sm text-[#CCCCCC] block mb-1">
-                Message
+                Message <span className="text-[#FF3100]">*</span>
               </label>
               <textarea
+                required
                 value={form.message}
                 onChange={(e) => updateFormField("message", e.target.value)}
                 rows={4}
