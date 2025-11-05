@@ -96,7 +96,7 @@ export default function FullRateCard() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    // Simple validation before sending
+    
     if (
       !form.name.trim() ||
       !form.email.trim() ||
@@ -294,7 +294,7 @@ export default function FullRateCard() {
                 required
                 type="date"
                 value={form.date}
-                min={new Date().toISOString().split("T")[0]} // no past dates
+                min={new Date().toISOString().split("T")[0]} 
                 onChange={(e) => updateFormField("date", e.target.value)}
                 className="w-full rounded-lg p-3 bg-[#1c1c1c] text-white border border-white/10 
                focus:border-[#FF3100] focus:ring-1 focus:ring-[#FF3100] outline-none transition [color-scheme:dark]"
