@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     siteName: "Bhoye Visuals",
     images: [
       {
-        url: "/Logo Dark.svg",
+        url: "/me.jpg",
         width: 1200,
         height: 630,
         alt: "Bhoye Visuals Open Graph Image",
