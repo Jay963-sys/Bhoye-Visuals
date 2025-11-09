@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     siteName: "Bhoye Visuals",
     images: [
       {
-        url: "/mee.jpg",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "Bhoye Visuals Logo and Brand Preview",
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Bhoye Visuals",
     description: "Cinematic storytelling through visual direction and film.",
-    images: ["/mee.jpg"],
+    images: ["/og-image.png"],
     creator: "@bhoyevisuals",
   },
 };
