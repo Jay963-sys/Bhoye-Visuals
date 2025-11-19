@@ -196,7 +196,7 @@ videographer-portfolio-p
 │     └─ cloudinary.ts
 ├─ tailwind.config.ts
 └─ tsconfig.json
-N.s
+N.s.t
 
 ```
 
