@@ -23,7 +23,7 @@ export default async function AdminPage() {
             Admin Dashboard
           </h1>
           <p className="text-gray-400 text-sm">
-            Manage your uploads, content and statistics
+            Manage all your uploads, content and statistics
           </p>
         </div>
 
