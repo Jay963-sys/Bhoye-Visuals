@@ -14,6 +14,7 @@ const clientLogos = [
   { name: "Alhan Islam", src: "/logos/alhan.svg" },
   { name: "Martell", src: "/logos/martell.svg" },
   { name: "CD Peacock", src: "/logos/peacock.svg" },
+  { name: "SummerStage", src: "/logos/summer.svg" },
 ];
 
 export default function Clients() {
