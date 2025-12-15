@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 const clientLogos = [
-  { name: "Ravian", src: "/logos/ravian.svg" },
+  { name: "Rivian", src: "/logos/rivian.svg" },
   { name: "Blank Creative", src: "/logos/blank.svg" },
   { name: "United Nations", src: "/logos/unitednations.svg" },
   { name: "Zurik", src: "/logos/zurik.svg" },
