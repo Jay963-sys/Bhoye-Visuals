@@ -12,18 +12,24 @@ export const config = {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { url, title, orientation, publicId } = body;
+    const { source, url, title, orientation, publicId, youtubeId } = body;
 
-    if (!url || !publicId || !orientation) {
+    if (
+      !source ||
+      (source === "cloudinary" && (!url || !publicId || !orientation)) ||
+      (source === "youtube" && !youtubeId)
+    ) {
       return NextResponse.json({ error: "Missing metadata" }, { status: 400 });
     }
 
     const video = await prisma.video.create({
       data: {
-        url,
         title: title || "Untitled",
-        orientation,
-        publicId,
+        orientation: orientation || null,
+        source,
+        url: source === "cloudinary" ? url : null,
+        publicId: source === "cloudinary" ? publicId : null,
+        youtubeId: source === "youtube" ? youtubeId : null,
       },
     });
 
@@ -34,6 +40,7 @@ export async function POST(req: NextRequest) {
   }
 }
 
+// Optional helper if you still need Cloudinary uploads
 async function uploadVideoToCloudinary(file: File): Promise<{
   secure_url: string;
   public_id: string;

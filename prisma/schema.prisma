@@ -9,9 +9,20 @@ datasource db {
 
 model Video {
   id          Int      @id @default(autoincrement())
-  url         String
+
+  
   title       String?
   orientation String?
-  publicId    String
   uploadedAt  DateTime @default(now())
+
+  
+  source      String   @default("cloudinary") // "cloudinary" | "youtube"
+
+  
+  url         String?
+  publicId    String?
+
+  
+  youtubeId   String?
 }
+

@@ -104,17 +104,30 @@ export default function WorksPreview() {
             transition={{ duration: 0.6, delay: i * 0.2 }}
             onClick={() => setSelectedVideo(video)}
           >
-            <video
-              ref={(el) => {
-                if (el) videoRefs.current[i] = el;
-              }}
-              src={video.url}
-              muted
-              playsInline
-              loop
-              preload="auto"
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-            />
+            {/* Render YouTube or Cloudinary */}
+            {video.source === "youtube" ? (
+              <iframe
+                width="100%"
+                height="100%"
+                src={`https://www.youtube.com/embed/${video.youtubeId}`}
+                frameBorder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+            ) : (
+              <video
+                ref={(el) => {
+                  if (el) videoRefs.current[i] = el;
+                }}
+                src={video.url}
+                muted
+                playsInline
+                loop
+                preload="auto"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+            )}
 
             {/* 🔴 Play icon hover glow */}
             <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300">
@@ -148,24 +161,36 @@ export default function WorksPreview() {
             exit={{ opacity: 0 }}
             onClick={() => setSelectedVideo(null)}
           >
-            <motion.video
-              src={selectedVideo.url}
-              controls
-              autoPlay
-              className="max-w-5xl w-full h-auto rounded-xl shadow-2xl"
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              onClick={(e) => e.stopPropagation()}
-              drag="y"
-              dragConstraints={{ top: 0, bottom: 0 }}
-              dragElastic={0.2}
-              onDragEnd={(e, info) => {
-                if (info.offset.y > 50) {
-                  setSelectedVideo(null);
-                }
-              }}
-            />
+            {selectedVideo.source === "youtube" ? (
+              <iframe
+                width="100%"
+                height="100%"
+                src={`https://www.youtube.com/embed/${selectedVideo.youtubeId}`}
+                frameBorder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="max-w-5xl w-full h-auto rounded-xl shadow-2xl"
+              />
+            ) : (
+              <motion.video
+                src={selectedVideo.url}
+                controls
+                autoPlay
+                className="max-w-5xl w-full h-auto rounded-xl shadow-2xl"
+                initial={{ scale: 0.95, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                onClick={(e) => e.stopPropagation()}
+                drag="y"
+                dragConstraints={{ top: 0, bottom: 0 }}
+                dragElastic={0.2}
+                onDragEnd={(e, info) => {
+                  if (info.offset.y > 50) {
+                    setSelectedVideo(null);
+                  }
+                }}
+              />
+            )}
           </motion.div>
         )}
       </AnimatePresence>

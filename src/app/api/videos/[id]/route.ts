@@ -19,9 +19,11 @@ export async function DELETE(
       return NextResponse.json({ error: "Video not found" }, { status: 404 });
     }
 
-    await cloudinary.uploader.destroy(video.publicId, {
-      resource_type: "video",
-    });
+    if (video.source === "cloudinary" && video.publicId) {
+      await cloudinary.uploader.destroy(video.publicId, {
+        resource_type: "video",
+      });
+    }
 
     await prisma.video.delete({ where: { id } });
 

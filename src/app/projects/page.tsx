@@ -9,8 +9,10 @@ type FilterOption = (typeof filterOptions)[number];
 interface Video {
   id: number;
   title: string;
-  url: string;
-  orientation: string;
+  url?: string;
+  youtubeId?: string;
+  orientation?: string;
+  source: "cloudinary" | "youtube";
 }
 
 export default function ProjectsPage() {
@@ -31,18 +33,14 @@ export default function ProjectsPage() {
 
   return (
     <main className="min-h-screen bg-black text-white px-4 py-20 relative overflow-hidden">
-      <div className="absolute inset-0 z-0 bg-[url('')] opacity-20 pointer-events-none" />
-
       <div className="max-w-7xl mx-auto">
-        {/* 🔥 Header with gradient */}
         <h1
           className="text-4xl md:text-5xl font-extrabold text-center mb-10 tracking-tight 
-                     bg-gradient-to-r from-[#FF3100] to-[#C10801] bg-clip-text text-transparent"
+                       bg-gradient-to-r from-[#FF3100] to-[#C10801] bg-clip-text text-transparent"
         >
           Featured Projects
         </h1>
 
-        {/* 🔥 Filter Buttons */}
         <div className="flex justify-center flex-wrap gap-4 mb-12">
           {filterOptions.map((type) => {
             const isActive = filter === type;
@@ -63,7 +61,6 @@ export default function ProjectsPage() {
           })}
         </div>
 
-        {/* 🔥 Video Grid */}
         {filteredVideos.length === 0 ? (
           <p className="text-gray-500 text-center italic">
             <span className="bg-gradient-to-r from-[#FF3100] to-[#C10801] bg-clip-text text-transparent">

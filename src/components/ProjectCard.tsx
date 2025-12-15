@@ -5,20 +5,24 @@ import { useEffect, useRef } from "react";
 
 interface ProjectCardProps {
   title: string;
-  url: string;
+  url?: string; // Cloudinary
+  youtubeId?: string; // YouTube
   orientation?: string;
+  source: "cloudinary" | "youtube";
 }
 
 export default function ProjectCard({
   title,
   url,
+  youtubeId,
   orientation = "landscape",
+  source,
 }: ProjectCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    videoRef.current?.play().catch(() => {});
-  }, []);
+    if (source === "cloudinary") videoRef.current?.play().catch(() => {});
+  }, [source]);
 
   const handleFullscreen = () => {
     const video = videoRef.current;
@@ -29,17 +33,40 @@ export default function ProjectCard({
       msRequestFullscreen?: () => void;
     };
 
-    if (v.requestFullscreen) {
-      v.requestFullscreen();
-    } else if (v.webkitEnterFullscreen) {
-      v.webkitEnterFullscreen();
-    } else if (v.msRequestFullscreen) {
-      v.msRequestFullscreen();
-    }
+    if (v.requestFullscreen) v.requestFullscreen();
+    else if (v.webkitEnterFullscreen) v.webkitEnterFullscreen();
+    else if (v.msRequestFullscreen) v.msRequestFullscreen();
   };
 
   const aspectClass =
     orientation === "portrait" ? "aspect-[9/16]" : "aspect-video";
+
+  const renderContent = () => {
+    if (source === "youtube" && youtubeId) {
+      return (
+        <iframe
+          src={`https://www.youtube.com/embed/${youtubeId}?controls=0`}
+          title={title}
+          className="w-full h-full object-cover pointer-events-none"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        />
+      );
+    }
+
+    return (
+      <video
+        ref={videoRef}
+        src={url}
+        poster={url?.replace("/video/upload/", "/video/upload/so_0/") + ".jpg"}
+        onClick={handleFullscreen}
+        className="w-full h-full object-cover group-hover:brightness-75 transition duration-300 cursor-pointer"
+        autoPlay
+        loop
+        muted
+        playsInline
+      />
+    );
+  };
 
   return (
     <motion.div
@@ -53,22 +80,9 @@ export default function ProjectCard({
                  hover:border-[#FF3100] 
                  transition-all duration-500"
     >
-      {/* 🔥 Video */}
       <div className={`relative w-full ${aspectClass}`}>
-        <video
-          ref={videoRef}
-          src={url}
-          poster={url.replace("/video/upload/", "/video/upload/so_0/") + ".jpg"}
-          onClick={handleFullscreen}
-          className="w-full h-full object-cover group-hover:brightness-75 
-                     transition duration-300 cursor-pointer"
-          autoPlay
-          loop
-          muted
-          playsInline
-        />
+        {renderContent()}
 
-        {/* 🔥 Gradient Overlay */}
         <div
           className="absolute inset-0 
                         bg-gradient-to-t from-[#FF3100]/40 via-transparent to-transparent 
@@ -77,12 +91,10 @@ export default function ProjectCard({
         />
       </div>
 
-      {/* 🔥 Text Content */}
       <div className="p-4 text-gray-200">
         <h3
           className="text-lg font-semibold truncate 
-                       group-hover:text-[#FF3100] 
-                       transition duration-300"
+                       group-hover:text-[#FF3100] transition duration-300"
         >
           {title.replace(/\.[^/.]+$/, "")}
         </h3>
