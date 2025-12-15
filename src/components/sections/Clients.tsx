@@ -4,18 +4,16 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 const clientLogos = [
-  { name: "Pepsi", src: "/logos/pepsi.svg" },
-  { name: "MTV Base", src: "/logos/mtvbase.svg" },
+  { name: "Ravian", src: "/logos/ravian.svg" },
+  { name: "Blank Creative", src: "/logos/blank.svg" },
   { name: "United Nations", src: "/logos/unitednations.svg" },
-  { name: "Tesla", src: "/logos/tesla.svg" },
+  { name: "Zurik", src: "/logos/zurik.svg" },
   { name: "Davido", src: "/logos/davido.svg" },
   { name: "Samsung", src: "/logos/samsung.svg" },
-  { name: "YouTube", src: "/logos/youtube.svg" },
-  { name: "The North Face", src: "/logos/northface.svg" },
-  { name: "Max", src: "/logos/max.svg" },
-  { name: "Gucci", src: "/logos/gucci.svg" },
+  { name: "Modern Luxury", src: "/logos/modern.svg" },
+  { name: "Alhan Islam", src: "/logos/alhan.svg" },
   { name: "Martell", src: "/logos/martell.svg" },
-  { name: "Coca-Cola", src: "/logos/cocacola.svg" },
+  { name: "CD Peacock", src: "/logos/peacock.svg" },
 ];
 
 export default function Clients() {
