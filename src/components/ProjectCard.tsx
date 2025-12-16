@@ -2,11 +2,12 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useRef } from "react";
+import VideoPreview from "./VideoPreview";
 
 interface ProjectCardProps {
   title: string;
-  url?: string; // Cloudinary
-  youtubeId?: string; // YouTube
+  url?: string;
+  youtubeId?: string;
   orientation?: string;
   source: "cloudinary" | "youtube";
 }
@@ -54,17 +55,17 @@ export default function ProjectCard({
     }
 
     return (
-      <video
-        ref={videoRef}
-        src={url}
-        poster={url?.replace("/video/upload/", "/video/upload/so_0/") + ".jpg"}
-        onClick={handleFullscreen}
-        className="w-full h-full object-cover group-hover:brightness-75 transition duration-300 cursor-pointer"
-        autoPlay
-        loop
-        muted
-        playsInline
-      />
+      <div className={`relative w-full ${aspectClass}`}>
+        <VideoPreview source={source} url={url} youtubeId={youtubeId} />
+
+        {/* Gradient Overlay */}
+        <div
+          className="absolute inset-0 
+               bg-gradient-to-t from-[#FF3100]/40 via-transparent to-transparent 
+               opacity-0 group-hover:opacity-100 
+               transition duration-500 pointer-events-none"
+        />
+      </div>
     );
   };
 
