@@ -17,16 +17,37 @@ interface Video {
 
 export default function ProjectsPage() {
   const [videos, setVideos] = useState<Video[]>([]);
+  const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
   const [filter, setFilter] = useState<FilterOption>("all");
 
   useEffect(() => {
     async function fetchVideos() {
-      const res = await fetch("/api/videos", { cache: "no-store" });
-      const data = await res.json();
-      setVideos(data);
+      try {
+        const res = await fetch("/api/videos", { cache: "no-store" });
+        const data = await res.json();
+        setVideos(data);
+      } catch (error) {
+        console.error("Failed to fetch videos:", error);
+      }
     }
+
     fetchVideos();
   }, []);
+
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSelectedVideo(null);
+    };
+    window.addEventListener("keydown", handleEsc);
+    return () => window.removeEventListener("keydown", handleEsc);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = selectedVideo ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [selectedVideo]);
 
   const filteredVideos =
     filter === "all" ? videos : videos.filter((v) => v.orientation === filter);
@@ -34,6 +55,7 @@ export default function ProjectsPage() {
   return (
     <main className="min-h-screen bg-black text-white px-4 py-20 relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
+        {/* Section Header */}
         <h1
           className="text-4xl md:text-5xl font-extrabold text-center mb-10 tracking-tight 
                        bg-gradient-to-r from-[#FF3100] to-[#C10801] bg-clip-text text-transparent"
@@ -41,6 +63,7 @@ export default function ProjectsPage() {
           Featured Projects
         </h1>
 
+        {/* Filter Buttons */}
         <div className="flex justify-center flex-wrap gap-4 mb-12">
           {filterOptions.map((type) => {
             const isActive = filter === type;
@@ -61,6 +84,7 @@ export default function ProjectsPage() {
           })}
         </div>
 
+        {/* Video Grid */}
         {filteredVideos.length === 0 ? (
           <p className="text-gray-500 text-center italic">
             <span className="bg-gradient-to-r from-[#FF3100] to-[#C10801] bg-clip-text text-transparent">
@@ -69,9 +93,22 @@ export default function ProjectsPage() {
           </p>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredVideos.map((video) => (
-              <ProjectCard key={video.id} {...video} />
-            ))}
+            {filteredVideos.map((video) => {
+              // Ensure each container matches orientation
+              const aspectClass =
+                video.orientation === "portrait"
+                  ? "aspect-[9/16]"
+                  : "aspect-video";
+
+              return (
+                <div
+                  key={video.id}
+                  className={`relative ${aspectClass} rounded-2xl overflow-hidden`}
+                >
+                  <ProjectCard {...video} />
+                </div>
+              );
+            })}
           </div>
         )}
       </div>
