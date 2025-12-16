@@ -1,3 +1,3 @@
 export const videoThumbnails: Record<string, string> = {
-  AXcksv4pvlI: "/thumbnails/v1.jpg",
+  fwSDf9Me2OU: "/thumbnails/v1.jpg",
 };
