@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import Image from "next/image";
+import { videoThumbnails } from "@/lib/videoThumbnails";
 
 type VideoPreviewProps = {
   source: "cloudinary" | "youtube";
@@ -23,20 +24,30 @@ export default function VideoPreview({
         loop
         playsInline
         preload="metadata"
-        className="w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover"
       />
     );
   }
 
-  // 🔹 YOUTUBE PREVIEW (Thumbnail only)
+  // 🔹 YOUTUBE PREVIEW (custom thumbnail)
   if (source === "youtube" && youtubeId) {
+    const safeId =
+      youtubeId.trim().split("v=")[1]?.split("&")[0] ?? youtubeId.trim();
+
+    const thumbnail = videoThumbnails[safeId] ?? "/thumbnails/fallback.jpg";
+
     return (
-      <img
-        src={`https://img.youtube.com/vi/${youtubeId}/hqdefault.jpg`}
-        alt="YouTube preview"
-        className="w-full h-full object-cover"
-        loading="lazy"
-      />
+      <div className="absolute inset-0">
+        <Image
+          src={thumbnail}
+          alt="Video thumbnail"
+          fill
+          sizes="(max-width: 768px) 100vw, 50vw"
+          className="object-cover"
+          priority
+        />
+      </div>
     );
   }
+  return null;
 }

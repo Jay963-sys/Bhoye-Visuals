@@ -9,10 +9,26 @@ export const config = {
   },
 };
 
+function normalizeYoutubeId(id: string) {
+  return id.trim().split("?")[0].split("&")[0];
+}
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { source, url, title, orientation, publicId, youtubeId } = body;
+    const {
+      source,
+      url,
+      title,
+      orientation,
+      publicId,
+      youtubeId: rawYoutubeId,
+    } = body;
+
+    const youtubeId =
+      source === "youtube" && typeof rawYoutubeId === "string"
+        ? normalizeYoutubeId(rawYoutubeId)
+        : null;
 
     if (
       !source ||
@@ -29,9 +45,16 @@ export async function POST(req: NextRequest) {
         source,
         url: source === "cloudinary" ? url : null,
         publicId: source === "cloudinary" ? publicId : null,
-        youtubeId: source === "youtube" ? youtubeId : null,
+        youtubeId,
       },
     });
+
+    if (source === "youtube" && (!youtubeId || youtubeId.length !== 11)) {
+      return NextResponse.json(
+        { error: "Invalid YouTube ID" },
+        { status: 400 }
+      );
+    }
 
     return NextResponse.json(video, { status: 201 });
   } catch (err) {

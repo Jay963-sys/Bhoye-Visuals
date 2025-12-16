@@ -14,18 +14,21 @@ export default function UploadForm() {
 
   function extractYoutubeId(url: string) {
     try {
-      const parsed = new URL(url);
+      const parsed = new URL(url.trim());
 
+      // youtu.be/VIDEO_ID
       if (parsed.hostname.includes("youtu.be")) {
-        return parsed.pathname.replace("/", "");
+        return parsed.pathname.slice(1).split("?")[0];
       }
 
+      // youtube.com/watch?v=VIDEO_ID
       if (parsed.searchParams.has("v")) {
-        return parsed.searchParams.get("v");
+        return parsed.searchParams.get("v")?.trim() ?? null;
       }
 
+      // youtube.com/shorts/VIDEO_ID
       if (parsed.pathname.startsWith("/shorts/")) {
-        return parsed.pathname.split("/shorts/")[1];
+        return parsed.pathname.split("/shorts/")[1].split("?")[0];
       }
 
       return null;
