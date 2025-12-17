@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { Video } from "@prisma/client";
 import { PlayCircle } from "lucide-react";
+import { youtubeThumbnails } from "@/lib/youtubeThumbnails";
+import { videoThumbnails } from "@/lib/videoThumbnails";
 
 export default function WorksPreview() {
   const [videos, setVideos] = useState<Video[]>([]);
@@ -125,11 +127,27 @@ export default function WorksPreview() {
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
             ) : (
-              <img
-                src={`https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg`}
-                alt={video.title ?? "YouTube video"}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              />
+              <div className="absolute inset-0 overflow-hidden">
+                {/* Blurred background fill */}
+                <img
+                  src={
+                    youtubeThumbnails[video.youtubeId!] ??
+                    "/thumbnails/fallback.jpg"
+                  }
+                  alt=""
+                  className="absolute inset-0 w-full h-full object-cover scale-110 blur-xl opacity-40"
+                />
+
+                {/* Sharp foreground image */}
+                <img
+                  src={
+                    youtubeThumbnails[video.youtubeId!] ??
+                    "/thumbnails/fallback.jpg"
+                  }
+                  alt={video.title ?? "YouTube video"}
+                  className="relative w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
             )}
 
             {/* Play icon overlay */}
