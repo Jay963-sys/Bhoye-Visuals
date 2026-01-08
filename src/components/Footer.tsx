@@ -81,13 +81,21 @@ export default function Footer() {
             © {new Date().getFullYear()} Bhoye Visuals. All rights reserved.
           </p>
           <p>
-            Designed by{" "}
             <Link
               href="https://jay-dev-portfolio.vercel.app/"
               target="_blank"
-              className="underline hover:text-[#FF3100] transition-colors duration-300"
+              rel="noopener noreferrer"
+              className="
+    font-medium
+    underline
+    underline-offset-4
+    decoration-neutral-600
+    hover:decoration-white
+    hover:text-white
+    transition-colors
+  "
             >
-              Jay.dev
+              Designed by Jay
             </Link>
           </p>
         </div>
