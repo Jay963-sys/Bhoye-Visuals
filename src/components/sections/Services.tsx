@@ -1,114 +1,151 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Camera, Heart, Film, Megaphone } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
+import Image from "next/image";
 
 const services = [
   {
+    id: "01",
     title: "Weddings",
-    desc: "Timeless wedding films that beautifully preserve your most important day.",
-    icon: <Heart className="w-8 h-8 text-[#FF3100]" />,
+    desc: "Timeless films that preserve the raw emotion of your most important day.",
+    src: "/services/wedding.jpg",
   },
   {
+    id: "02",
     title: "Event Coverage",
-    desc: "Capture unforgettable moments with precision and professionalism.",
-    icon: <Camera className="w-8 h-8 text-[#FF3100]" />,
+    desc: "Capturing the energy and atmosphere of corporate and social events.",
+    src: "/services/event.jpg",
   },
   {
+    id: "03",
     title: "Short Films",
-    desc: "Bring narratives to life with cinematic visuals and impactful pacing.",
-    icon: <Film className="w-8 h-8 text-[#FF3100]" />,
+    desc: "Narrative-driven storytelling with cinematic visuals and impactful pacing.",
+    src: "/services/shortfilm.jpg",
   },
   {
+    id: "04",
     title: "Brand Storytelling",
-    desc: "Promote your mission through powerful, emotional storytelling.",
-    icon: <Megaphone className="w-8 h-8 text-[#FF3100]" />,
+    desc: "Promote your mission through powerful, emotional visual campaigns.",
+    src: "/services/brand2.jpg",
   },
 ];
 
-const containerVariants = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.25,
-      delayChildren: 0.4,
-    },
-  },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 40 },
-  show: { opacity: 1, y: 0 },
-};
-
 export default function Services() {
+  const [activeService, setActiveService] = useState(0);
+
   return (
-    <section
-      id="services"
-      className="relative overflow-hidden min-h-screen snap-start bg-black text-white px-4 sm:px-6 md:px-10 py-20 md:py-28 flex flex-col items-center justify-center"
-    >
-      {/* 🌈 Blobs with subtle brand accents */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        <div className="absolute w-[60vw] h-[60vw] bg-[#FF3100]/10 rounded-full filter blur-3xl animate-pulse-slow top-[-20%] left-[-20%]" />
-        <div className="absolute w-[50vw] h-[50vw] bg-white/5 rounded-full filter blur-2xl animate-pulse-slower top-[40%] right-[-15%]" />
-        <div className="absolute w-[40vw] h-[40vw] bg-[#C10801]/10 rounded-full filter blur-2xl animate-pulse-slow bottom-[-10%] left-[30%]" />
+    <section className="relative bg-black text-white flex flex-col md:flex-row md:items-center md:min-h-screen py-24 md:py-0">
+      {/* ----------------------------------------------------
+          LEFT SIDE: THE LIST (Interactive)
+          ---------------------------------------------------- */}
+      <div className="w-full md:w-1/2 p-6 md:p-16 lg:p-24 z-20 flex flex-col justify-center">
+        {/* Section Label */}
+        <motion.span
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-[#FF3100] font-mono text-xs uppercase tracking-widest mb-12 block shadow-black drop-shadow-md"
+        >
+          Our Expertise
+        </motion.span>
+
+        <div className="flex flex-col space-y-8">
+          {services.map((service, index) => (
+            <div
+              key={service.id}
+              onMouseEnter={() => setActiveService(index)}
+              className="group cursor-pointer relative"
+            >
+              {/* The Number & Title */}
+              <div className="flex items-baseline gap-6 transition-all duration-300 group-hover:pl-4">
+                <span
+                  className={`font-mono text-sm transition-colors duration-300 ${
+                    activeService === index ? "text-[#FF3100]" : "text-gray-500"
+                  }`}
+                >
+                  {service.id}
+                </span>
+                {/* Added drop-shadow to text so it remains readable over bright images */}
+                <h3
+                  className={`text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tighter transition-colors duration-300 drop-shadow-lg ${
+                    activeService === index ? "text-white" : "text-gray-600"
+                  }`}
+                >
+                  {service.title}
+                </h3>
+              </div>
+
+              {/* The Description (Reveals on Active) */}
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{
+                  height: activeService === index ? "auto" : 0,
+                  opacity: activeService === index ? 1 : 0,
+                }}
+                className="overflow-hidden"
+              >
+                <p className="pt-4 pl-12 text-gray-300 max-w-md text-sm md:text-base leading-relaxed font-light drop-shadow-md">
+                  {service.desc}
+                </p>
+              </motion.div>
+            </div>
+          ))}
+        </div>
       </div>
 
-      {/* 🌾 Film grain overlay */}
-      <div className="absolute inset-0 bg-[url('/grain.png')] opacity-10 mix-blend-overlay z-0 pointer-events-none" />
+      <div className="absolute inset-0 md:relative w-full md:w-1/2 h-full md:h-screen z-10 md:z-auto opacity-60 md:opacity-100 pointer-events-none md:pointer-events-auto">
+        <div className="sticky top-0 h-full w-full overflow-hidden">
+          <AnimatePresence mode="popLayout">
+            <motion.div
+              key={services[activeService].id}
+              initial={{ scale: 1.1, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.7 }}
+              className="absolute inset-0 w-full h-full"
+            >
+              {/* Placeholder for Dynamic Image */}
+              <div className="relative w-full h-full bg-stone-900">
+                <Image
+                  src={services[activeService].src}
+                  alt={services[activeService].title}
+                  fill
+                  className="object-cover"
+                  priority
+                />
 
-      {/* 🔲 Gradient fade overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-transparent z-0" />
+                {/* Temporary colored block (Removed opacity here so it's full strength) */}
+                <div
+                  className={`w-full h-full ${
+                    activeService === 0
+                      ? "bg-red-900"
+                      : activeService === 1
+                        ? "bg-blue-900"
+                        : activeService === 2
+                          ? "bg-green-900"
+                          : "bg-purple-900"
+                  }`}
+                />
 
-      {/* 🧠 Section Title */}
-      <motion.h2
-        className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-center bg-gradient-to-r from-[#FF3100] to-[#C10801] bg-clip-text text-transparent z-10"
-        initial={{ opacity: 0, y: -30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
-        viewport={{ once: true }}
-      >
-        What We Offer
-      </motion.h2>
+                {/* Texture Overlay (Grain) */}
+                <div className="absolute inset-0 bg-[url('/grain.png')] opacity-20 mix-blend-overlay" />
 
-      {/* 🔡 Subtitle */}
-      <motion.p
-        className="text-center text-base sm:text-lg text-gray-300 mb-12 max-w-xl z-10 px-2"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.2 }}
-        viewport={{ once: true }}
-      >
-        Tailored creative solutions designed to elevate your story with
-        cinematic precision.
-      </motion.p>
+                {/* FIX: Stronger Gradient 
+                           This protects the text readability without washing out the whole image.
+                           It darkens the Left (where text is) and Bottom.
+                        */}
+                <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent md:hidden" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent md:hidden" />
 
-      {/* 🎬 Service Cards */}
-      <motion.div
-        className="grid md:grid-cols-2 gap-8 max-w-5xl w-full z-10"
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true }}
-      >
-        {services.map((service, index) => (
-          <motion.div
-            key={index}
-            variants={cardVariants}
-            className="bg-[#111] border border-gray-700 p-6 rounded-2xl shadow-md transition-all duration-300 hover:border-[#FF3100]/70 hover:shadow-[0_0_24px_rgba(255,49,0,0.4)] hover:-translate-y-1.5"
-          >
-            <div className="flex items-center gap-3 mb-4">
-              {service.icon}
-              <h3 className="text-xl font-semibold text-white">
-                {service.title}
-              </h3>
-            </div>
-            <p className="text-gray-300 leading-relaxed text-sm sm:text-base">
-              {service.desc}
-            </p>
-          </motion.div>
-        ))}
-      </motion.div>
+                {/* Desktop Gradient (Subtle fade from left) */}
+                <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent hidden md:block" />
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </div>
     </section>
   );
 }

@@ -1,169 +1,181 @@
 "use client";
 
-import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
-import { FaInstagram, FaYoutube, FaEnvelope, FaLinkedin } from "react-icons/fa";
+import { FaInstagram, FaEnvelope } from "react-icons/fa"; // Removed unused icons
+import { useRef } from "react";
 
 export default function Hero() {
-  const bgRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
 
-  useEffect(() => {
-    const node = bgRef.current;
-    if (node) {
-      node.animate(
-        [
-          { transform: "scale(1) translate(0, 0)" },
-          { transform: "scale(1.1) translate(-5%, -5%)" },
-        ],
-        { duration: 20000, iterations: Infinity, easing: "ease-in-out" }
-      );
-    }
-  }, []);
+  const yText = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const opacityText = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   return (
-    <section className="relative h-screen bg-black text-white overflow-hidden flex items-center justify-center pt-24 md:pt-32 pb-10 md:pb-16">
-      {/* BACKGROUND */}
-      <div ref={bgRef} className="absolute inset-0">
+    <section
+      ref={containerRef}
+      className="relative h-screen w-full bg-black text-white overflow-hidden"
+    >
+      {/* -------------------------------------------------------
+          BACKGROUND VIDEO
+          ------------------------------------------------------- */}
+      <div className="absolute inset-0 z-0">
         <video
           autoPlay
           loop
           muted
           playsInline
-          preload="auto"
-          className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-1000"
-          onCanPlay={(e) => e.currentTarget.classList.add("opacity-100")}
+          className="h-full w-full object-cover opacity-70"
         >
           <source
             src="https://14wyrkgruiwcmejp.public.blob.vercel-storage.com/water.mp4"
             type="video/mp4"
           />
         </video>
-
-        {/* Dark overlay */}
-        <div className="absolute inset-0 bg-black/40" />
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-        {/* Subtle brand tint */}
-        <div className="absolute inset-0 bg-gradient-radial from-[#FF3100]/10 via-transparent to-transparent opacity-40" />
-        {/* Grain/texture */}
-        <div className="absolute inset-0 pointer-events-none bg-[url('/grain.png')] animate-grain mix-blend-overlay opacity-20" />
+        <div className="absolute inset-0 bg-[url('/grain.png')] opacity-15 mix-blend-overlay pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
       </div>
 
-      {/* MAIN CONTENT */}
-      <motion.div
-        className="relative z-10 max-w-5xl text-center px-6 sm:px-10 space-y-6"
-        initial="hidden"
-        animate="visible"
-        variants={{
-          hidden: {},
-          visible: {
-            transition: { staggerChildren: 0.2 },
-          },
-        }}
-      >
-        <motion.p
-          className="font-display text-[11px] sm:text-sm md:text-base uppercase tracking-widest text-gray-300 font-medium"
-          variants={{
-            hidden: { opacity: 0, y: 20 },
-            visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
-          }}
-        >
-          Bhoye Visuals — Film Maker | Editor | Director
-        </motion.p>
-
+      {/* -------------------------------------------------------
+          MAIN CONTENT (Split Layout)
+          ------------------------------------------------------- */}
+      <div className="absolute bottom-0 left-0 w-full h-full flex flex-col justify-end z-10 p-6 md:p-12 pointer-events-none">
+        {/* The Grid Container */}
         <motion.div
-          className="flex justify-center"
-          variants={{
-            hidden: { opacity: 0, y: 30 },
-            visible: { opacity: 1, y: 0, transition: { duration: 1 } },
-          }}
+          style={{ y: yText, opacity: opacityText }}
+          className="flex flex-col md:flex-row items-end justify-between w-full gap-8 md:gap-0 border-t border-white/20 pt-8 md:pt-0 md:border-t-0"
         >
-          <Image
-            src="/Logo Dark.svg"
-            alt="Bhoye Visuals Logo"
-            width={300}
-            height={120}
-            className="w-36 sm:w-48 md:w-64 lg:w-80 xl:w-96 h-auto mx-auto drop-shadow-[0_0_25px_rgba(255,49,0,0.3)]"
-            priority
-          />
-        </motion.div>
-
-        <motion.p
-          className="text-sm sm:text-lg md:text-xl text-gray-300 max-w-2xl mx-auto drop-shadow leading-relaxed"
-          variants={{
-            hidden: { opacity: 0, y: 30 },
-            visible: { opacity: 1, y: 0, transition: { duration: 1 } },
-          }}
-        >
-          I craft immersive videos that captivate, communicate, and connect.
-          Let&apos;s bring your vision to life.
-        </motion.p>
-
-        <motion.div
-          className="flex justify-center flex-wrap gap-4 mt-6"
-          variants={{
-            hidden: { opacity: 0, y: 20 },
-            visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
-          }}
-        >
-          <Link href="#works">
-            <button
-              className="px-6 py-3 rounded-2xl transition shadow-md hover:scale-105 
-              bg-gradient-to-r from-[#FF3100] to-[#C10801] text-white font-medium
-              hover:shadow-[0_0_24px_rgba(255,49,0,0.5)]"
+          {/* LEFT COLUMN: Roles + Massive Title */}
+          <div className="w-full md:w-2/3 flex flex-col items-start">
+            <motion.p
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.5, duration: 1 }}
+              className="text-[#FF3100] font-mono text-xs md:text-sm uppercase tracking-[0.2em] mb-2 md:mb-4 pl-1"
             >
-              View Work
-            </button>
-          </Link>
-          <Link href="/contact">
-            <button className="px-6 py-3 border border-white text-white rounded-2xl transition shadow-md hover:scale-105 hover:border-[#FF3100] hover:text-[#FF3100]">
-              Contact
-            </button>
-          </Link>
-        </motion.div>
+              Film Maker | Editor | Director
+            </motion.p>
 
-        {/* Social Icons */}
-        <motion.div
-          className="mt-8 flex justify-center gap-6 text-white text-xl sm:text-2xl"
-          variants={{
-            hidden: { opacity: 0, y: 20 },
-            visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
-          }}
-        >
-          <Link
-            href="https://www.instagram.com/bhoyevisuals"
-            target="_blank"
-            className="hover:text-[#FF3100] transition"
-          >
-            <FaInstagram />
-          </Link>
-          <Link
-            href="https://youtube.com/@bhoyevisual"
-            target="_blank"
-            className="hover:text-[#FF3100] transition"
-          >
-            <FaYoutube />
-          </Link>
-          <Link
-            href="https://www.linkedin.com/in/adeboye-samuel?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
-            target="_blank"
-            className="hover:text-[#FF3100] transition"
-          >
-            <FaLinkedin />
-          </Link>
-          <Link
-            href="mailto:Bhoyevisualsllc@gmail.com"
-            className="hover:text-[#FF3100] transition"
-          >
-            <FaEnvelope />
-          </Link>
-        </motion.div>
-      </motion.div>
+            <div className="overflow-hidden">
+              <motion.h1
+                initial={{ y: "110%" }}
+                animate={{ y: 0 }}
+                transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
+                className="text-[12vw] md:text-[9rem] lg:text-[11rem] font-bold leading-[0.85] tracking-tighter text-white mix-blend-overlay"
+              >
+                BHOYE
+              </motion.h1>
+            </div>
+            <div className="overflow-hidden">
+              <motion.h1
+                initial={{ y: "110%" }}
+                animate={{ y: 0 }}
+                transition={{
+                  duration: 1,
+                  delay: 0.1,
+                  ease: [0.76, 0, 0.24, 1],
+                }}
+                className="text-[12vw] md:text-[9rem] lg:text-[11rem] font-bold leading-[0.85] tracking-tighter text-white"
+              >
+                VISUALS
+              </motion.h1>
+            </div>
+          </div>
 
-      {/* Bottom fade */}
-      <div className="absolute bottom-0 left-0 w-full h-16 sm:h-24 bg-gradient-to-b from-transparent to-black z-10 pointer-events-none" />
+          {/* RIGHT COLUMN: Location, Bio & Buttons */}
+          <div className="w-full md:w-1/3 flex flex-col items-start md:items-end justify-end space-y-6 md:pl-8 pointer-events-auto">
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 1, duration: 1 }}
+              className="flex flex-col items-start md:items-end text-right space-y-6"
+            >
+              <div className="flex flex-col items-start md:items-end">
+                <span className="text-[#FF3100] font-mono text-xs uppercase tracking-widest mb-1">
+                  Based In
+                </span>
+                <h3 className="text-xl md:text-2xl font-light text-white">
+                  Chicago, IL
+                </h3>
+              </div>
+
+              <p className="max-w-[300px] text-sm md:text-base text-gray-300 font-light leading-relaxed">
+                I craft immersive videos that{" "}
+                <span className="text-white font-medium">captivate</span>,{" "}
+                <span className="text-white font-medium">communicate</span>, and{" "}
+                <span className="text-white font-medium">connect</span>.
+                <br className="hidden md:block" /> Let&apos;s bring your vision
+                to life.
+              </p>
+
+              <div className="h-[1px] w-16 bg-white/20"></div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 1.2, duration: 0.5 }}
+              className="flex flex-col sm:flex-row gap-4 pt-2 w-full md:w-auto"
+            >
+              <Link href="#works" className="w-full md:w-auto">
+                <button className="w-full md:w-auto px-6 py-4 bg-white text-black hover:bg-[#FF3100] hover:text-white transition-colors duration-300 uppercase tracking-widest text-xs font-bold">
+                  View Works
+                </button>
+              </Link>
+
+              <Link href="#booking" className="w-full md:w-auto">
+                <button className="w-full md:w-auto px-6 py-4 border border-white/30 text-white hover:border-white hover:bg-white/5 transition-all duration-300 uppercase tracking-widest text-xs font-bold">
+                  Start Project
+                </button>
+              </Link>
+            </motion.div>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Mobile Socials (Bottom Left) */}
+      <div className="absolute bottom-6 left-6 md:hidden flex gap-4 text-white z-20">
+        <SocialLink
+          href="https://instagram.com/bhoyevisuals"
+          icon={<FaInstagram />}
+          delay={0}
+        />
+        <SocialLink
+          href="mailto:Bhoyevisualsllc@gmail.com"
+          icon={<FaEnvelope />}
+          delay={0}
+        />
+      </div>
     </section>
+  );
+}
+
+function SocialLink({
+  href,
+  icon,
+  delay,
+}: {
+  href: string;
+  icon: React.ReactNode;
+  delay: number;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 1 + delay, duration: 0.5 }}
+    >
+      <Link
+        href={href}
+        target="_blank"
+        className="text-white/70 hover:text-[#FF3100] hover:scale-110 transition-all duration-300"
+      >
+        {icon}
+      </Link>
+    </motion.div>
   );
 }

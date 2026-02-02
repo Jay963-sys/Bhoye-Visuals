@@ -3,102 +3,129 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowUpRight, Camera, MapPin } from "lucide-react";
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-black text-white px-4 py-20 relative overflow-hidden">
-      {/* Background texture (if you have one, set the URL) */}
-      <div className="absolute inset-0 bg-[url('')] opacity-20 pointer-events-none" />
+    <main className="min-h-screen bg-black text-white pt-45 md:pt-32 pb-24 px-6 md:px-12 relative overflow-hidden">
+      {/* Background Texture */}
+      <div className="absolute inset-0 bg-[url('/grain.png')] opacity-20 mix-blend-overlay pointer-events-none" />
 
-      <div className="max-w-3xl mx-auto flex flex-col items-center text-center relative z-10 space-y-10">
-        {/* === 1. Intro Heading === */}
-        <motion.p
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-lg sm:text-xl md:text-2xl text-gray-300 leading-relaxed"
-        >
-          <span className="font-semibold text-[#FF3100]">BHOYE VISUALS</span>{" "}
-          was founded out of the desire to tell great stories in new ways.
-        </motion.p>
+      <div className="max-w-7xl mx-auto grid md:grid-cols-12 gap-12 lg:gap-24 relative z-10">
+        {/* -------------------------------------------------------
+            LEFT COLUMN: THE PORTRAIT
+            ------------------------------------------------------- */}
+        <div className="md:col-span-5 relative">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
+            className="relative md:sticky md:top-32 w-full aspect-[4/5] rounded-lg overflow-hidden border border-white/10"
+          >
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10" />
 
-        {/* === 2. Larger Square Profile Image === */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="relative group w-72 h-72 sm:w-80 sm:h-80 overflow-hidden shadow-lg shadow-black/40 rounded-none"
-        >
-          {/* Subtle glow border */}
-          <div className="absolute inset-0 p-[2px] bg-gradient-to-tr from-[#FF3100]/60 via-[#C10801]/50 to-transparent">
-            <div className="w-full h-full bg-[#202020]" />
-          </div>
+            <Image
+              src="/jop.jpg"
+              alt="Samuel Adeboye Emmanuel"
+              fill
+              className="object-cover"
+              priority
+            />
 
-          <Image
-            src="/jop.jpg"
-            alt="Samuel Adeboye Emmanuel"
-            fill
-            className="object-cover relative z-10"
-          />
-        </motion.div>
+            {/* Name Overlay on Image */}
+            <div className="absolute bottom-6 left-6 z-20">
+              <h2 className="text-3xl font-bold uppercase tracking-tighter text-white">
+                Samuel <br /> Adeboye
+              </h2>
+            </div>
+          </motion.div>
+        </div>
 
-        {/* === 3. Name + Title === */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="space-y-1"
-        >
-          <h2 className="text-xl sm:text-2xl font-bold tracking-wide text-white uppercase">
-            SAMUEL ADEBOYE EMMANUEL
-          </h2>
-          <p className="text-sm sm:text-base text-gray-400">
-            FILM MAKER | CREATIVE DIRECTOR
-          </p>
-        </motion.div>
-
-        {/* === 4. Bio Paragraph (with inline connect link) === */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="text-gray-300 text-base sm:text-lg leading-relaxed max-w-2xl space-y-4"
-        >
-          <p>
-            A creative filmmaker and video editor passionate about transforming
-            ideas into visually captivating stories. I specialize in crafting
-            engaging video content that captures emotion, elevates brands, and
-            connects with audiences on a deeper level.
-          </p>
-          <p>
-            My journey started with a simple love for storytelling through
-            visuals. Over the years, I&apos;ve worked on diverse freelance
-            projects, from brand campaigns and event highlights to cinematic
-            visuals that bring concepts to life. Every project is an opportunity
-            for me to push boundaries, both technically and creatively.
-          </p>
-          <p>
-            Beyond editing and filming, I&apos;m deeply interested in the future
-            of media. I&apos;m currently exploring how AI can enhance
-            storytelling, streamline post-production, and open new creative
-            possibilities in modern videography.
-          </p>
-          <p>
-            Whether behind the camera or in the edit suite, my goal remains the
-            same — to deliver polished, meaningful visuals that leave a lasting
-            impression.{" "}
-            <span className="inline-block">
-              📩{" "}
-              <Link
-                href="/contact"
-                className="text-[#FF3100] hover:text-[#FF3100]/80 underline underline-offset-4 transition-colors"
-              >
-                Let&apos;s connect
-              </Link>{" "}
-              and discuss your next project.
+        {/* -------------------------------------------------------
+            RIGHT COLUMN: THE MANIFESTO
+            ------------------------------------------------------- */}
+        <div className="md:col-span-7 flex flex-col justify-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+          >
+            <span className="text-[#FF3100] font-mono text-xs uppercase tracking-widest mb-6 block">
+              The Director&apos;s Cut
             </span>
-          </p>
-        </motion.div>
+
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter mb-8 leading-[1.1]">
+              Telling great stories in{" "}
+              <span className="text-gray-500">new ways.</span>
+            </h1>
+
+            {/* BIO TEXT */}
+            <div className="space-y-6 text-gray-400 text-lg leading-relaxed font-light">
+              <p>
+                <strong className="text-white">Bhoye Visuals</strong> was
+                founded out of a simple desire: to capture emotion, elevate
+                brands, and connect with audiences on a deeper level.
+              </p>
+              <p>
+                My journey started with a love for visuals, but it has evolved
+                into a pursuit of{" "}
+                <span className="text-white">cinematic precision</span>. From
+                brand campaigns to intimate event highlights, I approach every
+                project as an opportunity to push boundaries—both technically
+                and creatively.
+              </p>
+              <p>
+                Beyond the edit suite, I am deeply invested in the future of
+                media. I am currently exploring how{" "}
+                <span className="text-white">AI tools</span> can enhance
+                storytelling workflows, streamlining post-production to open up
+                new creative possibilities that were not possible just a few
+                years ago.
+              </p>
+              <p>
+                Whether behind the camera or crafting the final cut, my goal
+                remains the same: to deliver polished, meaningful visuals that
+                leave a lasting impression.
+              </p>
+            </div>
+
+            {/* STATS GRID */}
+            <div className="grid grid-cols-2 gap-6 mt-12 py-8 border-y border-white/10">
+              <div>
+                <div className="flex items-center gap-2 text-[#FF3100] mb-2">
+                  <MapPin size={18} />
+                  <span className="text-xs font-mono uppercase tracking-widest">
+                    Based In
+                  </span>
+                </div>
+                <p className="text-white text-xl font-bold">Chicago, IL</p>
+                <p className="text-sm text-gray-500">Available Globally</p>
+              </div>
+
+              <div>
+                <div className="flex items-center gap-2 text-[#FF3100] mb-2">
+                  <Camera size={18} />
+                  <span className="text-xs font-mono uppercase tracking-widest">
+                    Focus
+                  </span>
+                </div>
+                <p className="text-white text-xl font-bold">Direction & Edit</p>
+                <p className="text-sm text-gray-500">
+                  Commercial / Doc / Event
+                </p>
+              </div>
+            </div>
+
+            {/* SIGNATURE / CTA */}
+            <div className="mt-12 flex items-center justify-between">
+              <Link href="/contact">
+                <button className="flex items-center gap-2 px-6 py-3 bg-white text-black font-bold uppercase tracking-widest text-xs hover:bg-[#FF3100] hover:text-white transition-all duration-300">
+                  Let&apos;s Connect <ArrowUpRight size={16} />
+                </button>
+              </Link>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </main>
   );

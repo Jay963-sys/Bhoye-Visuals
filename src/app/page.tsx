@@ -4,8 +4,6 @@ import Services from "../components/sections/Services";
 import WorksPreview from "../components/sections/WorksPreview";
 import Clients from "../components/sections/Clients";
 import FullRateCard from "../components/sections/Check";
-import ContactPreview from "../components/sections/ContactPreview";
-import Footer from "../components/Footer";
 
 export default function Home() {
   return (
@@ -30,14 +28,6 @@ export default function Home() {
 
       <section id="booking">
         <FullRateCard />
-      </section>
-
-      <section id="contact">
-        <ContactPreview />
-      </section>
-
-      <section>
-        <Footer />
       </section>
     </main>
   );

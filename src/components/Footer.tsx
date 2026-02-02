@@ -2,104 +2,141 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { FaInstagram, FaYoutube, FaLinkedin, FaEnvelope } from "react-icons/fa";
+import { ArrowUp, Instagram, Youtube, Linkedin, Mail } from "lucide-react";
 
 export default function Footer() {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
-    <footer className="relative min-h-[50vh] bg-black text-white px-4 sm:px-6 md:px-10 py-16 flex flex-col items-center justify-center text-center overflow-hidden">
-      {/* ⚪ Animated blobs (black & white) */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <div className="absolute w-[60vw] h-[60vw] bg-white/10 opacity-20 rounded-full blur-3xl animate-pulse-slow top-[-30%] left-[-20%]" />
-        <div className="absolute w-[50vw] h-[50vw] bg-white/5 opacity-10 rounded-full blur-2xl animate-pulse-slower bottom-[-20%] right-[-10%]" />
-        <div className="absolute w-[40vw] h-[40vw] bg-white/10 rounded-full blur-2xl animate-pulse-slow bottom-[-10%] left-[30%]" />
-      </div>
+    <footer className="relative bg-black text-white pt-24 overflow-hidden">
+      {/* Background Texture */}
+      <div className="absolute inset-0 bg-[url('/grain.png')] opacity-20 mix-blend-overlay pointer-events-none" />
 
-      {/* 🟫 Film grain + texture */}
-      <div className="absolute inset-0 bg-[url('/grain.png')] opacity-10 mix-blend-overlay z-0 pointer-events-none" />
-      <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10 mix-blend-soft-light z-0 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent z-0" />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/90 z-0 pointer-events-none" />
+      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+        {/* ----------------------------------------------------
+            TOP SECTION: COLUMNS
+            ---------------------------------------------------- */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8 mb-24">
+          {/* Column 1: Call to Action */}
+          <div className="md:col-span-2">
+            <h3 className="text-3xl md:text-4xl font-bold tracking-tighter mb-6">
+              Let&apos;s create something <br />
+              <span className="text-[#FF3100]">timeless</span> together.
+            </h3>
+            <Link href="mailto:bhoyevisualsllc@gmail.com">
+              <button className="group flex items-center gap-3 text-lg border-b border-white/30 pb-1 hover:border-[#FF3100] hover:text-[#FF3100] transition-all duration-300">
+                bhoyevisualsllc@gmail.com
+                <ArrowUp
+                  className="rotate-45 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"
+                  size={18}
+                />
+              </button>
+            </Link>
+          </div>
 
-      {/* 🌐 Content */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-        viewport={{ once: true }}
-        className="relative z-10 flex flex-col gap-6 items-center w-full max-w-4xl"
-      >
-        {/* 🔗 Nav Links */}
-        <div className="flex flex-wrap justify-center gap-6 text-sm md:text-base text-white/80">
-          <Link href="/#about" className="hover:text-[#FF3100] transition">
-            About
-          </Link>
-          <Link href="/#works" className="hover:text-[#FF3100] transition">
-            Works
-          </Link>
-          <Link href="/#clients" className="hover:text-[#FF3100] transition">
-            Clients
-          </Link>
-          <Link href="/#contact" className="hover:text-[#FF3100] transition">
-            Contact
-          </Link>
+          {/* Column 2: Navigation */}
+          <div>
+            <span className="text-[#FF3100] font-mono text-xs uppercase tracking-widest mb-6 block">
+              Menu
+            </span>
+            <ul className="space-y-4 font-light text-sm text-gray-400">
+              {["Home", "Projects", "Services", "Booking"].map((item) => (
+                <li key={item}>
+                  <Link
+                    href={item === "Home" ? "/" : `#${item.toLowerCase()}`}
+                    className="hover:text-white transition-colors block w-fit"
+                  >
+                    {item}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 3: Socials */}
+          <div>
+            <span className="text-[#FF3100] font-mono text-xs uppercase tracking-widest mb-6 block">
+              Socials
+            </span>
+            <ul className="space-y-4 font-light text-sm text-gray-400">
+              <li>
+                <Link
+                  href="https://instagram.com/bhoyevisuals"
+                  target="_blank"
+                  className="flex items-center gap-2 hover:text-white transition-colors w-fit"
+                >
+                  <Instagram size={16} /> Instagram
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="https://youtube.com/@bhoyevisual"
+                  target="_blank"
+                  className="flex items-center gap-2 hover:text-white transition-colors w-fit"
+                >
+                  <Youtube size={16} /> YouTube
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="https://linkedin.com"
+                  target="_blank"
+                  className="flex items-center gap-2 hover:text-white transition-colors w-fit"
+                >
+                  <Linkedin size={16} /> LinkedIn
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="mailto:bhoyevisualsllc@gmail.com"
+                  className="flex items-center gap-2 hover:text-white transition-colors w-fit"
+                >
+                  <Mail size={16} /> Email
+                </Link>
+              </li>
+            </ul>
+          </div>
         </div>
 
-        {/* 🌐 Social Icons */}
-        <div className="flex justify-center gap-5 text-xl text-white/80">
-          <Link
-            href="https://www.instagram.com/bhoyevisuals?igsh=MWRjcmZ4YzR2MmY4eA=="
-            target="_blank"
-            className="hover:text-[#FF3100] transition"
-          >
-            <FaInstagram />
-          </Link>
-          <Link
-            href="https://youtube.com/@bhoyevisual?si=UOC1QZJwPHd-pEz_"
-            target="_blank"
-            className="hover:text-[#FF3100] transition"
-          >
-            <FaYoutube />
-          </Link>
-          <Link
-            href="https://www.linkedin.com/in/adeboye-samuel?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
-            target="_blank"
-            className="hover:text-[#FF3100] transition"
-          >
-            <FaLinkedin />
-          </Link>
-          <Link
-            href="mailto:bhoyevisualsllc@gmail.com"
-            className="hover:text-[#FF3100] transition"
-          >
-            <FaEnvelope />
-          </Link>
-        </div>
+        {/* ----------------------------------------------------
+            BOTTOM SECTION: CREDITS & BACK TO TOP
+            ---------------------------------------------------- */}
+        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-6 pb-8 relative z-20">
+          <div className="flex flex-col md:flex-row gap-4 md:gap-8 items-center text-xs text-gray-600 font-mono uppercase tracking-widest">
+            <p>© {new Date().getFullYear()} Bhoye Visuals.</p>
 
-        {/* 📄 Copyright */}
-        <div className="text-xs md:text-sm text-white/50 space-y-1">
-          <p>
-            © {new Date().getFullYear()} Bhoye Visuals. All rights reserved.
-          </p>
-          <p>
             <Link
               href="https://jay-dev-portfolio.vercel.app/"
               target="_blank"
-              rel="noopener noreferrer"
-              className="
-    font-medium
-    underline
-    underline-offset-4
-    decoration-neutral-600
-    hover:decoration-white
-    hover:text-white
-    transition-colors
-  "
+              className="hover:text-[#FF3100] transition-colors flex items-center gap-1"
             >
               Designed by Jay
             </Link>
-          </p>
+          </div>
+
+          <button
+            onClick={scrollToTop}
+            className="flex items-center gap-2 text-xs text-gray-600 font-mono uppercase tracking-widest hover:text-[#FF3100] transition-colors"
+          >
+            Back to Top <ArrowUp size={14} />
+          </button>
         </div>
-      </motion.div>
+      </div>
+
+      {/* THE GIANT WATERMARK (FIXED VISIBILITY) */}
+      <div className="w-full overflow-hidden leading-none select-none pointer-events-none absolute bottom-0 left-0 right-0 z-0">
+        <motion.h1
+          initial={{ y: 50, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
+          // ⚠️ Changed text color to white/10 (10% opacity) and removed mix-blend-overlay
+          className="text-[13vw] md:text-[16vw] font-bold text-center text-white/10 tracking-tighter translate-y-[20%]"
+        >
+          BHOYE VISUALS
+        </motion.h1>
+      </div>
     </footer>
   );
 }

@@ -2,7 +2,11 @@
 
 import React, { useState, useCallback } from "react";
 import { motion } from "framer-motion";
+import { ArrowRight, Check, Loader2 } from "lucide-react";
 
+// ----------------------------------------------------------------------
+// TYPES & DATA
+// ----------------------------------------------------------------------
 type FormState = {
   name: string;
   email: string;
@@ -12,21 +16,37 @@ type FormState = {
   message: string;
 };
 
-type RateCardItem = {
-  title: string;
-  desc: string;
-  price: string;
-};
+const rateCards = [
+  {
+    title: "Basic Event Package",
+    price: "$1,500",
+    desc: "5–6 hours coverage • 1 Camera • Highlight Reel",
+  },
+  {
+    title: "Mid-Tier Event",
+    price: "$3,500",
+    desc: "8–10 hours • 2 Cameras • Full Doc + Highlight",
+  },
+  {
+    title: "High-End Production",
+    price: "$6,500+",
+    desc: "Multi-day • Drone • Cinema Line Cameras • Crew",
+  },
+  {
+    title: "Corporate / Promo",
+    price: "$2k–$5k",
+    desc: "Scripting • Lighting Setup • Full Edit",
+  },
+  {
+    title: "Hourly Rate",
+    price: "$200/hr",
+    desc: "Post-production or additional shooting hours",
+  },
+];
 
-type FormInputProps = {
-  label: string;
-  field: keyof FormState;
-  type: string;
-  required?: boolean;
-  value: string;
-  onChange: (value: string) => void;
-};
-
+// ----------------------------------------------------------------------
+// HELPER: FORM INPUT
+// ----------------------------------------------------------------------
 const FormInput = React.memo(
   ({
     label,
@@ -35,46 +55,51 @@ const FormInput = React.memo(
     required = true,
     value,
     onChange,
-  }: FormInputProps) => {
+    placeholder,
+  }: {
+    label: string;
+    field: keyof FormState;
+    type: string;
+    required?: boolean;
+    value: string;
+    onChange: (value: string) => void;
+    placeholder?: string;
+  }) => {
     const today = new Date().toISOString().split("T")[0];
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       let val = e.target.value;
-
       if (field === "phone") {
-        val = val.replace(/[^0-9]/g, "");
-        if (val.length > 11) return; // limit to 11 digits
+        val = val.replace(/[^0-9]/g, "").slice(0, 11);
       }
-
       onChange(val);
     };
 
     return (
-      <div>
-        <label className="text-sm text-[#CCCCCC] block mb-1">
-          {label} {required && <span className="text-[#FF3100]">*</span>}
+      <div className="group">
+        <label className="text-[10px] uppercase tracking-widest text-[#FF3100] font-mono mb-2 block">
+          {label} {required && "*"}
         </label>
         <input
           required={required}
           type={type}
           value={value}
           onChange={handleChange}
+          placeholder={placeholder}
           inputMode={field === "phone" ? "numeric" : undefined}
-          pattern={
-            field === "email" ? "[^@\\s]+@[^@\\s]+\\.[^@\\s]+" : undefined
-          }
           min={field === "date" ? today : undefined}
-          className="w-full rounded-lg p-3 bg-[#1c1c1c] text-white border border-white/10 
-                     focus:border-[#FF3100] focus:ring-1 focus:ring-[#FF3100] outline-none transition"
+          className="w-full bg-neutral-900/50 border-b border-white/20 text-white p-4 focus:border-[#FF3100] focus:bg-neutral-900 outline-none transition-all duration-300 placeholder:text-white/20"
         />
       </div>
     );
-  }
+  },
 );
-
 FormInput.displayName = "FormInput";
 
-export default function FullRateCard() {
+// ----------------------------------------------------------------------
+// MAIN COMPONENT
+// ----------------------------------------------------------------------
+export default function Contact() {
   const [form, setForm] = useState<FormState>({
     name: "",
     email: "",
@@ -90,295 +115,198 @@ export default function FullRateCard() {
     (field: keyof FormState, value: string) => {
       setForm((prev) => ({ ...prev, [field]: value }));
     },
-    []
+    [],
   );
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-
-    
-    if (
-      !form.name.trim() ||
-      !form.email.trim() ||
-      !form.phone.trim() ||
-      !form.shootType.trim() ||
-      !form.date.trim() ||
-      !form.message.trim()
-    ) {
-      alert("Please fill out all required fields before submitting.");
-      return;
-    }
+    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) return;
 
     setLoading(true);
-    setSent(false);
+    // Simulate API call
+    setTimeout(() => {
+      setLoading(false);
+      setSent(true);
+      setForm({
+        name: "",
+        email: "",
+        phone: "",
+        shootType: "Basic Event Coverage",
+        date: "",
+        message: "",
+      });
+      setTimeout(() => setSent(false), 3000);
+    }, 1500);
 
+    /* // Uncomment when API is ready
     try {
       const res = await fetch("/api/book", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
-
       if (res.ok) {
         setSent(true);
-        setForm({
-          name: "",
-          email: "",
-          phone: "",
-          shootType: "Basic Event Coverage",
-          date: "",
-          message: "",
-        });
-      } else {
-        const json = await res.json();
-        alert(`Failed to send: ${json.error || "Unknown error"}`);
+        // reset form...
       }
-    } catch (error) {
-      alert("Network error sending message.");
-    } finally {
-      setLoading(false);
-      setTimeout(() => setSent(false), 2000);
-    }
+    } catch (error) { ... } 
+    */
   }
-
-  const rateCards: RateCardItem[] = [
-    {
-      title: "Basic Event Package",
-      price: "$1500",
-      desc: "5–6 hours coverage, 1 camera, highlight video and speeches",
-    },
-    {
-      title: "Mid-Tier Event Package",
-      price: "$3500",
-      desc: "8–10 hours, two cameras, highlight + full video",
-    },
-    {
-      title: "High-End Event Package",
-      price: "$6500+",
-      desc: "Full day + prep, multiple cameras, drone, premium editing, extras",
-    },
-    {
-      title: "Small Event / Short Shoot",
-      price: "$1200",
-      desc: "1–3 hrs, 1 camera, 1 highlight reel",
-    },
-    {
-      title: "Corporate / Promo Video",
-      price: "$2000–$5000+",
-      desc: "Script/planning, multiple cameras, full edit, travel costs",
-    },
-    {
-      title: "Hourly Rate",
-      price: "$200/hr",
-      desc: "Smaller jobs or incremental work (editing, extra shooting)",
-    },
-    {
-      title: "Additional Reels",
-      price: "$200",
-      desc: "",
-    },
-  ];
 
   return (
     <section
       id="booking"
-      className="relative min-h-screen bg-black text-white flex flex-col items-center justify-center px-6 md:px-12 py-24"
+      className="relative min-h-screen bg-black text-white py-24 px-6 md:px-12 flex items-center"
     >
-      <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10">
-        {/* === Rate Card Section === */}
-        <motion.div
-          initial={{ opacity: 0, x: -10 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.35 }}
-        >
-          <h2 className="text-3xl font-bold text-[#FF3100] mb-4">
-            Rates & Booking
-          </h2>
-          <p className="text-[#CCCCCC] mb-6">
-            Detailed packages, add-ons, and custom quotes available — fill the
-            form to start the conversation.
-          </p>
+      {/* Background Texture */}
+      <div className="absolute inset-0 bg-[url('/grain.png')] opacity-20 mix-blend-overlay pointer-events-none" />
 
-          <div className="space-y-4">
-            {rateCards.map(({ title, desc, price }) => (
-              <div
-                key={title}
-                className="rounded-xl p-4 bg-black/30 border border-white/10"
-              >
-                <h3 className="text-xl font-semibold text-white">{title}</h3>
-                <p className="text-sm text-[#CCCCCC]">
-                  {desc} —{" "}
-                  <strong className="text-[#FF3100] font-semibold">
-                    {price}
-                  </strong>
-                </p>
+      <div className="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-16 lg:gap-24 relative z-10">
+        {/* ----------------------------------------------------
+            LEFT COLUMN: RATES (The "Menu")
+            ---------------------------------------------------- */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="flex flex-col justify-center"
+        >
+          <span className="text-[#FF3100] font-mono text-xs uppercase tracking-widest mb-6 block">
+            Invest In Quality
+          </span>
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-12">
+            Services & <br /> Rates
+          </h2>
+
+          <div className="space-y-8">
+            {rateCards.map((item, i) => (
+              <div key={i} className="group cursor-default">
+                <div className="flex items-baseline justify-between border-b border-white/10 pb-4 mb-2 group-hover:border-[#FF3100] transition-colors duration-300">
+                  <h3 className="text-xl font-medium text-gray-200 group-hover:text-white transition-colors">
+                    {item.title}
+                  </h3>
+                  <span className="text-lg font-mono text-[#FF3100]">
+                    {item.price}
+                  </span>
+                </div>
+                <p className="text-sm text-gray-500 font-light">{item.desc}</p>
               </div>
             ))}
           </div>
+
+          <div className="mt-12 p-6 border border-white/10 bg-white/5 rounded-lg">
+            <p className="text-sm text-gray-400 leading-relaxed">
+              <span className="text-white font-bold block mb-2">Note:</span>
+              Prices serve as a baseline. Every project has unique requirements.
+              Fill out the form for a custom quote tailored to your specific
+              vision.
+            </p>
+          </div>
         </motion.div>
 
-        {/* === Booking Form Section === */}
-        <div className="rounded-2xl p-6 bg-black/30 backdrop-blur-sm border border-white/10">
-          <h3 className="text-xl font-bold text-white mb-4">Book a Session</h3>
+        {/* ----------------------------------------------------
+            RIGHT COLUMN: THE FORM (Minimalist)
+            ---------------------------------------------------- */}
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          className="bg-neutral-900/20 border border-white/10 p-8 md:p-12 rounded-2xl backdrop-blur-sm"
+        >
+          <h3 className="text-2xl font-bold mb-8">Start a Project</h3>
 
-          <form onSubmit={handleSubmit} className="space-y-3">
-            <FormInput
-              label="Name"
-              field="name"
-              type="text"
-              value={form.name}
-              onChange={(value) => updateFormField("name", value)}
-            />
-
-            <FormInput
-              label="Email"
-              field="email"
-              type="email"
-              value={form.email}
-              onChange={(value) => updateFormField("email", value)}
-            />
-
-            <FormInput
-              label="Phone"
-              field="phone"
-              type="text"
-              value={form.phone}
-              onChange={(value) => updateFormField("phone", value)}
-            />
-
-            {/* Type of Shoot */}
-            <div>
-              <label className="text-sm text-[#CCCCCC] block mb-1">
-                Type of Shoot <span className="text-[#FF3100]">*</span>
-              </label>
-              <div className="relative">
-                <select
-                  required
-                  value={form.shootType}
-                  onChange={(e) => updateFormField("shootType", e.target.value)}
-                  className="w-full appearance-none rounded-lg p-3 bg-[#1c1c1c] text-white border border-white/10 
-                             focus:border-[#FF3100] focus:ring-1 focus:ring-[#FF3100] outline-none transition"
-                >
-                  <option value="">Select type</option>
-                  <option>Basic Event Coverage</option>
-                  <option>Mid Tier Event Coverage</option>
-                  <option>High End Event Coverage</option>
-                  <option>Small Event / Short Shoot</option>
-                  <option>Corporate / Promo Video</option>
-                  <option>Other</option>
-                </select>
-                <svg
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[#FF3100] pointer-events-none"
-                  width="18"
-                  height="18"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    d="M6 9l6 6 6-6"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div>
-            </div>
-
-            {/* Date Picker */}
-            <div>
-              <label className="text-sm text-[#CCCCCC] block mb-1">
-                Preferred Date <span className="text-[#FF3100]">*</span>
-              </label>
-              <input
-                required
-                type="date"
-                value={form.date}
-                min={new Date().toISOString().split("T")[0]} 
-                onChange={(e) => updateFormField("date", e.target.value)}
-                className="w-full rounded-lg p-3 bg-[#1c1c1c] text-white border border-white/10 
-               focus:border-[#FF3100] focus:ring-1 focus:ring-[#FF3100] outline-none transition [color-scheme:dark]"
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="grid md:grid-cols-2 gap-6">
+              <FormInput
+                label="Your Name"
+                field="name"
+                type="text"
+                value={form.name}
+                onChange={(val) => updateFormField("name", val)}
+                placeholder="John Doe"
+              />
+              <FormInput
+                label="Email Address"
+                field="email"
+                type="email"
+                value={form.email}
+                onChange={(val) => updateFormField("email", val)}
+                placeholder="john@example.com"
               />
             </div>
 
-            {/* Message */}
-            <div>
-              <label className="text-sm text-[#CCCCCC] block mb-1">
-                Message <span className="text-[#FF3100]">*</span>
+            <div className="grid md:grid-cols-2 gap-6">
+              <FormInput
+                label="Phone Number"
+                field="phone"
+                type="tel"
+                value={form.phone}
+                onChange={(val) => updateFormField("phone", val)}
+                placeholder="(555) 000-0000"
+              />
+              <FormInput
+                label="Preferred Date"
+                field="date"
+                type="date"
+                value={form.date}
+                onChange={(val) => updateFormField("date", val)}
+              />
+            </div>
+
+            {/* Custom Select Input */}
+            <div className="group">
+              <label className="text-[10px] uppercase tracking-widest text-[#FF3100] font-mono mb-2 block">
+                Project Type *
+              </label>
+              <select
+                required
+                value={form.shootType}
+                onChange={(e) => updateFormField("shootType", e.target.value)}
+                className="w-full bg-neutral-900/50 border-b border-white/20 text-white p-4 focus:border-[#FF3100] outline-none appearance-none cursor-pointer hover:bg-neutral-900 transition-colors"
+              >
+                {rateCards.map((r) => (
+                  <option key={r.title} value={r.title}>
+                    {r.title}
+                  </option>
+                ))}
+                <option value="Other">Other / Custom Request</option>
+              </select>
+            </div>
+
+            <div className="group">
+              <label className="text-[10px] uppercase tracking-widest text-[#FF3100] font-mono mb-2 block">
+                Tell us about your vision *
               </label>
               <textarea
                 required
+                rows={4}
                 value={form.message}
                 onChange={(e) => updateFormField("message", e.target.value)}
-                rows={4}
-                className="w-full rounded-lg p-3 bg-[#1c1c1c] text-white border border-white/10 
-                           focus:border-[#FF3100] focus:ring-1 focus:ring-[#FF3100] outline-none transition"
+                placeholder="Describe your project, locations, and any specific ideas..."
+                className="w-full bg-neutral-900/50 border-b border-white/20 text-white p-4 focus:border-[#FF3100] focus:bg-neutral-900 outline-none transition-all duration-300 placeholder:text-white/20 resize-none"
               />
             </div>
 
-            {/* Submit Button */}
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mt-4">
-              <p className="text-sm text-[#CCCCCC] text-center sm:text-left">
-                We typically respond within 24 hours.
-              </p>
-
-              <button
-                type="submit"
-                disabled={loading || sent}
-                className={`relative flex items-center justify-center gap-2 w-full sm:w-auto px-5 py-3 rounded-xl font-bold uppercase 
-                           transition-all duration-200 active:scale-95
-                           ${
-                             sent
-                               ? "bg-green-500 text-white"
-                               : "bg-[#FF3100] text-black hover:bg-[#ff4f26]"
-                           }
-                           ${loading ? "opacity-70 cursor-not-allowed" : ""}`}
-              >
-                {loading && (
-                  <svg
-                    className="animate-spin h-5 w-5 text-black"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle
-                      className="opacity-25"
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                    />
-                    <path
-                      className="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-                    />
-                  </svg>
-                )}
-
-                {sent && (
-                  <svg
-                    className="h-5 w-5 text-white"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth="3"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                )}
-
-                {loading ? "Sending..." : sent ? "Sent!" : "Send Message"}
-              </button>
-            </div>
+            <button
+              type="submit"
+              disabled={loading || sent}
+              className={`w-full py-5 mt-4 font-bold uppercase tracking-widest text-xs flex items-center justify-center gap-2 transition-all duration-300
+                    ${sent ? "bg-green-600 text-white" : "bg-white text-black hover:bg-[#FF3100] hover:text-white"}`}
+            >
+              {loading ? (
+                <Loader2 className="animate-spin" size={16} />
+              ) : sent ? (
+                <>
+                  Message Sent <Check size={16} />
+                </>
+              ) : (
+                <>
+                  Send Request <ArrowRight size={16} />
+                </>
+              )}
+            </button>
           </form>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

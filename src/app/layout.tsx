@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
@@ -72,6 +73,7 @@ export default function RootLayout({
 
           {/* Page Content */}
           <main>{children}</main>
+          <Footer />
         </body>
       </html>
     </ClerkProvider>

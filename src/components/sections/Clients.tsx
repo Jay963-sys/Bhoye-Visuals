@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const clientLogos = [
   { name: "Rivian", src: "/logos/rivian.svg" },
-  { name: "Blank Creative", src: "/logos/blank.svg" },
+  { name: "25", src: "/logos/25.svg" },
   { name: "United Nations", src: "/logos/unitednations.svg" },
   { name: "Zurik", src: "/logos/zurik.svg" },
   { name: "Davido", src: "/logos/davido.svg" },
@@ -15,75 +15,101 @@ const clientLogos = [
   { name: "Martell", src: "/logos/martell.svg" },
   { name: "CD Peacock", src: "/logos/peacock.svg" },
   { name: "SummerStage", src: "/logos/summer.svg" },
+  { name: "Blank Creative", src: "/logos/blank.svg" },
 ];
 
 export default function Clients() {
   return (
     <section
       id="clients"
-      className="relative min-h-screen snap-start bg-black text-white flex flex-col items-center justify-center px-6 md:px-12 py-24"
+      className="relative min-h-[80vh] bg-black text-white flex flex-col md:flex-row"
     >
-      {/* Background Effects */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        <div className="absolute w-[60vw] h-[60vw] bg-white/10 opacity-20 rounded-full blur-3xl animate-pulse-slow top-[-20%] left-[-20%]" />
-        <div className="absolute w-[50vw] h-[50vw] bg-white/5 opacity-10 rounded-full blur-2xl animate-pulse-slower top-[40%] right-[-15%]" />
-        <div className="absolute w-[40vw] h-[40vw] bg-white/10 opacity-10 rounded-full blur-2xl animate-pulse-slow bottom-[-10%] left-[30%]" />
-      </div>
-      <div className="absolute inset-0 bg-[url('/grain.png')] opacity-10 mix-blend-overlay z-0 pointer-events-none" />
-      <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10 mix-blend-soft-light z-0 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-transparent z-0" />
-
-      {/* Title */}
-      <motion.h2
-        className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-center bg-gradient-to-r from-[#FF3100] to-[#C10801] bg-clip-text text-transparent z-10"
-        initial={{ opacity: 0, y: -30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-      >
-        Clients We&apos;ve Worked With
-      </motion.h2>
-
-      <motion.p
-        className="text-center max-w-2xl text-white/80 text-lg md:text-xl mb-8 leading-relaxed drop-shadow-sm relative z-10"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.3 }}
-        viewport={{ once: true }}
-      >
-        From local talent to global brands — captured with vision
-      </motion.p>
-
-      <motion.div
-        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8 md:gap-12 z-10 max-w-6xl w-full"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-        viewport={{ once: true }}
-      >
-        {clientLogos.map((client, i) => (
-          <motion.div
-            key={client.name}
-            className="flex flex-col items-center bg-white/5 p-6 rounded-xl border border-white/10 backdrop-blur-sm shadow-md 
-      transition-transform duration-300 hover:scale-105 hover:border-[#FF3100]/60 hover:shadow-[0_0_20px_#FF3100]/30"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.1, duration: 0.6 }}
-            viewport={{ once: true }}
+      {/* LEFT SIDE: HEADER */}
+      <div className="w-full md:w-1/3 border-b md:border-b-0 md:border-r border-white/10 p-10 md:p-16 flex flex-col justify-center relative z-10">
+        <div className="sticky top-24">
+          <motion.span
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            className="text-[#FF3100] font-mono text-xs uppercase tracking-widest mb-4 block"
           >
-            <Image
-              src={client.src}
-              alt={client.name}
-              width={120}
-              height={120}
-              className="h-16 md:h-20 object-contain mb-4"
-            />
-            <p className="text-sm md:text-base font-semibold text-gray-200">
-              {client.name}
-            </p>
-          </motion.div>
-        ))}
-      </motion.div>
+            Trusted By
+          </motion.span>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="text-4xl md:text-6xl font-bold tracking-tighter mb-6"
+          >
+            Global <br /> Partners
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="text-gray-400 text-sm leading-relaxed max-w-xs"
+          >
+            From local talent to global brands—capturing visions for some of the
+            world’s most forward-thinking names.
+          </motion.p>
+        </div>
+      </div>
+
+      {/* RIGHT SIDE: THE LOGO MESH */}
+      <div className="w-full md:w-2/3 bg-neutral-900/20">
+        <div className="grid grid-cols-2 md:grid-cols-3">
+          {clientLogos.map((client, i) => (
+            <LogoCell key={client.name} client={client} index={i} />
+          ))}
+        </div>
+      </div>
+
+      {/* Background Grain */}
+      <div className="absolute inset-0 bg-[url('/grain.png')] opacity-10 mix-blend-overlay pointer-events-none" />
     </section>
+  );
+}
+
+// ----------------------------------------------------------------------
+// SUB-COMPONENT: LOGO CELL (Responsive Fix)
+// ----------------------------------------------------------------------
+function LogoCell({
+  client,
+  index,
+}: {
+  client: { name: string; src: string };
+  index: number;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ delay: index * 0.05 }}
+      viewport={{ once: true }}
+      className="relative group h-40 md:h-52 flex items-center justify-center border-b border-r border-white/10 p-8 cursor-default overflow-hidden transition-all duration-500 hover:bg-white"
+    >
+      <div className="relative w-full h-full flex items-center justify-center transition-all duration-500 group-hover:scale-110">
+        <Image
+          src={client.src}
+          alt={client.name}
+          width={140}
+          height={60}
+          className="object-contain max-w-[70%] max-h-[60%] transition-all duration-300
+                    
+                    /* --- MOBILE DEFAULT (Visible White Silhouette) --- */
+                     opacity-90
+                    
+                    /* --- DESKTOP DEFAULT (Dimmed Ghost) --- */
+                    md:opacity-90
+                    
+                    /* --- DESKTOP HOVER (Full Color Flash) --- */
+                    group-hover:grayscale-0 group-hover:invert-0 group-hover:opacity-100"
+        />
+      </div>
+
+      {/* Corner Accent (Only show on desktop hover) */}
+      <div className="hidden md:block absolute top-0 right-0 w-3 h-3 bg-[#FF3100] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+    </motion.div>
   );
 }

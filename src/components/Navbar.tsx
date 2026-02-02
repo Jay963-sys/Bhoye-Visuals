@@ -1,160 +1,169 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import { useUser } from "@clerk/nextjs";
-import { useClerk } from "@clerk/nextjs";
+import {
+  motion,
+  AnimatePresence,
+  useScroll,
+  useTransform,
+} from "framer-motion";
+import { useUser, useClerk } from "@clerk/nextjs";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
-import { usePathname } from "next/navigation"; 
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
-
   const { user, isSignedIn } = useUser();
   const { signOut } = useClerk();
   const role = user?.publicMetadata?.role;
-  const pathname = usePathname(); 
+  const pathname = usePathname();
 
+  // 1. GET SCROLL POSITION
+  const { scrollY } = useScroll();
+
+  // 2. INTERPOLATE VALUES (0px to 100px scroll)
+  const backgroundColor = useTransform(
+    scrollY,
+    [0, 100],
+    ["rgba(0,0,0,0)", "rgba(0,0,0,0.8)"],
+  );
+
+  const paddingBlock = useTransform(scrollY, [0, 100], ["32px", "16px"]);
+
+  const borderBottom = useTransform(
+    scrollY,
+    [0, 100],
+    ["1px solid rgba(255,255,255,0)", "1px solid rgba(255,255,255,0.1)"],
+  );
+
+  const backdropFilter = useTransform(
+    scrollY,
+    [0, 100],
+    ["blur(0px)", "blur(12px)"],
+  );
+
+  const logoWidth = useTransform(scrollY, [0, 100], [140, 100]);
+
+  // Lock body scroll when mobile menu is open
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setMenuOpen(false);
-      }
-    };
-
     if (menuOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
+      document.body.style.overflow = "hidden";
     } else {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.body.style.overflow = "unset";
     }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
   }, [menuOpen]);
 
-  const handleLinkClick = () => setMenuOpen(false);
-
-  const links = [
+  const navLinks = [
     { href: "/about", label: "About" },
     { href: "/projects", label: "Projects" },
     { href: "/contact", label: "Contact" },
   ];
 
-  const navLinks = (
-    <>
-      {links.map((link) => {
-        const isActive = pathname === link.href;
-        return (
-          <Link
-            key={link.href}
-            href={link.href}
-            onClick={handleLinkClick}
-            className={`transition font-medium ${
-              isActive
-                ? "text-[#FF3100] drop-shadow-[0_0_8px_#FF3100]"
-                : "text-white hover:text-[#FF3100]/80"
-            }`}
-          >
-            {link.label}
-          </Link>
-        );
-      })}
-
-      {!isSignedIn ? (
-        <Link
-          href="/sign-in"
-          onClick={handleLinkClick}
-          className="text-sm opacity-60 hover:opacity-100 transition"
-        ></Link>
-      ) : role === "admin" ? (
-        <>
-          <Link
-            href="/admin"
-            onClick={handleLinkClick}
-            className={`text-sm ${
-              pathname === "/admin"
-                ? "text-[#FF3100] drop-shadow-[0_0_8px_#FF3100]"
-                : "hover:text-[#FF3100]/80"
-            }`}
-          >
-            Admin Panel
-          </Link>
-          <button
-            onClick={() => {
-              signOut(() => {
-                window.location.href = "/";
-              });
-            }}
-            className="text-sm hover:text-[#FF3100]/80"
-          >
-            Sign Out
-          </button>
-        </>
-      ) : null}
-    </>
-  );
-
   return (
-    <motion.nav
-      initial={{ opacity: 0, y: -40 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-white/10 dark:bg-darkPrimary/60 backdrop-blur-md shadow-md"
-          : "bg-white/5 dark:bg-darkPrimary/50 backdrop-blur-md"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-2 flex justify-between items-center">
-        {/* Logo link to homepage */}
-        <Link href="/" className="block" aria-label="Homepage">
-          <Image
-            src="/Logo Dark.svg"
-            alt="Bhoye Visuals Logo"
-            width={60}
-            height={30}
-            className="h-10 w-auto sm:h-12 transition-all duration-300"
-          />
-        </Link>
+    <>
+      <motion.nav
+        style={{
+          backgroundColor,
+          paddingBlock,
+          borderBottom,
+          backdropFilter,
+        }}
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
+        className="fixed top-0 left-0 right-0 z-50 flex items-center"
+      >
+        <div className="w-full max-w-7xl mx-auto px-6 flex justify-between items-center">
+          {/* LOGO (Dynamic Size) */}
+          {/* FIX: Added onClick={() => setMenuOpen(false)} here */}
+          <Link
+            href="/"
+            className="relative z-50 group block"
+            onClick={() => setMenuOpen(false)}
+          >
+            <motion.div style={{ width: logoWidth }}>
+              <Image
+                src="/Logo Dark.svg"
+                alt="Bhoye Visuals"
+                width={140}
+                height={60}
+                className="w-full h-auto"
+              />
+            </motion.div>
+          </Link>
 
-        <div className="hidden md:flex gap-6">{navLinks}</div>
+          {/* DESKTOP NAV */}
+          <div className="hidden md:flex items-center gap-8">
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="relative group py-2"
+                >
+                  <span
+                    className={`text-sm uppercase tracking-widest font-medium transition-colors duration-300 ${
+                      isActive
+                        ? "text-[#FF3100]"
+                        : "text-white/80 group-hover:text-white"
+                    }`}
+                  >
+                    {link.label}
+                  </span>
+                  <span
+                    className={`absolute bottom-0 left-0 h-[1px] bg-[#FF3100] transition-all duration-300 ${
+                      isActive ? "w-full" : "w-0 group-hover:w-full"
+                    }`}
+                  />
+                </Link>
+              );
+            })}
+          </div>
 
-        {/* Mobile menu toggle */}
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden text-white"
-          aria-label="Toggle Menu"
-        >
-          {menuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </div>
+          {/* MOBILE TOGGLE */}
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="md:hidden relative z-50 text-white p-2"
+          >
+            {menuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
+      </motion.nav>
 
+      {/* MOBILE MENU */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            key="mobileMenu"
-            ref={menuRef}
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.3 }}
-            className="md:hidden px-6 pb-6 pt-2 bg-white/10 dark:bg-darkPrimary/60 backdrop-blur-md text-white flex flex-col gap-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }}
+            className="fixed inset-0 bg-black z-40 flex flex-col justify-center items-center md:hidden"
           >
-            {navLinks}
+            <div className="flex flex-col items-center gap-8 relative z-10">
+              {navLinks.map((link, i) => (
+                <motion.div
+                  key={link.href}
+                  initial={{ y: 50, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.1 * i }}
+                >
+                  <Link
+                    href={link.href}
+                    onClick={() => setMenuOpen(false)}
+                    className="text-4xl font-bold tracking-tighter uppercase text-white hover:text-[#FF3100]"
+                  >
+                    {link.label}
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </>
   );
 }
