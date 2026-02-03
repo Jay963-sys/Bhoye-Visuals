@@ -107,12 +107,22 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row gap-4 md:gap-8 items-center text-xs text-gray-600 font-mono uppercase tracking-widest">
             <p>© {new Date().getFullYear()} Bhoye Visuals.</p>
 
+            {/* 🔥 UPDATED DESIGNED BY JAY LINK */}
             <Link
               href="https://jay-dev-portfolio.vercel.app/"
               target="_blank"
-              className="hover:text-[#FF3100] transition-colors flex items-center gap-1"
+              className="group flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 hover:border-[#FF3100]/50 hover:bg-white/10 transition-all duration-300"
             >
-              Designed by Jay
+              {/* The Pulsing Dot */}
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF3100] opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#FF3100]"></span>
+              </span>
+
+              {/* The Text */}
+              <span className="text-gray-400 group-hover:text-white transition-colors">
+                Designed by Jay
+              </span>
             </Link>
           </div>
 
