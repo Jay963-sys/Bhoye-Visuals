@@ -114,4 +114,5 @@ videographer-portfolio-p
 ├─ tailwind.config.ts
 ├─ tsconfig.json
 └─ water.mp4
+thanks....
 ```
