@@ -154,6 +154,7 @@ function VideoCard({
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className="relative aspect-video bg-gray-900 overflow-hidden mb-6">
+        {/* YOUTUBE VIDEOS (Uses Image Thumbnail) */}
         {video.source === "youtube" && (
           <div className="absolute inset-0">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -165,10 +166,13 @@ function VideoCard({
           </div>
         )}
 
+        {/* CLOUDINARY VIDEOS */}
         {video.source === "cloudinary" && video.url && (
           <video
             ref={videoRef}
-            src={video.url}
+            // 🔥 FIX: Added #t=0.1 to force mobile browsers to fetch the first frame
+            src={`${video.url}#t=0.1`}
+            preload="metadata" // 🔥 FIX: Tells the browser it's okay to load video metadata (dimensions, first frame)
             muted
             playsInline
             loop
