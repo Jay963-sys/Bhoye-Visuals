@@ -19,27 +19,22 @@ type FormState = {
 const rateCards = [
   {
     title: "Basic Event Package",
-    price: "$1,500",
     desc: "5–6 hours coverage • 1 Camera • Highlight Reel",
   },
   {
     title: "Mid-Tier Event",
-    price: "$3,500",
     desc: "8–10 hours • 2 Cameras • Full Doc + Highlight",
   },
   {
     title: "High-End Production",
-    price: "$6,500+",
     desc: "Multi-day • Drone • Cinema Line Cameras • Crew",
   },
   {
     title: "Corporate / Promo",
-    price: "$2k–$5k",
     desc: "Scripting • Lighting Setup • Full Edit",
   },
   {
     title: "Hourly Rate",
-    price: "$200/hr",
     desc: "Post-production or additional shooting hours",
   },
 ];
@@ -185,22 +180,10 @@ export default function Contact() {
                   <h3 className="text-xl font-medium text-gray-200 group-hover:text-white transition-colors">
                     {item.title}
                   </h3>
-                  <span className="text-lg font-mono text-[#FF3100]">
-                    {item.price}
-                  </span>
                 </div>
                 <p className="text-sm text-gray-500 font-light">{item.desc}</p>
               </div>
             ))}
-          </div>
-
-          <div className="mt-12 p-6 border border-white/10 bg-white/5 rounded-lg">
-            <p className="text-sm text-gray-400 leading-relaxed">
-              <span className="text-white font-bold block mb-2">Note:</span>
-              Prices serve as a baseline. Every project has unique requirements.
-              Fill out the form for a custom quote tailored to your specific
-              vision.
-            </p>
           </div>
         </motion.div>
 
