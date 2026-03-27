@@ -133,7 +133,7 @@ export default function Contact() {
       setTimeout(() => setSent(false), 3000);
     }, 1500);
 
-    /* // Uncomment when API is ready
+    /* // Uncomment  when API is ready
     try {
       const res = await fetch("/api/book", {
         method: "POST",
