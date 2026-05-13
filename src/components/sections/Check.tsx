@@ -118,34 +118,39 @@ export default function Contact() {
     if (!form.name.trim() || !form.email.trim() || !form.message.trim()) return;
 
     setLoading(true);
-    // Simulate API call
-    setTimeout(() => {
-      setLoading(false);
-      setSent(true);
-      setForm({
-        name: "",
-        email: "",
-        phone: "",
-        shootType: "Basic Event Coverage",
-        date: "",
-        message: "",
-      });
-      setTimeout(() => setSent(false), 3000);
-    }, 1500);
 
-    /* // Uncomment when API is ready
     try {
       const res = await fetch("/api/book", {
+        // Make sure your folder is app/api/book/route.ts
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
+
       if (res.ok) {
         setSent(true);
-        // reset form...
+        // Reset form fields
+        setForm({
+          name: "",
+          email: "",
+          phone: "",
+          shootType: "Basic Event Coverage",
+          date: "",
+          message: "",
+        });
+        // Revert button state after 3 seconds
+        setTimeout(() => setSent(false), 3000);
+      } else {
+        const errorData = await res.json();
+        console.error("Server Error:", errorData.error);
+        alert("Failed to send: " + errorData.error);
       }
-    } catch (error) { ... } 
-    */
+    } catch (error) {
+      console.error("Network Error:", error);
+      alert("Check your internet connection or server status.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
